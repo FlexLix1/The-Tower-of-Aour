@@ -12,10 +12,13 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void Update() {
-        playerPosition.z = Input.GetAxisRaw("Vertical") * movementSpeed;
-        playerPosition.x = Input.GetAxisRaw("Horizontal") * movementSpeed;
-        playerPosition.y = rgbd.velocity.y;
+        playerPosition.z = Input.GetAxisRaw("Vertical");
+        playerPosition.x = Input.GetAxisRaw("Horizontal");
+        playerPosition = playerPosition.normalized * movementSpeed;
 
+
+        playerPosition.y = rgbd.velocity.y;
         rgbd.velocity = playerPosition;
+        Debug.Log(rgbd.velocity);
     }
 }

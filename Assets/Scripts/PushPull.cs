@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMovement : MonoBehaviour {
+public class PushPull : MonoBehaviour
+{
     private float speed = 2.0f;
     public GameObject character;
     private Transform grabbedObj;

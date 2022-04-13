@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushPull:MonoBehaviour {
+public class PushPull : MonoBehaviour {
     private float speed = 2.0f;
     public GameObject character;
     private Transform grabbedObj;
@@ -18,9 +18,8 @@ public class PushPull:MonoBehaviour {
                 }
             }
         }
-
-        if(Input.GetKeyUp(KeyCode.E)) {
-            if(grabbedObj != null) {
+        if (Input.GetKeyUp(KeyCode.E)) {
+            if (grabbedObj != null) {
                 grabbedObj.SetParent(null);
                 grabbedObj = null;
             }

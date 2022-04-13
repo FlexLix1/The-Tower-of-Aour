@@ -12,21 +12,18 @@ public class CameraTriggerVolume : MonoBehaviour
 
     BoxCollider box;
     Rigidbody rb;
-
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
-
         box.isTrigger = true;
         box.size = boxsize;
-
         rb.isKinematic = true;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, boxsize);
     }
 

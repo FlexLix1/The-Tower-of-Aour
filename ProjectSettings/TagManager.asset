@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Key
   - Pickup
+  - Box
   layers:
   - Default
   - TransparentFX

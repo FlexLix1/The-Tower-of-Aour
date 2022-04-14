@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement:MonoBehaviour {
 
-    Vector3 playerPosition;
-    public float movementSpeed, rotationSpeed;
+    Vector3 playerPosition, direction;
     Rigidbody rgbd;
 
-    float direction, angle;
+    public float movementSpeed, rotationSpeed;
+    float cameraAngle;
 
     public GameObject mainCamera;
 
@@ -20,7 +20,7 @@ public class PlayerMovement:MonoBehaviour {
         //Update player input
         GetInput();
 
-        //RotateCharacter();
+        //Rotate character towards walking direction
         RotateCharacter();
 
         //Get angle between player and camera (Exclude Y axis)
@@ -43,10 +43,13 @@ public class PlayerMovement:MonoBehaviour {
 
     void CameraPlayerAngle() {
         Vector3 getAngle = rgbd.transform.position - mainCamera.transform.position;
-        angle = (Mathf.Atan2(getAngle.x, getAngle.z) * Mathf.Rad2Deg);
+        cameraAngle = (Mathf.Atan2(getAngle.x, getAngle.z) * Mathf.Rad2Deg);
     }
 
     void RotateCharacter() {
-
+        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, transform.position.y - transform.position.y, playerPosition.z), Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 }

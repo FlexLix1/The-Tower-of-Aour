@@ -1,0 +1,1 @@
+Fix camera so it will be smooth downstairs

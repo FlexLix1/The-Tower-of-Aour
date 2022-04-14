@@ -20,7 +20,6 @@ public class TimeStop:MonoBehaviour {
     }
 
     void Update() {
-
         if(Input.GetMouseButtonDown(1)) {
             timeStoped = !timeStoped;
             Unfreeze();
@@ -37,20 +36,22 @@ public class TimeStop:MonoBehaviour {
         Unfreeze();
     }
 
+    //Removes all constraints, Implaments saved velocity
     void Unfreeze() {
         time = 0;
         material.material = normalMat;
-        rgbd.constraints = RigidbodyConstraints.None;
         if(isRotating) {
-            rgbd.constraints = RigidbodyConstraints.FreezePosition;
-            rgbd.constraints = RigidbodyConstraints.FreezeRotationZ;
-            rgbd.constraints = RigidbodyConstraints.FreezeRotationX;
+            rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
+        } else {
+            rgbd.constraints = RigidbodyConstraints.None; 
         }
 
         rgbd.velocity = saveVelocity;
         timeStoped = false;
     }
 
+    //An update that works everytime mouse hovers over objectscript
+    //If L_Mouse_click saves velocity, activates all rgbd constraints
     void OnMouseOver() {
         if(timeStoped)
             return;

@@ -12,6 +12,8 @@ public class CameraTriggerVolume : MonoBehaviour
 
     BoxCollider box;
     Rigidbody rb;
+
+    //float? test = null;
     private void Awake()
     {
         box = GetComponent<BoxCollider>();
@@ -36,6 +38,5 @@ public class CameraTriggerVolume : MonoBehaviour
             if (CameraSwitcher.ActiveCamera != cam) CameraSwitcher.SwitchCamera(cam);
         }
     }
-
 }
 

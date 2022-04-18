@@ -8,6 +8,7 @@ TagManager:
   - Pickup
   - Box
   - Door
+  - Lever
   layers:
   - Default
   - TransparentFX

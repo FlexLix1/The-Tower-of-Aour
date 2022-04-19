@@ -12,7 +12,7 @@ public class PickUp:MonoBehaviour {
 
     void Update() {
         if(Input.GetKeyDown(KeyCode.E) && hasPickup) {
-            PlaceItem();
+            CheckPlacement();
         }
 
         if(Input.GetKeyDown(KeyCode.E) && !hasPickup && canPickup) {
@@ -20,14 +20,40 @@ public class PickUp:MonoBehaviour {
         }
     }
 
+    //Check if there are obsticles
+    void CheckPlacement() {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
+            switch(hit.collider.tag) {
+                case "Door":
+                    if(inventory[saveInventoryNumber].name == "Key") {
+                        DoorOpen doorScript = hit.collider.gameObject.GetComponent<DoorOpen>();
+                        doorScript.doorOpen = true;
+                        UseItem();
+                    }
+                    return;
+            }
+            return;
+        }
+        PlaceItem();
+    }
+
+    //SUSS ligma baka omega sus, käre här talman, du e sussy baka; bin chillin 591536
+    void UseItem() {
+        inventory[saveInventoryNumber].SetActive(false);
+        hasPickup = false;
+        Invoke(nameof(CanPickup), 0.025f);
+    }
+
+    //Places held item on map
     void PlaceItem() {
-        //Add raycast too make sure the item can be placed
         Instantiate(prefabsInventory[saveInventoryNumber], transform.position + (transform.forward * placeDistance), Quaternion.identity);
         inventory[saveInventoryNumber].SetActive(false);
         hasPickup = false;
         Invoke(nameof(CanPickup), 0.025f);
     }
 
+    //Checks if item is pickupable
     void CheckPickup() {
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
@@ -40,6 +66,7 @@ public class PickUp:MonoBehaviour {
         }
     }
 
+    //Activates, stores and destroys item in inventory and map
     void PickInventory(int selectedNumber) {
         inventory[selectedNumber].SetActive(true);
         saveInventoryNumber = selectedNumber;
@@ -48,6 +75,7 @@ public class PickUp:MonoBehaviour {
         Destroy(savePickup);
     }
 
+    //Dumbfuck bool needs a cooldown
     void CanPickup() {
         canPickup = true;
     }

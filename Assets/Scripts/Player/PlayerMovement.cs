@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement:MonoBehaviour {
 
-    Vector3 playerPosition, direction;
+    Vector3 playerPosition, relativeForward, relativeRight;
     Rigidbody rgbd;
 
     public float movementSpeed, rotationSpeed;
@@ -17,33 +17,34 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void Update() {
+        //Update forward direction relative to camera
+        UpdateCameraForward();
+
         //Update player input
         GetInput();
 
         //Rotate character towards walking direction
         RotateCharacter();
 
-        //Get angle between player and camera (Exclude Y axis)
-        CameraPlayerAngle();
-
         //Update player Input
         UpdatePosition();
     }
 
+    void UpdateCameraForward() {
+        relativeForward = mainCamera.transform.forward;
+        relativeForward.y = 0;
+        relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward.normalized;
+    } 
+
     void GetInput() {
-        playerPosition.z = Input.GetAxisRaw("Vertical");
-        playerPosition.x = Input.GetAxisRaw("Horizontal");
-        playerPosition = playerPosition.normalized * movementSpeed;
+        Vector3 forwardDirection = Input.GetAxisRaw("Vertical") * relativeForward;
+        Vector3 rightDirection = Input.GetAxisRaw("Horizontal") * relativeRight;
+        playerPosition = Vector3.Normalize(rightDirection + forwardDirection) * movementSpeed;
     }
 
     void UpdatePosition() {
         playerPosition.y = rgbd.velocity.y;
         rgbd.velocity = playerPosition;
-    }
-
-    void CameraPlayerAngle() {
-        Vector3 getAngle = rgbd.transform.position - mainCamera.transform.position;
-        cameraAngle = (Mathf.Atan2(getAngle.x, getAngle.z) * Mathf.Rad2Deg);
     }
 
     void RotateCharacter() {

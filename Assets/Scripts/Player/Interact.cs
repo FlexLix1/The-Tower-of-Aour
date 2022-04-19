@@ -17,7 +17,6 @@ public class Interact:MonoBehaviour {
         if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
             switch(hit.collider.tag) {
                 case "Lever":
-                    Debug.Log("yay");
                     SimpleLever leverScript = hit.collider.gameObject.GetComponent<SimpleLever>();
                     if(leverScript.leverActive) {
                         leverScript.LeverDown();

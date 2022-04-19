@@ -9,9 +9,9 @@ public class SimpleLever:MonoBehaviour {
 
     void Start() {
         if(startTrue) {
-            anim.Play("lever_True");
+            SetLeverTrue();
         } else {
-            anim.Play("lever_False");
+            SetLeverFalse();
         }
     }
 

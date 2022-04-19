@@ -33,7 +33,8 @@ public class PlayerMovement:MonoBehaviour {
     void UpdateCameraForward() {
         relativeForward = mainCamera.transform.forward;
         relativeForward.y = 0;
-        relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward.normalized;
+        Vector3.Normalize(relativeForward);
+        relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward;
     } 
 
     void GetInput() {

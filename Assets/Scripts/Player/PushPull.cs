@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PushPull : MonoBehaviour {
-    private float speed = 2.0f;
     public GameObject character;
     private Transform grabbedObj;
 

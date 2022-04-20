@@ -27,7 +27,6 @@ public class LadderClimb : MonoBehaviour {
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) {
                 TouchingWall = true;
-                Debug.Log("Din Mamma");
             }
         }
     }

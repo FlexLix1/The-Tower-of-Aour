@@ -20,16 +20,20 @@ public class DialogueManager:MonoBehaviour {
             return;
 
         if(writingOut && Input.GetKeyDown(KeyCode.E)) {
-            StopAllCoroutines();
-            dialogueText.text = holdDialogue[numInDialogue];
-            writingOut = false;
-            numInDialogue++;
+            SkipSentence();
             return;
         }
 
         if(Input.GetKeyDown(KeyCode.E)) {
             NextSentence();
         }
+    }
+
+    void SkipSentence() {
+        StopAllCoroutines();
+        dialogueText.text = holdDialogue[numInDialogue];
+        writingOut = false;
+        numInDialogue++;
     }
 
     void NextSentence() {

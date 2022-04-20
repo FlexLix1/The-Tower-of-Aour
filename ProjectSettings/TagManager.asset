@@ -10,6 +10,7 @@ TagManager:
   - Door
   - Lever
   - Dialogue
+  - Hint
   layers:
   - Default
   - TransparentFX

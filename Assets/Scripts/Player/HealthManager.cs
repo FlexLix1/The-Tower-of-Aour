@@ -18,7 +18,6 @@ public class HealthManager : MonoBehaviour {
 
         respawnPoint = player.transform.position;
     }
-
     private void Update() {
         if (Input.GetKeyDown("p")) {
             HurtPlayer(damage);
@@ -47,7 +46,6 @@ public class HealthManager : MonoBehaviour {
         player.transform.position = respawnPoint;
         currentHealth = maxHealth;
     }
-
     public void SetSpawnPoint(Vector3 newPos) {
         respawnPoint = newPos;
     }

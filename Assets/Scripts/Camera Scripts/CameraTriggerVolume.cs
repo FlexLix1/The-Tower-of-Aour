@@ -31,11 +31,10 @@ public class CameraTriggerVolume : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Tjenare");
         if (other.gameObject.CompareTag("Player"))
         {
-            
-            if (CameraSwitcher.ActiveCamera != cam) CameraSwitcher.SwitchCamera(cam);
+            if (CameraSwitcher.ActiveCamera != cam) 
+                CameraSwitcher.SwitchCamera(cam);
         }
     }
 }

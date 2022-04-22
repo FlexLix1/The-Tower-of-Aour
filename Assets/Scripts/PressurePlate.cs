@@ -9,6 +9,8 @@ public class PressurePlate : MonoBehaviour
     public bool OnPressurePlate;
     Transform pressureplate;
 
+    int numOfObjectsOnPlate;
+
     [SerializeField]
     private float timeUntilReset = 2;
 
@@ -31,30 +33,38 @@ public class PressurePlate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        Debug.Log(numOfObjectsOnPlate);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (OnPressurePlate) return;
+
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
+            numOfObjectsOnPlate++;
             OnPressurePlate = true;
             Debug.Log("Hello Mr who stands on pressure plate");
             transform.position -= new Vector3(0, 0.02f, 0);
             onStandingOnPressurePlate.Invoke();
+            Debug.Log("OnTriggerEnter");
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //Invoke(nameof(PressureplateStartPosition), 5);
-
-        if (waitCoroutineReference != null)
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
-            StopCoroutine(waitCoroutineReference);
+            numOfObjectsOnPlate--;
+            if (numOfObjectsOnPlate > 0) return;
+            if (waitCoroutineReference != null)
+            {
+                StopCoroutine(waitCoroutineReference);
+            }
+            waitCoroutineReference = StartCoroutine(WaitCoroutine(timeUntilReset));
+            Debug.Log("OnTriggerExit");
         }
-        waitCoroutineReference = StartCoroutine(WaitCoroutine(timeUntilReset));
-
     }
     
     IEnumerator WaitCoroutine(float timeToWait)

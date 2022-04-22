@@ -9,6 +9,8 @@ TagManager:
   - Box
   - Door
   - Lever
+  - Dialogue
+  - Hint
   layers:
   - Default
   - TransparentFX

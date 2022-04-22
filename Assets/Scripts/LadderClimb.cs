@@ -20,7 +20,6 @@ public class LadderClimb : MonoBehaviour {
             TouchingWall = false;
         }
     }
-
     void Shoot() {
         RaycastHit hit;
         if (Physics.Raycast(ladderCam.transform.position, ladderCam.transform.forward, out hit, range)) {
@@ -30,7 +29,6 @@ public class LadderClimb : MonoBehaviour {
             }
         }
     }
-
     IEnumerator StartClimb() {
         transform.position += Vector3.up * Time.deltaTime * UpwardSpeed;
         GetComponent<Rigidbody>().isKinematic = true;

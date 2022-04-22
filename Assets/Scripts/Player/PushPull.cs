@@ -6,7 +6,9 @@ public class PushPull : MonoBehaviour {
     public GameObject character;
     private Transform grabbedObj;
 
+    
     void Update() {
+
         if(Input.GetKeyDown(KeyCode.E)) {
             Collider[] colliders = Physics.OverlapBox(transform.position, transform.forward, Quaternion.identity);
             foreach(var collider in colliders) {

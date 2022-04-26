@@ -57,4 +57,9 @@ public class SlipperyOil : MonoBehaviour
             canMove = true;
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+            canMove = false;
+    }
 }

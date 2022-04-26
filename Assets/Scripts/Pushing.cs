@@ -5,9 +5,10 @@ using UnityEngine;
 public class Pushing : MonoBehaviour {
     public GameObject tempBox;
     public float rayDistance = 2f, boxOffset = 2f;
-    bool hasBox;
+    public bool hasBox;
     Vector3 offset;
     public string lockDirection;
+
     void Update() {
         if (hasBox) {
             MovingBox();
@@ -17,7 +18,9 @@ public class Pushing : MonoBehaviour {
             }
             return;
         }
+
         if (!Input.GetKeyDown(KeyCode.E)) return;
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
             if (hit.collider.CompareTag("Box")) {
@@ -35,11 +38,11 @@ public class Pushing : MonoBehaviour {
                 } else if (angle < -55 && angle > -125) {
                     //Upp
                     offset = -Vector3.forward * boxOffset;
-                    lockDirection = "LeftUp";
+                    lockDirection = "DownRight";
                 } else if (angle > 125 || angle < -125) {
                     //Höger
                     offset = -Vector3.right * boxOffset;
-                    lockDirection = "DownRight";
+                    lockDirection = "LeftUp";
                 }
                 hasBox = true;
             }

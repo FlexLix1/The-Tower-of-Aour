@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement:MonoBehaviour {
 
     Vector3 playerPosition, relativeForward, relativeRight;
     Rigidbody rgbd;
@@ -19,27 +19,38 @@ public class PlayerMovement : MonoBehaviour {
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         slipperyOilMovement = GetComponent<SlipperyOil>();
+        pushScript = GetComponent<Pushing>();
         GroundMovement = true;
     }
 
     void Update() {
 
-        if (GroundMovement)
-        {
+        if(pushScript.hasBox) {
+            if(pushScript.lockDirection == "LeftUp") {
+                rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            } else if(pushScript.lockDirection == "DownRight") {
+                rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+            }
+        } else {
+            rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
+        if(GroundMovement) {
             //Update forward direction relative to camera
             UpdateCameraForward();
 
             //Update player input
             GetInput();
 
-            //Rotate character towards walking direction
-            RotateCharacter();
-
             //Update player Input
             UpdatePosition();
-        }
-        else
-        {
+
+            if(pushScript.hasBox)
+                return;
+
+            //Rotate character towards walking direction
+            RotateCharacter();
+        } else {
             slipperyOilMovement.SlipperyOilMovement();
         }
     }
@@ -63,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void RotateCharacter() {
-        if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
+        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, transform.position.y - transform.position.y, playerPosition.z), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }

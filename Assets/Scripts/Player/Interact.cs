@@ -42,16 +42,6 @@ public class Interact:MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other) {
-        switch(other.tag) {
-            case "Lever":
-                onTrigger = true;
-                saveTag = other.tag;
-                leverScript = other.gameObject.GetComponent<SimpleLever>();
-                break;
-        }
-    }
-
     void OnTriggerExit(Collider other) {
         if(onTrigger)
             onTrigger = false;

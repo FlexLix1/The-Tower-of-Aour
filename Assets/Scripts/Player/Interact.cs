@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class Interact:MonoBehaviour {
 
-    float rayDistance = 1.5f;
+    DynamicLever leverScript;
+    string saveTag;
+    bool onTrigger;
 
     void Update() {
         if(Input.GetKeyDown(KeyCode.E)) {
-            CheckInteraction();
+            Activate();
         }
     }
 
-    void CheckInteraction() {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
-            switch(hit.collider.tag) {
-                case "Lever":
-                    SimpleLever leverScript = hit.collider.gameObject.GetComponent<SimpleLever>();
-                    if(leverScript.leverActive) {
-                        leverScript.LeverDown();
-                    } else {
-                        leverScript.LeverUp();
-                    }
-                    break;
-            }
+    void Activate() {
+        switch(saveTag) {
+            case "Lever":
+                if(leverScript.inUse)
+                    return;
+
+                if(leverScript.leverActive) {
+                    leverScript.LeverDown();
+                } else {
+                    leverScript.LeverUp();
+                }
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        switch(other.tag) {
+            case "Lever":
+                onTrigger = true;
+                saveTag = other.tag;
+                leverScript = other.gameObject.GetComponent<DynamicLever>();
+                break;
         }
     }
 }

@@ -4112,9 +4112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63ebc5d5e3196c41b8f94bc802a42a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressed: 0
-  closeDelay: 5
-  pressedOffset: {x: 0, y: 0.02, z: 0}
+  OnPressurePlate: 0
+  timeUntilReset: 1
   onStandingOnPressurePlate:
     m_PersistentCalls:
       m_Calls:
@@ -4193,7 +4192,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 092a72add846d0941b9e3d0c968de4fe, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4231,7 +4230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281180493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -448.69, y: 152.432, z: 341.02}
+  m_LocalPosition: {x: -448.69, y: 152.364, z: 341.02}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4951,7 +4950,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 092a72add846d0941b9e3d0c968de4fe, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

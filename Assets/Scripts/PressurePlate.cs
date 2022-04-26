@@ -23,17 +23,10 @@ public class PressurePlate : MonoBehaviour
     Coroutine waitCoroutineReference;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         OnPressurePlate = false;
         pressureplate = GetComponent<Transform>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(numOfObjectsOnPlate);
     }
 
     private void OnTriggerEnter(Collider other)

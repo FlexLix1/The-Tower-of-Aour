@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DynamicLever:MonoBehaviour {
 
-    public DoorLever doorScript;
+    public DynamicDoor doorScript;
     public bool leverActive, startTrue, inUse, oneTimeUse;
     public Animator anim;
 
@@ -34,7 +34,7 @@ public class DynamicLever:MonoBehaviour {
 
     void SetLeverFalse() {
         anim.Play("lever_False");
-        doorScript.MoveUp();
+        //doorScript.MoveUp();
         leverActive = false;
         if(oneTimeUse)
             return;
@@ -43,7 +43,7 @@ public class DynamicLever:MonoBehaviour {
 
     void SetLeverTrue() {
         anim.Play("lever_True");
-        doorScript.MoveDown();
+        //doorScript.MoveDown();
         leverActive = true;
         if(oneTimeUse)
             return;

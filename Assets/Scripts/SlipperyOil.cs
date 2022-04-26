@@ -11,7 +11,7 @@ public class SlipperyOil : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canMove = true;
+        canMove = false;
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

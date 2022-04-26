@@ -9,6 +9,9 @@ public class Interact:MonoBehaviour {
     bool onTrigger;
 
     void Update() {
+        if(!onTrigger)
+            return;
+
         if(Input.GetKeyDown(KeyCode.E)) {
             Activate();
         }
@@ -37,5 +40,20 @@ public class Interact:MonoBehaviour {
                 leverScript = other.gameObject.GetComponent<DynamicLever>();
                 break;
         }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        switch(other.tag) {
+            case "Lever":
+                onTrigger = true;
+                saveTag = other.tag;
+                leverScript = other.gameObject.GetComponent<SimpleLever>();
+                break;
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if(onTrigger)
+            onTrigger = false;
     }
 }

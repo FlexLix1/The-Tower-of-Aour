@@ -12,22 +12,35 @@ public class PlayerMovement:MonoBehaviour {
 
     public GameObject mainCamera;
 
+    public bool GroundMovement;
+    private SlipperyOil slipperyOilMovement;
+
     void Start() {
         rgbd = GetComponent<Rigidbody>();
+        slipperyOilMovement = GetComponent<SlipperyOil>();
+        GroundMovement = true;
     }
 
     void Update() {
-        //Update forward direction relative to camera
-        UpdateCameraForward();
 
-        //Update player input
-        GetInput();
+        if (GroundMovement)
+        {
+            //Update forward direction relative to camera
+            UpdateCameraForward();
 
-        //Rotate character towards walking direction
-        RotateCharacter();
+            //Update player input
+            GetInput();
 
-        //Update player Input
-        UpdatePosition();
+            //Rotate character towards walking direction
+            RotateCharacter();
+
+            //Update player Input
+            UpdatePosition();
+        }
+        else
+        {
+            slipperyOilMovement.SlipperyOilMovement();
+        }
     }
 
     void UpdateCameraForward() {

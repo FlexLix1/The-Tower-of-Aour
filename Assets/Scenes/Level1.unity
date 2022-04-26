@@ -2967,6 +2967,7 @@ MonoBehaviour:
   movementSpeed: 10
   rotationSpeed: 350
   mainCamera: {fileID: 633675547}
+  GroundMovement: 1
 --- !u!65 &502938794
 BoxCollider:
   m_ObjectHideFlags: 0

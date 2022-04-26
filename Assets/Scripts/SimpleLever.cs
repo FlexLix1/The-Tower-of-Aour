@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SimpleLever:MonoBehaviour {
 
+    public DoorLever doorScript;
     public bool leverActive, startTrue;
     public Animator anim;
 
@@ -17,11 +18,13 @@ public class SimpleLever:MonoBehaviour {
 
     public void LeverUp() {
         anim.Play("lever_MTrue");
+        doorScript.MoveDown();
         Invoke(nameof(SetLeverTrue), 1);
     }
 
     public void LeverDown() {
         anim.Play("lever_MFalse");
+        doorScript.MoveUp();
         Invoke(nameof(SetLeverFalse), 1);
     }
 

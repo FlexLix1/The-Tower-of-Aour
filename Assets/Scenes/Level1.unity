@@ -1495,7 +1495,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21762
+  m_Name: pb_Mesh35866
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2392,7 +2392,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20904
+  m_Name: pb_Mesh35008
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3372,6 +3372,7 @@ GameObject:
   - component: {fileID: 502938800}
   - component: {fileID: 502938801}
   - component: {fileID: 502938802}
+  - component: {fileID: 502938803}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -3423,6 +3424,7 @@ MonoBehaviour:
   movementSpeed: 10
   rotationSpeed: 350
   mainCamera: {fileID: 633675547}
+  GroundMovement: 1
 --- !u!65 &502938794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3579,6 +3581,21 @@ MonoBehaviour:
   TouchingWall: 0
   UpwardSpeed: 3.3
   ladderCam: {fileID: 738047063}
+--- !u!114 &502938803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502938790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5232c391dcf3c17498cbd0e6de0d2647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10000
+  canMove: 0
+  rb: {fileID: 0}
 --- !u!1 &505556563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7018bd78606ab7d4f8e718e3349b8034, type: 3}
@@ -5026,7 +5043,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794456848}
-  m_LocalRotation: {x: 0.11591689, y: 0.8804763, z: -0.27984813, w: 0.36470523}
+  m_LocalRotation: {x: 0.11591691, y: 0.88047624, z: -0.27984816, w: 0.36470523}
   m_LocalPosition: {x: -97.11, y: 48.51, z: -35.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5155,7 +5172,7 @@ GameObject:
   - component: {fileID: 918197610}
   - component: {fileID: 918197609}
   - component: {fileID: 918197613}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: LeverDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7970,7 +7987,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21348
+  m_Name: pb_Mesh35452
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

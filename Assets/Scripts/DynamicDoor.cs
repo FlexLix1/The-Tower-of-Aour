@@ -6,6 +6,7 @@ public class DynamicDoor:MonoBehaviour {
 
     public Vector3 moveTowards;
     public bool swiningDoor, openDoor;
+    bool moving;
 
     void Start() {
 

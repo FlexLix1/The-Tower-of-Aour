@@ -7,7 +7,8 @@ public class Pushing : MonoBehaviour {
     public float rayDistance = 2f, boxOffset = 2f;
     public bool hasBox;
     Vector3 offset;
-    public string lockDirection;
+    public enum lockDirection {LeftUp, DownRight};
+    public lockDirection holdDirection;
 
     void Update() {
         if (hasBox) {
@@ -30,19 +31,19 @@ public class Pushing : MonoBehaviour {
                 if (angle < 35 && angle > -35) {
                     //Vänster
                     offset = Vector3.right * boxOffset;
-                    lockDirection = "LeftUp";
+                    holdDirection = lockDirection.LeftUp;
                 } else if (angle > 55 && angle < 125) {
                     //Ner
                     offset = Vector3.forward * boxOffset;
-                    lockDirection = "DownRight";
+                    holdDirection = lockDirection.DownRight;
                 } else if (angle < -55 && angle > -125) {
                     //Upp
                     offset = -Vector3.forward * boxOffset;
-                    lockDirection = "DownRight";
+                    holdDirection = lockDirection.DownRight;
                 } else if (angle > 125 || angle < -125) {
                     //Höger
                     offset = -Vector3.right * boxOffset;
-                    lockDirection = "LeftUp";
+                    holdDirection = lockDirection.LeftUp;
                 }
                 hasBox = true;
             }

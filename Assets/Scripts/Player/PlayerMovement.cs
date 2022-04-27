@@ -26,10 +26,13 @@ public class PlayerMovement:MonoBehaviour {
     void Update() {
 
         if(pushScript.hasBox) {
-            if(pushScript.lockDirection == "LeftUp") {
-                rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-            } else if(pushScript.lockDirection == "DownRight") {
-                rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+            switch(pushScript.holdDirection) {
+                case Pushing.lockDirection.LeftUp:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+                    break;
+                case Pushing.lockDirection.DownRight:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+                    break;
             }
         } else {
             rgbd.constraints = RigidbodyConstraints.FreezeRotation;

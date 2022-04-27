@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interact:MonoBehaviour {
 
-    SimpleLever leverScript;
+    DynamicLever leverScript;
     string saveTag;
     bool onTrigger;
 
@@ -20,6 +20,9 @@ public class Interact:MonoBehaviour {
     void Activate() {
         switch(saveTag) {
             case "Lever":
+                if(leverScript.inUse)
+                    return;
+
                 if(leverScript.leverActive) {
                     leverScript.LeverDown();
                 } else {
@@ -34,7 +37,7 @@ public class Interact:MonoBehaviour {
             case "Lever":
                 onTrigger = true;
                 saveTag = other.tag;
-                leverScript = other.gameObject.GetComponent<SimpleLever>();
+                leverScript = other.gameObject.GetComponent<DynamicLever>();
                 break;
         }
     }

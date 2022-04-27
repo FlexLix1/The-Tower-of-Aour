@@ -11,6 +11,7 @@ public class PlayerMovement:MonoBehaviour {
     float cameraAngle;
 
     public GameObject mainCamera;
+    Pushing pushScript;
 
     public bool GroundMovement;
     private SlipperyOil slipperyOilMovement;
@@ -18,27 +19,41 @@ public class PlayerMovement:MonoBehaviour {
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         slipperyOilMovement = GetComponent<SlipperyOil>();
+        pushScript = GetComponent<Pushing>();
         GroundMovement = true;
     }
 
     void Update() {
 
-        if (GroundMovement)
-        {
+        if(pushScript.hasBox) {
+            switch(pushScript.holdDirection) {
+                case Pushing.lockDirection.LeftUp:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+                    break;
+                case Pushing.lockDirection.DownRight:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+                    break;
+            }
+        } else {
+            rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
+        if(GroundMovement) {
             //Update forward direction relative to camera
             UpdateCameraForward();
 
             //Update player input
             GetInput();
 
-            //Rotate character towards walking direction
-            RotateCharacter();
-
             //Update player Input
             UpdatePosition();
-        }
-        else
-        {
+
+            if(pushScript.hasBox)
+                return;
+
+            //Rotate character towards walking direction
+            RotateCharacter();
+        } else {
             slipperyOilMovement.SlipperyOilMovement();
         }
     }
@@ -48,7 +63,7 @@ public class PlayerMovement:MonoBehaviour {
         relativeForward.y = 0;
         Vector3.Normalize(relativeForward);
         relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward;
-    } 
+    }
 
     void GetInput() {
         Vector3 forwardDirection = Input.GetAxisRaw("Vertical") * relativeForward;

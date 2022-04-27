@@ -804,7 +804,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13376
+  m_Name: pb_Mesh26536
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1450,13 +1450,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450048311}
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 17.598, y: 4.036, z: 29.299}
+  m_LocalRotation: {x: -0.38268343, y: -0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1089993}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1.5}
   m_Children:
   - {fileID: 501951765}
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1978920122}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &481112846
 GameObject:
@@ -2540,7 +2540,7 @@ Transform:
   m_LocalScale: {x: 0.19302, y: 16.238953, z: 5.844712}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &662260593
 PrefabInstance:
@@ -4267,8 +4267,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856219676}
-  m_LocalRotation: {x: 0.27984816, y: 0.3647052, z: -0.1159169, w: 0.8804763}
-  m_LocalPosition: {x: -32.010002, y: 48.51, z: -58.07}
+  m_LocalRotation: {x: 0.27984813, y: -0.3647052, z: 0.1159169, w: 0.8804763}
+  m_LocalPosition: {x: 57.989998, y: 48.51, z: -58.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4784,7 +4784,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13526
+  m_Name: pb_Mesh26920
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6593,7 +6593,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1216265893
 PrefabInstance:
@@ -6883,7 +6883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1268137531
 GameObject:
@@ -7183,7 +7183,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1270962137
 GameObject:
@@ -7706,7 +7706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401227376
 GameObject:
@@ -7991,8 +7991,8 @@ GameObject:
   - component: {fileID: 1457016563}
   - component: {fileID: 1457016562}
   - component: {fileID: 1457016561}
-  - component: {fileID: 1457016560}
   - component: {fileID: 1457016559}
+  - component: {fileID: 1457016560}
   m_Layer: 0
   m_Name: LeverDoor
   m_TagString: Untagged
@@ -8025,9 +8025,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457016558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2254309c4474f9644be8236a6e59559e, type: 3}
+  m_Script: {fileID: 11500000, guid: ed6f9c36a777b834aad51dd9a5b3115c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorTarget: {x: -6, y: 0, z: 0}
+  speed: 3
+  swiningDoor: 0
+  openDoor: 0
 --- !u!65 &1457016561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11914,7 +11918,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-13338
+  m_Name: pb_Mesh26392
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12669,7 +12673,7 @@ Transform:
   m_Children:
   - {fileID: 1613648633}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1978920119
 GameObject:
@@ -12714,7 +12718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9b8e0578b2a144a90b7204e3b50b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorScript: {fileID: 0}
+  doorScript: {fileID: 1457016560}
   leverActive: 0
   startTrue: 0
   inUse: 0
@@ -12730,9 +12734,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 17.598, y: 4.036, z: 28.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 450048313}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037127715
 GameObject:

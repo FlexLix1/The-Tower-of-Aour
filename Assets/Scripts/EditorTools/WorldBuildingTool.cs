@@ -11,10 +11,10 @@ public class WorldBuildingTool:EditorWindow {
     GameObject[] prefabs;
     public GameObject selectedPrefab;
     int selectedPrefabIndex;
-    public bool worldToolActive;
+    public bool worldToolActive, randomizeRotation;
 
 
-    private const string menuItemPath = "Tool/WBT/" + myWindowTitle;
+    private const string menuItemPath = "Tools/WBT/" + myWindowTitle;
     private const string myWindowTitle = "World Building Tool";
 
     [MenuItem(menuItemPath)]
@@ -40,6 +40,11 @@ public class WorldBuildingTool:EditorWindow {
         selectedPrefabIndex = EditorGUILayout.Popup(selectedPrefabIndex, options);
         selectedPrefab = prefabs[selectedPrefabIndex];
 
+        GUILayout.Space(10f);
+
+        EditorGUILayout.LabelField("Random Rotation");
+        randomizeRotation = EditorGUILayout.Toggle(randomizeRotation);
+
         GUILayout.Space(5f);
         if(GUILayout.Button("Create")) {
             GameObject placementIndicator = GameObject.Find("Placement Indicator");
@@ -48,6 +53,11 @@ public class WorldBuildingTool:EditorWindow {
             RaycastHit hit;
             if(Physics.Raycast(holdInstance.transform.position, -holdInstance.transform.up, out hit, Mathf.Infinity)) {
                 holdInstance.transform.position = new Vector3(hit.point.x, hit.point.y + (holdInstance.transform.localScale.y / 2), hit.point.z);
+                if(randomizeRotation) {
+                    Quaternion test = Quaternion.FromToRotation(Vector3.down, hit.normal);
+                    holdInstance.transform.rotation = Quaternion.Euler(test.x, Random.Range(0, 360), test.z);
+                    //holdInstance.transform.rotation = test;
+                }
             }
         }
     }

@@ -135,7 +135,7 @@ MonoBehaviour:
     Thumbnail: 
     HasThumbnail: 0
     OutputMaterial: {fileID: 2100000, guid: f714019c0bc01457884fccee1fabb2cb, type: 2}
-    MaterialShader: Standard
+    MaterialShader: Universal Render Pipeline/Lit
     GenerateAllOutputs: 0
     GenerateAllMipmaps: 0
     DefaultPreset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n 

@@ -53,6 +53,7 @@ public class PlayerMovement:MonoBehaviour {
 
             //Rotate character towards walking direction
             RotateCharacter();
+
         } else {
             slipperyOilMovement.SlipperyOilMovement();
         }

@@ -11,11 +11,11 @@ public class BoxClimb:MonoBehaviour {
             return;
 
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
+        if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             switch(hit.collider.tag) {
                 case "Box":
                     GameObject holdBox = hit.collider.gameObject;
-                    transform.position =  new Vector3(holdBox.transform.position.x, holdBox.transform.position.y + 4, holdBox.transform.position.z);
+                    transform.position =  new Vector3(holdBox.transform.position.x, holdBox.transform.position.y + 3, holdBox.transform.position.z);
                     holdBox = null;
                     break;
             }

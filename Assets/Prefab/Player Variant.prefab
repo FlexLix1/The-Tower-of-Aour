@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempBox: {fileID: 0}
-  rayDistance: 2
+  rayDistance: 10
   boxOffset: 2
   hasBox: 0
   holdDirection: 0

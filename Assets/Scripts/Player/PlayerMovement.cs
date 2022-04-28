@@ -38,7 +38,7 @@ public class PlayerMovement:MonoBehaviour {
             rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if(GroundMovement) {
+        if (!GroundMovement) return;
             //Update forward direction relative to camera
             UpdateCameraForward();
 
@@ -53,10 +53,6 @@ public class PlayerMovement:MonoBehaviour {
 
             //Rotate character towards walking direction
             RotateCharacter();
-
-        } else {
-            slipperyOilMovement.SlipperyOilMovement();
-        }
     }
 
     void UpdateCameraForward() {

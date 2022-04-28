@@ -10,6 +10,8 @@ public class PressurePlate : MonoBehaviour
     Vector3 pressedPosition;
     Transform plateTransform;
 
+    public DynamicDoor doorScript;
+
     [SerializeField]
     UnityEvent onStandingOnPressurePlate = null;
 
@@ -28,13 +30,14 @@ public class PressurePlate : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
             CancelInvoke(nameof(Unpressed));
-            Debug.Log("Hello Mr "+ other.gameObject.name + " who stands on pressure plate", other.gameObject);
+            //Debug.Log("Hello Mr "+ other.gameObject.name + " who stands on pressure plate", other.gameObject);
             plateTransform.position = pressedPosition;
             if (!pressed)
             {
                 onStandingOnPressurePlate.Invoke();
             }
             pressed = true;
+            doorScript.openDoor = true;
         }
     }
 
@@ -61,6 +64,7 @@ public class PressurePlate : MonoBehaviour
     private void Unpressed()
     {
         pressed = false;
+        doorScript.openDoor = false;
         plateTransform.position = pressedPosition + pressedOffset * 2;
         onResettingPressurePlate.Invoke();
     }

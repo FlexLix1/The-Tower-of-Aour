@@ -4,27 +4,40 @@ using UnityEngine;
 
 public class Interact:MonoBehaviour {
 
-    SimpleLever leverScript;
+    DynamicLever leverScript;
+    DynamicDoor doorScript;
+    PickUp inventoryScript;
     string saveTag;
     bool onTrigger;
+
+    void Start() {
+        inventoryScript = GetComponent<PickUp>();    
+    }
 
     void Update() {
         if(!onTrigger)
             return;
 
         if(Input.GetKeyDown(KeyCode.E)) {
-            Activate();
+            UseItem();
         }
     }
 
-    void Activate() {
+    void UseItem() {
         switch(saveTag) {
             case "Lever":
+                if(leverScript.inUse)
+                    return;
+
                 if(leverScript.leverActive) {
                     leverScript.LeverDown();
                 } else {
                     leverScript.LeverUp();
                 }
+                break;
+            case "Door":
+                doorScript.openDoor = true;
+                inventoryScript.UseItem();
                 break;
         }
     }
@@ -34,13 +47,20 @@ public class Interact:MonoBehaviour {
             case "Lever":
                 onTrigger = true;
                 saveTag = other.tag;
-                leverScript = other.gameObject.GetComponent<SimpleLever>();
+                leverScript = other.gameObject.GetComponent<DynamicLever>();
+                break;
+            case "Door":
+                onTrigger = true;
+                saveTag = other.tag;
+                doorScript = other.gameObject.GetComponent<DynamicDoor>();
                 break;
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if(onTrigger)
+        if(onTrigger) {
             onTrigger = false;
+            saveTag = null;
+        }
     }
 }

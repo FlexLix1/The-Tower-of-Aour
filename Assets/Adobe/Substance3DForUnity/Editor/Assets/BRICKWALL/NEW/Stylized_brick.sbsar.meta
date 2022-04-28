@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 33be64736606241aca6b3aa5d7852ed1
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 10a499689f8fa49e3aa2dc3bf0f4ef10, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/BRICKWALL/NEW/Stylized_brick.sbsar

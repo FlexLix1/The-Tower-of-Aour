@@ -6,11 +6,10 @@ public class PressurePlate : MonoBehaviour
     public bool pressed;
     public float closeDelay = 5;
     public Vector3 pressedOffset = new Vector3(0, 0.02f, 0);
+    public DynamicDoor doorScript;
 
     Vector3 pressedPosition;
     Transform plateTransform;
-
-    public DynamicDoor doorScript;
 
     [SerializeField]
     UnityEvent onStandingOnPressurePlate = null;
@@ -30,7 +29,6 @@ public class PressurePlate : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
             CancelInvoke(nameof(Unpressed));
-            //Debug.Log("Hello Mr "+ other.gameObject.name + " who stands on pressure plate", other.gameObject);
             plateTransform.position = pressedPosition;
             if (!pressed)
             {
@@ -45,8 +43,6 @@ public class PressurePlate : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
-            //Use the OverlapBox to detect if there are any other colliders within this box area.
-            //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
             Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity);
 
             foreach (var item in hitColliders)
@@ -56,11 +52,9 @@ public class PressurePlate : MonoBehaviour
                     return;
                 }
             }
-
             Invoke(nameof(Unpressed), closeDelay);
         }
     }
-
     private void Unpressed()
     {
         pressed = false;

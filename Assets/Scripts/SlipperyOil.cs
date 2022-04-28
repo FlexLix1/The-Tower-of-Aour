@@ -28,25 +28,6 @@ public class SlipperyOil : MonoBehaviour
     {
         if (canMove){ 
             
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb.velocity = new Vector3(0, 0, 1 * speed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb.velocity = new Vector3(0, 0, -1 * speed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb.velocity = new Vector3(-1 * speed * Time.deltaTime, 0, 0);
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb.velocity = new Vector3(1 * speed * Time.deltaTime, 0, 0);
-            }
         }
     }
 
@@ -54,12 +35,13 @@ public class SlipperyOil : MonoBehaviour
     {
         if(collision.gameObject.tag == "OilPuzzleWall")
         {
-            canMove = true;
+            playermovement.GroundMovement = true;
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-            canMove = false;
+        canMove = false;
+        rb.AddForce(Vector3.forward);
     }
 }

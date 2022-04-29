@@ -37,18 +37,26 @@ public class Pushing:MonoBehaviour {
                 float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
                 if(angle < 35 && angle > -35) {
                     //Vänster
+                    //Deg: 90
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
                     offset = Vector3.right * boxOffset;
                     holdDirection = lockDirection.LeftUp;
                 } else if(angle > 55 && angle < 125) {
                     //Ner
+                    //deg: 0
+                    transform.rotation = Quaternion.Euler(Vector3.zero);
                     offset = Vector3.forward * boxOffset;
                     holdDirection = lockDirection.DownRight;
                 } else if(angle < -55 && angle > -125) {
                     //Upp
+                    //Deg: 180
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
                     offset = -Vector3.forward * boxOffset;
                     holdDirection = lockDirection.DownRight;
                 } else if(angle > 125 || angle < -125) {
                     //Höger
+                    //Deg: -90
+                    transform.rotation = Quaternion.Euler(0, -90, 0);
                     offset = -Vector3.right * boxOffset;
                     holdDirection = lockDirection.LeftUp;
                 }

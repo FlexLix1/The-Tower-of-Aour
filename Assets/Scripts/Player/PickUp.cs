@@ -37,7 +37,7 @@ public class PickUp:MonoBehaviour {
 
     //Places held item on map
     void PlaceItem() {
-        Instantiate(prefabsInventory[saveInventoryNumber], transform.position + (transform.forward * placeDistance), Quaternion.identity);
+        Instantiate(prefabsInventory[saveInventoryNumber], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z) + (transform.forward * placeDistance), Quaternion.identity);
         inventory[saveInventoryNumber].SetActive(false);
         hasPickup = false;
         Invoke(nameof(CanPickup), 0.025f);

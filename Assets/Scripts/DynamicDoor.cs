@@ -36,12 +36,14 @@ public class DynamicDoor:MonoBehaviour {
                 MoveDoorTo(doorStart);
             } else {
                 rgbd.velocity = Vector3.zero;
+                rgbd.constraints = RigidbodyConstraints.FreezeAll;
                 colliderActive.isTrigger = false;
             }
             return;
         }
 
         colliderActive.isTrigger = true;
+        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         if(Vector3.Distance(doorTarget, transform.position) > 0.025f) {
             MoveDoorTo(doorTarget);
         } else {

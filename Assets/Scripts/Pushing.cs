@@ -22,8 +22,9 @@ public class Pushing : MonoBehaviour {
 
         if (!Input.GetKeyDown(KeyCode.E)) return;
 
+
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             if (hit.collider.CompareTag("Box")) {
                 tempBox = hit.collider.gameObject;
                 Vector3 forcedDir = tempBox.transform.position - transform.position;

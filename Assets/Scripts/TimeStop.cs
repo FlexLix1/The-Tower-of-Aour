@@ -42,21 +42,25 @@ public class TimeStop:MonoBehaviour {
         material.material = normalMat;
         if(isRotating) {
             rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
+            rgbd.angularVelocity = saveVelocity;
         } else {
             rgbd.constraints = RigidbodyConstraints.None; 
+            rgbd.velocity = saveVelocity;
         }
 
-        rgbd.velocity = saveVelocity;
         timeStoped = false;
     }
 
     //An update that works everytime mouse hovers over objectscript
     //If L_Mouse_click saves velocity, activates all rgbd constraints
     void OnMouseOver() {
+        Debug.Log("Over");
+
         if(timeStoped)
             return;
 
         if(Input.GetMouseButtonDown(0)) {
+
             timeStoped = true;
             saveVelocity = rgbd.velocity;
             material.material = timeFreezeMat;

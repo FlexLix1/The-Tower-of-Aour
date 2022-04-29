@@ -46,7 +46,7 @@ public class PickUp:MonoBehaviour {
     //Checks if item is pickupable
     void CheckPickup() {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
+        if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             switch(hit.collider.tag) {
                 case "Key":
                     savePickup = hit.collider.gameObject;

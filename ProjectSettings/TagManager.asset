@@ -12,7 +12,7 @@ TagManager:
   - Dialogue
   - Hint
   - OilPuzzleWall
-  - OilFloor
+  - HintEnd
   layers:
   - Default
   - TransparentFX

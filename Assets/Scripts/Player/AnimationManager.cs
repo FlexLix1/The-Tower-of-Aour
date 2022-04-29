@@ -18,7 +18,6 @@ public class AnimationManager:MonoBehaviour {
         if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {
-            
             velocityMagnitude -= Time.deltaTime * blendSpeed;
         }
         velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);

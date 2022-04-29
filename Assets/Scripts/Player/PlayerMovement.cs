@@ -8,7 +8,7 @@ public class PlayerMovement:MonoBehaviour {
     Rigidbody rgbd;
 
     public float movementSpeed, rotationSpeed;
-    float cameraAngle;
+    float cameraAngle, startMovementSpeed;
 
     public GameObject mainCamera;
     Pushing pushScript;
@@ -18,14 +18,16 @@ public class PlayerMovement:MonoBehaviour {
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
-        slipperyOilMovement = GetComponent<SlipperyOil>();
         pushScript = GetComponent<Pushing>();
+        slipperyOilMovement = GetComponent<SlipperyOil>();
+        startMovementSpeed = movementSpeed;
         GroundMovement = true;
     }
 
     void Update() {
 
         if(pushScript.hasBox) {
+            movementSpeed = 4.5f;
             switch(pushScript.holdDirection) {
                 case Pushing.lockDirection.LeftUp:
                     rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
@@ -35,6 +37,7 @@ public class PlayerMovement:MonoBehaviour {
                     break;
             }
         } else {
+            movementSpeed = startMovementSpeed;
             rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         }
 

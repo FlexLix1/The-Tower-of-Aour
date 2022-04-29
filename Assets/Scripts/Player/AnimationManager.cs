@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class AnimationManager:MonoBehaviour {
 
+    Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
     float velocityMagnitude;
     public float blendSpeed;
 
+    string currentState;
+
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        pushBoxScript = GetComponent<Pushing>();
     }
 
     void Update() {
@@ -22,6 +26,16 @@ public class AnimationManager:MonoBehaviour {
         }
         velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);
 
-        anim.SetFloat("IdleToWalk", velocityMagnitude);
+        if(pushBoxScript.hasBox) {
+            ChangeAnimation("IdleToPush");
+            return;
+        }
+
+        ChangeAnimation("IdleToWalk");
+    }
+
+    void ChangeAnimation(string newState) {
+        anim.Play(newState);
+        anim.SetFloat(newState, velocityMagnitude);
     }
 }

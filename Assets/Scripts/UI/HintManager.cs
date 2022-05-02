@@ -9,7 +9,7 @@ public class HintManager:MonoBehaviour {
 
     HintHolder getHit;
 
-    public float textSpeed = 0.025f; 
+    public float textSpeed = 0.025f;
 
     string[] holdHint;
     bool hintActive, writingOut;
@@ -50,6 +50,10 @@ public class HintManager:MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("HintEnd")) {
+            CancelInvoke(nameof(WaitUntilType));
+        }
+
         if(hintActive)
             return;
 
@@ -63,7 +67,7 @@ public class HintManager:MonoBehaviour {
                 holdHint[i] = getHit.hintText[i];
             }
             Invoke(nameof(WaitUntilType), getHit.timerSeconds);
-        }    
+        }
     }
 
     void WaitUntilType() {

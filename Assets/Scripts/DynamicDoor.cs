@@ -21,17 +21,29 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     void Update() {
+
+        if(swiningDoor) {
+            if(openDoor) {
+                rgbd.constraints = RigidbodyConstraints.None;
+            } else {
+                rgbd.constraints = RigidbodyConstraints.FreezeRotationY;
+            }
+            return;
+        }
+
         if(!openDoor) {
             if(Vector3.Distance(doorStart, transform.position) > 0.025f) {
                 MoveDoorTo(doorStart);
             } else {
                 rgbd.velocity = Vector3.zero;
+                rgbd.constraints = RigidbodyConstraints.FreezeAll;
                 colliderActive.isTrigger = false;
             }
             return;
         }
 
         colliderActive.isTrigger = true;
+        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         if(Vector3.Distance(doorTarget, transform.position) > 0.025f) {
             MoveDoorTo(doorTarget);
         } else {

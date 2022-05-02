@@ -11,6 +11,8 @@ TagManager:
   - Lever
   - Dialogue
   - Hint
+  - OilPuzzleWall
+  - HintEnd
   layers:
   - Default
   - TransparentFX

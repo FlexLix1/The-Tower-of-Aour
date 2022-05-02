@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
+    public bool pressed;
+    public float closeDelay = 5;
+    public Vector3 pressedOffset = new Vector3(0, 0.02f, 0);
 
-    public bool OnPressurePlate;
-    Transform pressureplate;
+    Vector3 pressedPosition;
+    Transform plateTransform;
 
-    int numOfObjectsOnPlate;
-
-    [SerializeField]
-    private float timeUntilReset = 2;
+    public DynamicDoor doorScript;
 
     [SerializeField]
     UnityEvent onStandingOnPressurePlate = null;
@@ -20,58 +18,54 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     UnityEvent onResettingPressurePlate = null;
 
-    Coroutine waitCoroutineReference;
-
-
     void Start()
     {
-        OnPressurePlate = false;
-        pressureplate = GetComponent<Transform>();
+        pressed = false;
+        plateTransform = transform.GetChild(0).transform;
+        pressedPosition = plateTransform.position - pressedOffset;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (OnPressurePlate) return;
-
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
-            numOfObjectsOnPlate++;
-            OnPressurePlate = true;
-            Debug.Log("Hello Mr who stands on pressure plate");
-            transform.position -= new Vector3(0, 0.02f, 0);
-            onStandingOnPressurePlate.Invoke();
-            Debug.Log("OnTriggerEnter");
+            CancelInvoke(nameof(Unpressed));
+            //Debug.Log("Hello Mr "+ other.gameObject.name + " who stands on pressure plate", other.gameObject);
+            plateTransform.position = pressedPosition;
+            if (!pressed)
+            {
+                onStandingOnPressurePlate.Invoke();
+            }
+            pressed = true;
+            doorScript.openDoor = true;
         }
-
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
-            numOfObjectsOnPlate--;
-            if (numOfObjectsOnPlate > 0) return;
-            if (waitCoroutineReference != null)
+            //Use the OverlapBox to detect if there are any other colliders within this box area.
+            //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
+            Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity);
+
+            foreach (var item in hitColliders)
             {
-                StopCoroutine(waitCoroutineReference);
+                if (item.gameObject.CompareTag("Player") || item.gameObject.CompareTag("Box"))
+                {
+                    return;
+                }
             }
-            waitCoroutineReference = StartCoroutine(WaitCoroutine(timeUntilReset));
-            Debug.Log("OnTriggerExit");
+
+            Invoke(nameof(Unpressed), closeDelay);
         }
     }
-    
-    IEnumerator WaitCoroutine(float timeToWait)
-    {
-        yield return new WaitForSeconds(timeToWait);
-        PressureplateStartPosition();
-    }
 
-    private void PressureplateStartPosition()
+    private void Unpressed()
     {
-        OnPressurePlate = false;
-        Debug.Log("You left 5 seconds ago");
-        transform.position += new Vector3(0, 0.02f, 0);
-
+        pressed = false;
+        doorScript.openDoor = false;
+        plateTransform.position = pressedPosition + pressedOffset * 2;
         onResettingPressurePlate.Invoke();
     }
 }

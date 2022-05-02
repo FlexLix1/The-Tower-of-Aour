@@ -25,10 +25,9 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void Update() {
-
         if(pushScript.hasBox) {
             movementSpeed = 4.5f;
-            switch(pushScript.holdDirection) {
+            switch(pushScript.holdLockDirection) {
                 case Pushing.lockDirection.LeftUp:
                     rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
                     break;

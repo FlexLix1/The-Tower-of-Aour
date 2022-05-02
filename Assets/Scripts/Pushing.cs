@@ -8,7 +8,11 @@ public class Pushing:MonoBehaviour {
     public bool hasBox;
     Vector3 offset;
     public enum lockDirection { LeftUp, DownRight };
-    public lockDirection holdDirection;
+    public lockDirection holdLockDirection;
+
+    public enum pushDirection { Up, Down, Left, Right };
+    public pushDirection holdPushDirection;
+
 
     void Update() {
         if(hasBox) {
@@ -36,25 +40,29 @@ public class Pushing:MonoBehaviour {
                 Vector3 forcedDir = tempBox.transform.position - transform.position;
                 float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
                 if(angle < 35 && angle > -35) {
-                    //Vänster
+                    //Left
                     transform.rotation = Quaternion.Euler(0, 90, 0);
                     offset = Vector3.right * boxOffset;
-                    holdDirection = lockDirection.LeftUp;
+                    holdLockDirection = lockDirection.LeftUp;
+                    holdPushDirection = pushDirection.Left;
                 } else if(angle > 55 && angle < 125) {
-                    //Ner
+                    //Down
                     transform.rotation = Quaternion.Euler(Vector3.zero);
                     offset = Vector3.forward * boxOffset;
-                    holdDirection = lockDirection.DownRight;
+                    holdLockDirection = lockDirection.DownRight;
+                    holdPushDirection = pushDirection.Down;
                 } else if(angle < -55 && angle > -125) {
-                    //Upp
+                    //Up
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     offset = -Vector3.forward * boxOffset;
-                    holdDirection = lockDirection.DownRight;
+                    holdLockDirection = lockDirection.DownRight;
+                    holdPushDirection = pushDirection.Up;
                 } else if(angle > 125 || angle < -125) {
-                    //Höger
+                    //Right
                     transform.rotation = Quaternion.Euler(0, -90, 0);
                     offset = -Vector3.right * boxOffset;
-                    holdDirection = lockDirection.LeftUp;
+                    holdLockDirection = lockDirection.LeftUp;
+                    holdPushDirection = pushDirection.Right;
                 }
                 hasBox = true;
             }

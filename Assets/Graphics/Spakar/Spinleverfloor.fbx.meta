@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: f52e57265c8f44142bc9ab0554470a60
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -5921656123777679990
+    second: Circle|CameraAction
+  - first:
+      74: 2653181187088022880
+    second: Circle|Circle.001Action.001
+  - first:
+      74: -3293565175841828515
+    second: Circle|Circle.003Action.001
+  - first:
+      74: -359618272553315812
+    second: Circle|CircleAction.001
+  - first:
+      74: -8907353557592765773
+    second: Circle|CylinderAction.001
+  - first:
+      74: 2873087267925698543
+    second: Circle|LightAction
+  - first:
+      74: -3523305384771567622
+    second: Circle.001|CameraAction
+  - first:
+      74: -9011658075762179022
+    second: Circle.001|Circle.001Action.001
+  - first:
+      74: -1620124778015824403
+    second: Circle.001|Circle.003Action.001
+  - first:
+      74: 2542469185943518233
+    second: Circle.001|CircleAction.001
+  - first:
+      74: 1037350464529995893
+    second: Circle.001|CylinderAction.001
+  - first:
+      74: -4959116277465686965
+    second: Circle.001|LightAction
+  - first:
+      74: -3299178882980226264
+    second: Cylinder|CameraAction
+  - first:
+      74: -7876101038077572862
+    second: Cylinder|Circle.001Action.001
+  - first:
+      74: 432630696842269888
+    second: Cylinder|Circle.003Action.001
+  - first:
+      74: 6937967581354384863
+    second: Cylinder|CircleAction.001
+  - first:
+      74: -6242241587816052237
+    second: Cylinder|CylinderAction.001
+  - first:
+      74: 2131784477776736117
+    second: Cylinder|LightAction
+  - first:
+      74: -3226872165270716677
+    second: Circle.003|CameraAction
+  - first:
+      74: 5712278189764358524
+    second: Circle.003|Circle.001Action.001
+  - first:
+      74: -5017901540954003311
+    second: Circle.003|Circle.003Action.001
+  - first:
+      74: -6584103964988966320
+    second: Circle.003|CircleAction.001
+  - first:
+      74: -3273079143736512292
+    second: Circle.003|CylinderAction.001
+  - first:
+      74: -6198572024843874081
+    second: Circle.003|LightAction
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

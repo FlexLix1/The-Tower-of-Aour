@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 907a71cd907714696b92b03d3cd74366
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 844bb481828c04626ac88ff7209ac487, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/NEW/DAMAGED BRICK WALL/Stylized_damaged_wall_bricks.sbsar

@@ -23,23 +23,13 @@ public class PickUp:MonoBehaviour {
     //Check if there are obsticles
     void CheckPlacement() {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
-            switch(hit.collider.tag) {
-                case "Door":
-                    if(inventory[saveInventoryNumber].name == "Key") {
-                        DoorOpen doorScript = hit.collider.gameObject.GetComponent<DoorOpen>();
-                        doorScript.doorOpen = true;
-                        UseItem();
-                    }
-                    return;
-            }
+        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance))
             return;
-        }
+
         PlaceItem();
     }
 
-    //SUSS ligma baka omega sus, käre här talman, du e sussy baka; bin chillin 591536
-    void UseItem() {
+    public void UseItem() {
         inventory[saveInventoryNumber].SetActive(false);
         hasPickup = false;
         Invoke(nameof(CanPickup), 0.025f);
@@ -47,7 +37,7 @@ public class PickUp:MonoBehaviour {
 
     //Places held item on map
     void PlaceItem() {
-        Instantiate(prefabsInventory[saveInventoryNumber], transform.position + (transform.forward * placeDistance), Quaternion.identity);
+        Instantiate(prefabsInventory[saveInventoryNumber], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z) + (transform.forward * placeDistance), Quaternion.identity);
         inventory[saveInventoryNumber].SetActive(false);
         hasPickup = false;
         Invoke(nameof(CanPickup), 0.025f);
@@ -56,7 +46,7 @@ public class PickUp:MonoBehaviour {
     //Checks if item is pickupable
     void CheckPickup() {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance)) {
+        if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             switch(hit.collider.tag) {
                 case "Key":
                     savePickup = hit.collider.gameObject;

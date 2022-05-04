@@ -4,46 +4,51 @@ using UnityEngine;
 using UnityEngine.Events;
 public class SlipperyOil : MonoBehaviour
 {
-    public float speed;
-    public bool canMove;
     public Rigidbody rb;
+    Vector3 saveVelocity;
+
+    private PlayerMovement playermovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        canMove = true;
         rb = gameObject.GetComponent<Rigidbody>();
+        playermovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SlipperyOilMovement();
+        if (playermovement.GroundMovement) return;
+        rb.velocity = saveVelocity;
+    }
+    private void OnTriggerEnter(Collider colider)
+    {
+            if (colider.gameObject.tag == "OilFloor")
+            {
+                saveVelocity = rb.velocity;
+                playermovement.GroundMovement = false;
+            }
+        
+            if (colider.gameObject.tag == "OilPuzzleWall")
+            {
+                playermovement.GroundMovement = true;
+                saveVelocity = Vector3.zero;
+            }
     }
 
-    public void SlipperyOilMovement()
+    private void OnTriggerExit(Collider colider)
     {
-        if (canMove){ 
-            
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb.velocity = new Vector3(0, 0, 1 * speed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb.velocity = new Vector3(0, 0, -1 * speed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb.velocity = new Vector3(-1 * speed * Time.deltaTime, 0, 0);
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb.velocity = new Vector3(1 * speed * Time.deltaTime, 0, 0);
-            }
+        if (colider.gameObject.tag == "OilPuzzleWall")
+        {
+            saveVelocity = rb.velocity;
+            playermovement.GroundMovement = false;
+        }
+        if (colider.gameObject.tag == "OilFloor")
+        {
+            rb.velocity = Vector3.zero;
+            saveVelocity = Vector3.zero;
+            playermovement.GroundMovement = true;
         }
     }
 }

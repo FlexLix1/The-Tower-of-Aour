@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement:MonoBehaviour {
 
     Vector3 playerPosition, relativeForward, relativeRight;
     Rigidbody rgbd;
 
     public float movementSpeed, rotationSpeed;
-    float cameraAngle;
+    float cameraAngle, startMovementSpeed;
 
     public GameObject mainCamera;
     Pushing pushScript;
@@ -18,30 +18,46 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
+        pushScript = GetComponent<Pushing>();
         slipperyOilMovement = GetComponent<SlipperyOil>();
+        startMovementSpeed = movementSpeed;
         GroundMovement = true;
     }
 
     void Update() {
 
-        if (GroundMovement)
-        {
+        if(pushScript.hasBox) {
+            movementSpeed = 4.5f;
+            switch(pushScript.holdDirection) {
+                case Pushing.lockDirection.LeftUp:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+                    break;
+                case Pushing.lockDirection.DownRight:
+                    rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+                    break;
+            }
+        } else {
+            movementSpeed = startMovementSpeed;
+            rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
+        if(GroundMovement) {
             //Update forward direction relative to camera
             UpdateCameraForward();
 
             //Update player input
             GetInput();
 
+            //Update player Input
+            UpdatePosition();
+
+            if(pushScript.hasBox)
+                return;
+
             //Rotate character towards walking direction
             RotateCharacter();
 
-            //Update player Input
-            UpdatePosition();
-        }
-        else
-        {
-            slipperyOilMovement.SlipperyOilMovement();
-        }
+        } 
     }
 
     void UpdateCameraForward() {
@@ -63,7 +79,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void RotateCharacter() {
-        if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
+        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, transform.position.y - transform.position.y, playerPosition.z), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }

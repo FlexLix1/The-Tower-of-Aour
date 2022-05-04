@@ -1,0 +1,35 @@
+audio must haves:
+
+Footsteps
+cogwheels (slow down and pull the pitch down, maybe a little too long so if you want to, you can shorten it so it loops) ✓
+wooden door sounds (bind dessa ihop till en ljud fil)✓
+metal mechanical door sounds
+lever sounds ✓
+background noises (steam engine noises ✓, wind, etc.) 
+pushing boxes sounds
+pressing down on pressure plates (Make it sound more "Mechanical") ✓
+climbing boxes sounds
+noises for hints and clicking e in the text box
+putting stuff down
+picking stuff up
+jumping off boxes / landing noises (man hör lite av metall skruvar så behåll det)✓
+ticking noises (typ varannan minut) (kolla med cogwheels, apply the same changes)✓
+hydrolic elevator noises 
+freezing ability noise
+climbing ladder sounds
+gliding on oil effect
+checkpoint
+dead sound effect
+menu/ui sounds
+background music for the menu
+light buzzing sound effect (gamla ljusrör style)
+
+
+
+Voiceacting (om vi ska ha det?)
+
+backstory (djup röst som berättar contexten av storyn för spelaren)
+grunting när man puttar lådan
+normala voice lines
+idle thinking hmmmm ljud
+gliding on oil voices

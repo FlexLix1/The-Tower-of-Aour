@@ -7,8 +7,7 @@ public class AnimationManager:MonoBehaviour {
     Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
-    float velocityMagnitude;
-    public float blendSpeed;
+    public float blendSpeed, velocityMagnitude;
 
     string currentState;
 
@@ -21,7 +20,7 @@ public class AnimationManager:MonoBehaviour {
     }
 
     void Update() {
-        if(rgbd.velocity.magnitude > 0.1) {
+        if(rgbd.velocity.magnitude > 0.2) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {
             velocityMagnitude -= Time.deltaTime * blendSpeed;
@@ -83,9 +82,7 @@ public class AnimationManager:MonoBehaviour {
 
         if(pushBox) {
             ChangeAnimation("IdleToPush");
-        }
-
-        if(pullBox) {
+        } else if(pullBox) {
             ChangeAnimation("IdleToPull");
         }
     }

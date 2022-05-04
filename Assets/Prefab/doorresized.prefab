@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3501793314738915435}
   - component: {fileID: 519890751007934414}
   - component: {fileID: 2365501048871072516}
+  - component: {fileID: 9138266317099002429}
   m_Layer: 0
   m_Name: doorresized
   m_TagString: Untagged
@@ -86,3 +87,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9138266317099002429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310805606168105681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 233cf58bd697a2845b507370f035addd, type: 2}

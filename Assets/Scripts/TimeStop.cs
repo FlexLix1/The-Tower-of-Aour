@@ -54,6 +54,7 @@ public class TimeStop:MonoBehaviour {
     //An update that works everytime mouse hovers over objectscript
     //If L_Mouse_click saves velocity, activates all rgbd constraints
     void OnMouseOver() {
+        Debug.Log(transform.position);
         Debug.Log("Over");
 
         if(timeStoped)

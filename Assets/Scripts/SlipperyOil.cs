@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 public class SlipperyOil : MonoBehaviour
 {
-    public float speed;
-    public bool canMove;
     public Rigidbody rb;
+    Vector3 saveVelocity;
 
     private PlayerMovement playermovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        canMove = false;
         rb = gameObject.GetComponent<Rigidbody>();
         playermovement = GetComponent<PlayerMovement>();
     }
@@ -21,27 +19,36 @@ public class SlipperyOil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SlipperyOilMovement();
+        if (playermovement.GroundMovement) return;
+        rb.velocity = saveVelocity;
+    }
+    private void OnTriggerEnter(Collider colider)
+    {
+            if (colider.gameObject.tag == "OilFloor")
+            {
+                saveVelocity = rb.velocity;
+                playermovement.GroundMovement = false;
+            }
+        
+            if (colider.gameObject.tag == "OilPuzzleWall")
+            {
+                playermovement.GroundMovement = true;
+                saveVelocity = Vector3.zero;
+            }
     }
 
-    public void SlipperyOilMovement()
+    private void OnTriggerExit(Collider colider)
     {
-        if (canMove){ 
-            
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "OilPuzzleWall")
+        if (colider.gameObject.tag == "OilPuzzleWall")
         {
+            saveVelocity = rb.velocity;
+            playermovement.GroundMovement = false;
+        }
+        if (colider.gameObject.tag == "OilFloor")
+        {
+            rb.velocity = Vector3.zero;
+            saveVelocity = Vector3.zero;
             playermovement.GroundMovement = true;
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        canMove = false;
-        rb.AddForce(Vector3.forward);
     }
 }

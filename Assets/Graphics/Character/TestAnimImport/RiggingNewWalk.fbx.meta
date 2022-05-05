@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 381b4e2acef240742b7c3b67c2881f34
+guid: c79620c0eaa7593428c772e3968ec66d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -23,7 +23,7 @@ ModelImporter:
     second: Armature|Pushbox
   - first:
       74: -2791508656229221981
-    second: Armature|Run
+    second: Armature|Run2
   - first:
       74: 3227673638164742581
     second: Armature|spring?
@@ -38,7 +38,7 @@ ModelImporter:
     second: Armature|Walkcyclereal
   - first:
       74: -3241420402835035748
-    second: Armature|Walk
+    second: Armature|WalkReal
   - first:
       74: -7846714988124779258
     second: Armature|WallLeverPullpull
@@ -111,7 +111,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -140,7 +140,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -169,7 +169,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -187,7 +187,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Run
+      name: Armature|Run2
       takeName: Armature|Run2
       internalID: 0
       firstFrame: 0
@@ -216,7 +216,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Walk
+      name: Armature|WalkReal
       takeName: Armature|WalkReal
       internalID: 0
       firstFrame: 0
@@ -227,7 +227,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

@@ -32,17 +32,19 @@ public class DynamicDoor:MonoBehaviour {
         }
 
         if(!openDoor) {
-            if(Vector3.Distance(doorStart, transform.position) > 0.025f) {
+            if(Vector3.Distance(doorStart, transform.position) > 0.075f) {
                 MoveDoorTo(doorStart);
             } else {
                 rgbd.velocity = Vector3.zero;
+                rgbd.constraints = RigidbodyConstraints.FreezeAll;
                 colliderActive.isTrigger = false;
             }
             return;
         }
 
         colliderActive.isTrigger = true;
-        if(Vector3.Distance(doorTarget, transform.position) > 0.025f) {
+        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        if(Vector3.Distance(doorTarget, transform.position) > 0.05f) {
             MoveDoorTo(doorTarget);
         } else {
             rgbd.velocity = Vector3.zero;

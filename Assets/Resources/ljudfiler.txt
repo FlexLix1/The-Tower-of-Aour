@@ -1,29 +1,27 @@
 audio must haves:
 
 Footsteps
-cogwheels (slow down and pull the pitch down, maybe a little too long so if you want to, you can shorten it so it loops) ✓
-wooden door sounds (bind dessa ihop till en ljud fil)✓
+cogwheels (slow down and pull the pitch down, maybe a little too long so if you want to, you can shorten it so it loops, make it sound more "ambient") ✓
+wooden door sounds✓
 metal mechanical door sounds
 lever sounds ✓
 background noises (steam engine noises ✓, wind, etc.) 
 pushing boxes sounds (Vet inte riktigt om den passar men kolla vad du tycker o skriv om jag ska hitta en ny) ✓
 pressing down on pressure plates (Make it sound more "Mechanical") ✓
-climbing boxes sounds (Visste inte direkt vad för typ av ljud skulle passa men cutta en del av ljudet så det spelas bara när man klättrar)
-noises for hints and clicking e in the text box
-putting stuff down
-picking stuff up
+climbing boxes sounds✓
+noises for hints and clicking e in the text box 
+putting stuff down✓
+picking stuff up ✓
 jumping off boxes / landing noises (man hör lite av metall skruvar så behåll det)✓
 ticking noises (typ varannan minut) (kolla med cogwheels, apply the same changes)✓
-hydrolic elevator noises 
+hydrolic elevator noises (Finns 2 elevator noises, välj den du tycker passar bättre, kunde inte välja)✓
 freezing ability noise (TimeStop.wav) (Tänkte att ljudet fortsätter tills stasis effekten går ut)✓
 climbing ladder sounds ✓
 gliding on oil effect
 dead sound effect
 menu/ui sounds
 background music for the menu
-light buzzing sound effect (gamla ljusrör style)
-
-
+light buzzing sound effect (gamla ljusrör style) (det är lite för lång, loopa den och få den kortare)✓
 
 Voiceacting (om vi ska ha det?)
 

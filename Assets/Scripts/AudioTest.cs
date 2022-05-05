@@ -24,13 +24,13 @@ namespace UnityCore {
                     audioController.PlayAudio(AudioType.SFX_01, true);
                 }
                 if (Input.GetKeyUp(KeyCode.H)) {
-                   audioController.StopAudio(AudioType.SFX_01, true);
+                    audioController.StopAudio(AudioType.SFX_01, true);
                 }
                 if (Input.GetKeyUp(KeyCode.N)) {
                     audioController.RestartAudio(AudioType.SFX_01, true);
                 }
             }
-#endif
+            #endif
             #endregion
         }
     }

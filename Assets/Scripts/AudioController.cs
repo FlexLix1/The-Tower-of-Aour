@@ -191,7 +191,6 @@ namespace UnityCore {
                     }
                 }
             }
-
             private AudioTrack GetAudioTrack(AudioType _type, string _job = "") {
                 if (!m_AudioTable.ContainsKey(_type)) {
                     LogWarning("You are trying to <color=#fff>" + _job + "</color> for [" + _type + "] but no track was found supporting this audio type.");
@@ -199,7 +198,6 @@ namespace UnityCore {
                 }
                 return (AudioTrack)m_AudioTable[_type];
             }
-
             private AudioClip GetAudioClipFromAudioTrack(AudioType _type, AudioTrack _track) {
                 foreach (AudioObject _obj in _track.audio) {
                     if (_obj.type == _type) {

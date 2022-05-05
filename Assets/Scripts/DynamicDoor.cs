@@ -9,12 +9,14 @@ public class DynamicDoor:MonoBehaviour {
     public bool swiningDoor, openDoor;
     bool holdDoorState;
 
-    Animator animator;
+    Animator anim;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
         holdDoorState = openDoor;
+        if(TryGetComponent<Animator>(out Animator animator)) {
+            anim = animator;
+        }
     }
 
     void Update() {
@@ -59,22 +61,22 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     void DoorOpen() {
-        animator.Play("door_open");
+        anim.Play("door_open");
     }
 
     void DoorClose() {
-        animator.Play("door_close");
+        anim.Play("door_close");
     }
 
     public void SetDoorOpen() {
-        animator.Play("door_open_static");
+        anim.Play("door_open_static");
         holdDoorState = openDoor;
         CancelInvoke();
 
     }
 
     public void SetDoorClosed() {
-        animator.Play("door_close_static");
+        anim.Play("door_close_static");
         holdDoorState = openDoor;
         CancelInvoke();
     }

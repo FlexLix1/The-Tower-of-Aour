@@ -13,7 +13,7 @@ public class PlayerMovement:MonoBehaviour {
     public GameObject mainCamera;
     Pushing pushScript;
 
-    public bool GroundMovement;
+    public bool groundMovement;
     private SlipperyOil slipperyOilMovement;
 
     void Start() {
@@ -21,18 +21,21 @@ public class PlayerMovement:MonoBehaviour {
         pushScript = GetComponent<Pushing>();
         slipperyOilMovement = GetComponent<SlipperyOil>();
         startMovementSpeed = movementSpeed;
-        GroundMovement = true;
+        groundMovement = true;
     }
 
     void Update() {
+        if(pushScript.movingPlayerTowardsBox) {
+            return;
+        }
 
         if(pushScript.hasBox) {
             movementSpeed = 4.5f;
-            switch(pushScript.holdDirection) {
-                case Pushing.lockDirection.LeftUp:
+            switch(pushScript.holdLockDirection) {
+                case Pushing.lockDirection.LockAxisY:
                     rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
                     break;
-                case Pushing.lockDirection.DownRight:
+                case Pushing.lockDirection.LockAxisX:
                     rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
                     break;
             }
@@ -41,7 +44,7 @@ public class PlayerMovement:MonoBehaviour {
             rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if(GroundMovement) {
+        if(groundMovement) {
             //Update forward direction relative to camera
             UpdateCameraForward();
 
@@ -79,8 +82,8 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void RotateCharacter() {
-        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, transform.position.y - transform.position.y, playerPosition.z), Vector3.up);
+        if(rgbd.velocity.magnitude > 0.1) {
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, 0, playerPosition.z), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
     }

@@ -7,10 +7,11 @@ public class AnimationManager:MonoBehaviour {
     Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
-    float velocityMagnitude;
-    public float blendSpeed;
+    public float blendSpeed, velocityMagnitude;
 
     string currentState;
+
+    bool pushBox, pullBox;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
@@ -19,7 +20,7 @@ public class AnimationManager:MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
+        if(rgbd.velocity.magnitude > 0.2) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {
             velocityMagnitude -= Time.deltaTime * blendSpeed;
@@ -27,7 +28,7 @@ public class AnimationManager:MonoBehaviour {
         velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);
 
         if(pushBoxScript.hasBox) {
-            ChangeAnimation("IdleToPush");
+            CheckPushDirection();
             return;
         }
 
@@ -37,5 +38,52 @@ public class AnimationManager:MonoBehaviour {
     void ChangeAnimation(string newState) {
         anim.Play(newState);
         anim.SetFloat(newState, velocityMagnitude);
+    }
+
+    void CheckPushDirection() {
+        switch(pushBoxScript.holdPushDirection) {
+            case Pushing.pushDirection.Left:
+                if(rgbd.velocity.x > 0) {
+                    pullBox = false;
+                    pushBox = true;
+                } else if(rgbd.velocity.x < 0) {
+                    pushBox = false;
+                    pullBox = true;
+                }
+                break;
+            case Pushing.pushDirection.Down:
+                if(rgbd.velocity.z > 0) {
+                    pullBox = false;
+                    pushBox = true;
+                } else if(rgbd.velocity.z < 0) {
+                    pushBox = false;
+                    pullBox = true;
+                }
+                break;
+            case Pushing.pushDirection.Up:
+                if(rgbd.velocity.z > 0) {
+                    pushBox = false;
+                    pullBox = true;
+                } else if(rgbd.velocity.z < 0) {
+                    pullBox = false;
+                    pushBox = true;
+                }
+                break;
+            case Pushing.pushDirection.Right:
+                if(rgbd.velocity.x > 0) {
+                    pushBox = false;
+                    pullBox = true;
+                } else if(rgbd.velocity.x < 0) {
+                    pullBox = false;
+                    pushBox = true;
+                }
+                break;
+        }
+
+        if(pushBox) {
+            ChangeAnimation("IdleToPush");
+        } else if(pullBox) {
+            ChangeAnimation("IdleToPull");
+        }
     }
 }

@@ -1137,8 +1137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4560f175a559784cafa3956ca7da5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempBox: {fileID: 0}
-  rayDistance: 10
+  rayDistance: 2
   boxOffset: 2
   hasBox: 0
   holdDirection: 0

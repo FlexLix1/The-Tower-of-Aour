@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d82e1eaf4b72a4d688b1f94041a66194
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: d82aa05a644f146ab8a1c9bc807f4eba, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/Stylized_Stone_Floor_+_Oil.sbsar

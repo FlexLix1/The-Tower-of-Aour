@@ -12,6 +12,7 @@ public class DynamicDoor:MonoBehaviour {
     Animator animator;
 
     void Start() {
+        rgbd = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         holdDoorState = openDoor;
     }

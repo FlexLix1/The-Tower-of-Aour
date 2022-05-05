@@ -70,22 +70,20 @@ public class DynamicDoor:MonoBehaviour {
     void DoorOpen() {
         animator.Play("door_open");
         //animator.GetCurrentAnimatorClipInfo(0).Length;
-        Invoke(nameof(SetDoorOpen), 1.3f);
     }
 
     void DoorClose() {
         animator.Play("door_close");
-        Invoke(nameof(SetDoorClosed), 1.3f);
     }
 
-    void SetDoorOpen() {
+    public void SetDoorOpen() {
         animator.Play("door_open_static");
         holdDoorState = openDoor;
         CancelInvoke();
 
     }
 
-    void SetDoorClosed() {
+    public void SetDoorClosed() {
         animator.Play("door_close_static");
         holdDoorState = openDoor;
         CancelInvoke();

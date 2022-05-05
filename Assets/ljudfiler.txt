@@ -1,0 +1,35 @@
+audio must haves:
+
+Footsteps
+cogwheels https://freesound.org/people/soundskeep/sounds/328154/ (sänk ljudet  o justera hur det är)
+wooden door sounds https://freesound.org/people/InspectorJ/sounds/342241/ https://freesound.org/people/InspectorJ/sounds/411791/ (binda dessa ihop till en ljud fil)
+metal mechanical door sounds
+lever sounds https://freesound.org/people/BMacZero/sounds/94127/
+background noises (steam engine noises https://freesound.org/people/szegvari/sounds/580633/, wind, etc.) https://freesound.org/people/sound-master/sounds/57332/
+pushing boxes sounds
+pressing down on pressure plates https://freesound.org/people/proolsen/sounds/466272/
+climbing boxes sounds
+noises for hints and clicking e in the text box
+putting stuff down
+picking stuff up
+jumping off boxes / landing noises https://freesound.org/people/Brokenphono/sounds/344153/ (man hör lite av metall skruvar osv)
+ticking noises ( typ varannan minut) https://freesound.org/people/Diboz/sounds/211203/ (ändra pitch, manipulera filen heavy)
+hydrolic elevator noises https://freesound.org/people/kfatehi/sounds/366248/
+freezing ability noise
+climbing ladder sounds
+gliding on oil effect
+checkpoint
+dead sound effect
+menu/ui sounds
+background music for the menu
+light buzzing sound effect (gamla ljusrör style)
+
+
+
+Voiceacting (om vi ska ha det?)
+
+backstory (djup röst som berättar contexten av storyn för spelaren)
+grunting när man puttar lådan
+normala voice lines
+idle thinking hmmmm ljud
+gliding on oil voices

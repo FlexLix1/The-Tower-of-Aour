@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class DynamicLever:MonoBehaviour {
 
+    public Elevator elevatorScript;
     public DynamicDoor doorScript;
     public bool leverActive, startTrue, inUse, oneTimeUse;
     public Animator anim;
 
+    
+
     void Start() {
+
+
         if(startTrue) {
             anim.Play("lever_True");
             leverActive = true;

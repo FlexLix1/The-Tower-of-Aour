@@ -2,58 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveAndDeactivateFloors : MonoBehaviour
-{
+public class ActiveAndDeactivateFloors:MonoBehaviour {
+
     public GameObject[] floors;
     public int currentfloor;
     int floorChecker;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         floorChecker = currentfloor;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        CheckCurrentFloor();
-    }
-
-    private void CheckCurrentFloor()
-    {
-        for (int i = 0; i < floors.Length; i++)
-        {
-            if (i == currentfloor)
-            {
+    void ChangeCurrentFloor() {
+        for(int i = 0; i < floors.Length; i++) {
+            if(i == currentfloor) {
                 floors[i].SetActive(true);
 
-                if (i == 0)
+                if(i == 0)
                     return;
 
                 floors[i - 1].SetActive(true);
-            }
-            else
-            {
+            } else {
                 floors[i].SetActive(false);
             }
         }
     }
 
-    public void IncreaseCurrentFloor()
-    {
+    public void IncreaseCurrentFloor() {
         currentfloor++;
-        floorChecker = currentfloor;
+        ChangeCurrentFloor();
     }
 
-    public void DecreaseCurrentFloor()
-    {
-        currentfloor--;
+    public void DecreaseCurrentFloor() {
+        if(currentfloor != 0)   
+            currentfloor--;
 
-        if(currentfloor == floorChecker)
-        {
-            currentfloor++;
-        }
-
+        ChangeCurrentFloor();
     }
 }

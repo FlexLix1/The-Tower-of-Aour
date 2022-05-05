@@ -6,11 +6,12 @@ public class ActiveAndDeactivateFloors : MonoBehaviour
 {
     public GameObject[] floors;
     public int currentfloor;
+    int floorChecker;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentfloor = 0;
+        floorChecker = currentfloor;
     }
 
     // Update is called once per frame
@@ -37,5 +38,22 @@ public class ActiveAndDeactivateFloors : MonoBehaviour
                 floors[i].SetActive(false);
             }
         }
+    }
+
+    public void IncreaseCurrentFloor()
+    {
+        currentfloor++;
+        floorChecker = currentfloor;
+    }
+
+    public void DecreaseCurrentFloor()
+    {
+        currentfloor--;
+
+        if(currentfloor == floorChecker)
+        {
+            currentfloor++;
+        }
+
     }
 }

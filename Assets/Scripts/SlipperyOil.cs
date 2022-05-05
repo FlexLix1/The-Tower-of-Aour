@@ -19,7 +19,7 @@ public class SlipperyOil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playermovement.GroundMovement) return;
+        if (playermovement.groundMovement) return;
         rb.velocity = saveVelocity;
     }
     private void OnTriggerEnter(Collider colider)
@@ -27,12 +27,12 @@ public class SlipperyOil : MonoBehaviour
             if (colider.gameObject.tag == "OilFloor")
             {
                 saveVelocity = rb.velocity;
-                playermovement.GroundMovement = false;
+                playermovement.groundMovement = false;
             }
         
             if (colider.gameObject.tag == "OilPuzzleWall")
             {
-                playermovement.GroundMovement = true;
+                playermovement.groundMovement = true;
                 saveVelocity = Vector3.zero;
             }
     }
@@ -42,13 +42,13 @@ public class SlipperyOil : MonoBehaviour
         if (colider.gameObject.tag == "OilPuzzleWall")
         {
             saveVelocity = rb.velocity;
-            playermovement.GroundMovement = false;
+            playermovement.groundMovement = false;
         }
         if (colider.gameObject.tag == "OilFloor")
         {
             rb.velocity = Vector3.zero;
             saveVelocity = Vector3.zero;
-            playermovement.GroundMovement = true;
+            playermovement.groundMovement = true;
         }
     }
 }

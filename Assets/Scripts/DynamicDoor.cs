@@ -11,13 +11,19 @@ public class DynamicDoor:MonoBehaviour {
     Rigidbody rgbd;
 
     public bool swiningDoor, openDoor;
-    bool moving;
+    bool holdDoorState;
+
+    Animator animator;
+    AnimatorClipInfo[] clipInfo;
 
     void Start() {
-        rgbd = GetComponent<Rigidbody>();
-        colliderActive = GetComponent<BoxCollider>();
-        doorStart = transform.position;
-        doorTarget += doorStart;
+        //rgbd = GetComponent<Rigidbody>();
+        //colliderActive = GetComponent<BoxCollider>();
+        //doorStart = transform.position;
+        //doorTarget += doorStart;
+        animator = GetComponent<Animator>();
+        clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        holdDoorState = openDoor;
     }
 
     void Update() {
@@ -31,29 +37,63 @@ public class DynamicDoor:MonoBehaviour {
             return;
         }
 
-        if(!openDoor) {
-            if(Vector3.Distance(doorStart, transform.position) > 0.075f) {
-                MoveDoorTo(doorStart);
-            } else {
-                rgbd.velocity = Vector3.zero;
-                rgbd.constraints = RigidbodyConstraints.FreezeAll;
-                colliderActive.isTrigger = false;
-            }
+        if(holdDoorState == openDoor)
             return;
-        }
 
-        colliderActive.isTrigger = true;
-        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
-        if(Vector3.Distance(doorTarget, transform.position) > 0.05f) {
-            MoveDoorTo(doorTarget);
+        if(openDoor) {
+            DoorOpen();
         } else {
-            rgbd.velocity = Vector3.zero;
+            DoorClose();
         }
+
+        //Copy paste into new elevator script
+        //if(!openDoor) {
+        //    if(Vector3.Distance(doorStart, transform.position) > 0.075f) {
+        //        MoveDoorTo(doorStart);
+        //    } else {
+        //        rgbd.velocity = Vector3.zero;
+        //        rgbd.constraints = RigidbodyConstraints.FreezeAll;
+        //        colliderActive.isTrigger = false;
+        //    }
+        //    return;
+        //}
+
+        //colliderActive.isTrigger = true;
+        //rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        //if(Vector3.Distance(doorTarget, transform.position) > 0.05f) {
+        //    MoveDoorTo(doorTarget);
+        //} else {
+        //    rgbd.velocity = Vector3.zero;
+        //}
     }
 
-    void MoveDoorTo(Vector3 target) {
-        Vector3 forcedDirection = target - transform.position;
-        Vector3.Normalize(forcedDirection);
-        rgbd.velocity = forcedDirection * speed;
+    void DoorOpen() {
+        animator.Play("door_open");
+        //animator.GetCurrentAnimatorClipInfo(0).Length;
+        Invoke(nameof(SetDoorOpen), 1.3f);
     }
+
+    void DoorClose() {
+        animator.Play("door_close");
+        Invoke(nameof(SetDoorClosed), 1.3f);
+    }
+
+    void SetDoorOpen() {
+        animator.Play("door_open_static");
+        holdDoorState = openDoor;
+        CancelInvoke();
+
+    }
+
+    void SetDoorClosed() {
+        animator.Play("door_close_static");
+        holdDoorState = openDoor;
+        CancelInvoke();
+    }
+
+    //void MoveDoorTo(Vector3 target) {
+    //    Vector3 forcedDirection = target - transform.position;
+    //    Vector3.Normalize(forcedDirection);
+    //    rgbd.velocity = forcedDirection * speed;
+    //}
 }

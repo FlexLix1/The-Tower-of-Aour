@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Door close_static
+  m_Name: door_close_static
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0

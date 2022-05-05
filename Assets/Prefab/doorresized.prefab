@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 519890751007934414}
   - component: {fileID: 2365501048871072516}
   - component: {fileID: 9138266317099002429}
+  - component: {fileID: 3710557719007047639}
+  - component: {fileID: 5156476862154608145}
   m_Layer: 0
   m_Name: doorresized
   m_TagString: Untagged
@@ -104,3 +106,29 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 233cf58bd697a2845b507370f035addd, type: 2}
+--- !u!65 &3710557719007047639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310805606168105681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3542695, y: 8.333136, z: 1.9766527}
+  m_Center: {x: -3.351548, y: 4.200322, z: 0.16777128}
+--- !u!65 &5156476862154608145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310805606168105681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3768535, y: 8.333136, z: 1.9766527}
+  m_Center: {x: 3.3397396, y: 4.200322, z: 0.16777128}

@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DynamicDoor:MonoBehaviour {
-    [SerializeField] Vector3 doorTarget;
-    Vector3 doorStart;
 
-    public float speed;
-    BoxCollider colliderActive;
     Rigidbody rgbd;
 
     public bool swiningDoor, openDoor;
     bool holdDoorState;
 
     Animator animator;
-    AnimatorClipInfo[] clipInfo;
 
     void Start() {
-        //rgbd = GetComponent<Rigidbody>();
-        //colliderActive = GetComponent<BoxCollider>();
-        //doorStart = transform.position;
-        //doorTarget += doorStart;
         animator = GetComponent<Animator>();
-        clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         holdDoorState = openDoor;
     }
 
@@ -69,7 +59,6 @@ public class DynamicDoor:MonoBehaviour {
 
     void DoorOpen() {
         animator.Play("door_open");
-        //animator.GetCurrentAnimatorClipInfo(0).Length;
     }
 
     void DoorClose() {

@@ -86,7 +86,7 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void RotateCharacter() {
-        if(rgbd.velocity.magnitude > 0.1) {
+        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, 0, playerPosition.z), Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }

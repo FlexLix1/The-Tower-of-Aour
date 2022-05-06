@@ -23,7 +23,7 @@ public class AnimationManager:MonoBehaviour {
     void Update() {
         if(climbingBox) {
             velocityMagnitude = 0;
-            ChangeAnimation("BoxClimb");
+            anim.Play("BoxClimb");
             return;
         }
 

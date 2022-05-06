@@ -14,7 +14,10 @@ public class Pushing:MonoBehaviour {
     public enum pushDirection { Up, Down, Left, Right };
     public pushDirection holdPushDirection;
 
+    Quaternion holdRotation;
+
     Rigidbody rgbd;
+    Box boxScript;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
@@ -29,13 +32,14 @@ public class Pushing:MonoBehaviour {
         if(hasBox) {
             if(Input.GetKeyDown(KeyCode.Space)) {
                 hasBox = false;
+                boxScript.hasBox = false;
                 tempBox = null;
                 return;
             }
 
-            MovingBox();
             if(Input.GetKeyDown(KeyCode.E)) {
                 hasBox = false;
+                boxScript.hasBox = false;
                 tempBox = null;
             }
             return;
@@ -48,30 +52,31 @@ public class Pushing:MonoBehaviour {
         if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             if(hit.collider.CompareTag("Box")) {
                 tempBox = hit.collider.gameObject;
+                boxScript = tempBox.GetComponent<Box>();
                 Vector3 forcedDir = tempBox.transform.position - transform.position;
                 float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
                 if(angle < 35 && angle > -35) {
                     //Left
-                    transform.rotation = Quaternion.Euler(0, 90, 0);
-                    offset = Vector3.right * boxOffset;
+                    holdRotation = Quaternion.Euler(0, 90, 0);
+                    boxScript.offset = offset = Vector3.right * boxOffset;
                     holdLockDirection = lockDirection.LockAxisY;
                     holdPushDirection = pushDirection.Left;
                 } else if(angle > 55 && angle < 125) {
                     //Down
-                    transform.rotation = Quaternion.Euler(Vector3.zero);
-                    offset = Vector3.forward * boxOffset;
+                    holdRotation = Quaternion.Euler(Vector3.zero);
+                    boxScript.offset = offset = Vector3.forward * boxOffset;
                     holdLockDirection = lockDirection.LockAxisX;
                     holdPushDirection = pushDirection.Down;
                 } else if(angle < -55 && angle > -125) {
                     //Up
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                    offset = -Vector3.forward * boxOffset;
+                    holdRotation = Quaternion.Euler(0, 180, 0);
+                    boxScript.offset = offset = -Vector3.forward * boxOffset;
                     holdLockDirection = lockDirection.LockAxisX;
                     holdPushDirection = pushDirection.Up;
                 } else if(angle > 125 || angle < -125) {
                     //Right
-                    transform.rotation = Quaternion.Euler(0, -90, 0);
-                    offset = -Vector3.right * boxOffset;
+                    holdRotation = Quaternion.Euler(0, -90, 0);
+                    boxScript.offset = offset = -Vector3.right * boxOffset;
                     holdLockDirection = lockDirection.LockAxisY;
                     holdPushDirection = pushDirection.Right;
                 }
@@ -85,16 +90,19 @@ public class Pushing:MonoBehaviour {
         forcedDirection = forcedDirection.normalized;
         if(Vector3.Distance(transform.position, (tempBox.transform.position - offset)) > 0.2f) {
             rgbd.velocity = forcedDirection * 7;
+            transform.LookAt(tempBox.transform);
         } else {
             rgbd.velocity = Vector3.zero;
             movingPlayerTowardsBox = false;
-            CancelInvoke(nameof(HasBox));
             Invoke(nameof(HasBox), 0.5f);
         }
     }
 
     void HasBox() {
+        boxScript.hasBox = true;
         hasBox = true;
+        transform.rotation = holdRotation;
+        CancelInvoke();
     }
 
     void MovingBox() {

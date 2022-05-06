@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 1.5
-  boxOffset: 1.5
+  boxOffset: 2
   hasBox: 0
   movingPlayerTowardsBox: 0
   holdLockDirection: 0

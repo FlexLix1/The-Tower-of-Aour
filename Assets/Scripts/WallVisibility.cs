@@ -11,12 +11,6 @@ public class WallVisibility:MonoBehaviour {
 
     MeshRenderer meshRenderer;
 
-    void Update() {
-
-    }
-
-
-
     void MakeWallsTransparent() {
         for(int i = 0; i < walls.Length; i++) {
             walls[i].GetComponent<MeshRenderer>().material = transparant;
@@ -41,7 +35,5 @@ public class WallVisibility:MonoBehaviour {
             wallsTransparent = true;
             MakeWallsTransparent();
         }
-
     }
-
 }

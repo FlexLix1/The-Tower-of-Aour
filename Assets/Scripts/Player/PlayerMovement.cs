@@ -12,6 +12,7 @@ public class PlayerMovement:MonoBehaviour {
 
     public GameObject mainCamera;
     Pushing pushScript;
+    AnimationManager animScript;
 
     public bool groundMovement;
     private SlipperyOil slipperyOilMovement;
@@ -20,14 +21,17 @@ public class PlayerMovement:MonoBehaviour {
         rgbd = GetComponent<Rigidbody>();
         pushScript = GetComponent<Pushing>();
         slipperyOilMovement = GetComponent<SlipperyOil>();
+        animScript = GetComponent<AnimationManager>();
         startMovementSpeed = movementSpeed;
         groundMovement = true;
     }
 
     void Update() {
-        if(pushScript.movingPlayerTowardsBox) {
+        if(animScript.climbingBox)
             return;
-        }
+
+        if(pushScript.movingPlayerTowardsBox)
+            return;
 
         if(pushScript.hasBox) {
             movementSpeed = 4.5f;

@@ -11,6 +11,7 @@ public class AnimationManager:MonoBehaviour {
 
     string currentState;
 
+    public bool climbingBox;
     bool pushBox, pullBox;
 
     void Start() {
@@ -20,6 +21,12 @@ public class AnimationManager:MonoBehaviour {
     }
 
     void Update() {
+        if(climbingBox) {
+            velocityMagnitude = 0;
+            ChangeAnimation("BoxClimb");
+            return;
+        }
+
         if(rgbd.velocity.magnitude > 0.2) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {

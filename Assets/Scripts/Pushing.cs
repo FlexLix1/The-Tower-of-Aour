@@ -104,8 +104,4 @@ public class Pushing:MonoBehaviour {
         transform.rotation = holdRotation;
         CancelInvoke();
     }
-
-    void MovingBox() {
-        tempBox.transform.position = transform.position + offset;
-    }
 }

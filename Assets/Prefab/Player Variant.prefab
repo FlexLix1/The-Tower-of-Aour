@@ -1137,10 +1137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4560f175a559784cafa3956ca7da5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 2
-  boxOffset: 2
+  rayDistance: 1.5
+  boxOffset: 1.5
   hasBox: 0
-  holdDirection: 0
+  movingPlayerTowardsBox: 0
+  holdLockDirection: 0
+  holdPushDirection: 0
 --- !u!114 &348669809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,7 +1233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df3018f9e1f9f64eaf6abe48b816395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blendSpeed: 4
+  blendSpeed: 6
+  velocityMagnitude: 0
+  climbingBox: 0
 --- !u!114 &348669815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,7 +1248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d22e68e6753a54081c8bbe84ac4605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  movementSpeed: 7
   rotationSpeed: 350
   mainCamera: {fileID: 0}
-  GroundMovement: 0
+  groundMovement: 0

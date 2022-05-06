@@ -13,11 +13,11 @@ public class IncreaseOrDecreaseCurrentFloor:MonoBehaviour {
         ActiveAndDeactivateFloors playerFloorScript = other.GetComponent<ActiveAndDeactivateFloors>();
 
         if(!upperFloor) {
-            upperFloor = true;
             playerFloorScript.IncreaseCurrentFloor();
+            upperFloor = true;
         } else if(upperFloor) {
-            upperFloor = false;
             playerFloorScript.DecreaseCurrentFloor();
+            upperFloor = false;
         }
     }
 }

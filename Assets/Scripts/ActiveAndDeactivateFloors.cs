@@ -17,10 +17,10 @@ public class ActiveAndDeactivateFloors:MonoBehaviour {
             if(i == currentfloor) {
                 floors[i].SetActive(true);
 
-                if(i == 0)
-                    return;
+                if(i != 0) {
+                    floors[i - 1].SetActive(true);
+                }
 
-                floors[i - 1].SetActive(true);
             } else {
                 floors[i].SetActive(false);
             }
@@ -28,12 +28,15 @@ public class ActiveAndDeactivateFloors:MonoBehaviour {
     }
 
     public void IncreaseCurrentFloor() {
+        if(currentfloor == floors.Length)
+            return;
+
         currentfloor++;
         ChangeCurrentFloor();
     }
 
     public void DecreaseCurrentFloor() {
-        if(currentfloor != 0)   
+        if(currentfloor != 0)
             currentfloor--;
 
         ChangeCurrentFloor();

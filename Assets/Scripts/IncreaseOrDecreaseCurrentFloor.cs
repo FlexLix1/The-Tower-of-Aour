@@ -6,22 +6,18 @@ using UnityEngine.Events;
 public class IncreaseOrDecreaseCurrentFloor:MonoBehaviour {
     bool upperFloor;
 
-    [SerializeField]
-    UnityEvent IncreaseCurrentFloor = null;
-
-    [SerializeField]
-    UnityEvent DecreaseCurrentFloor = null;
-
     private void OnTriggerEnter(Collider other) {
         if(!other.CompareTag("Player"))
             return;
 
+        ActiveAndDeactivateFloors playerFloorScript = other.GetComponent<ActiveAndDeactivateFloors>();
+
         if(!upperFloor) {
             upperFloor = true;
-            IncreaseCurrentFloor.Invoke();
+            playerFloorScript.IncreaseCurrentFloor();
         } else if(upperFloor) {
             upperFloor = false;
-            DecreaseCurrentFloor.Invoke();
+            playerFloorScript.DecreaseCurrentFloor();
         }
     }
 }

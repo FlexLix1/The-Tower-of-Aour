@@ -89,7 +89,7 @@ public class Pushing:MonoBehaviour {
         Vector3 forcedDirection = (tempBox.transform.position - offset) - transform.position;
         forcedDirection = forcedDirection.normalized;
         if(Vector3.Distance(transform.position, (tempBox.transform.position - offset)) > 0.2f) {
-            rgbd.velocity = forcedDirection * 7;
+            rgbd.velocity = forcedDirection * 4;
             transform.LookAt(tempBox.transform);
         } else {
             rgbd.velocity = Vector3.zero;

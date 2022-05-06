@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class IncreaseOrDecreaseCurrentFloor:MonoBehaviour {
-
-    public int floorNumber;
     bool upperFloor;
 
     [SerializeField]

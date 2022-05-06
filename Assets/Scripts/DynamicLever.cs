@@ -6,14 +6,10 @@ public class DynamicLever:MonoBehaviour {
 
     public Elevator elevatorScript;
     public DynamicDoor doorScript;
-    public bool leverActive, startTrue, inUse, oneTimeUse;
+    public bool leverActive, startTrue, inUse, oneTimeUse, elevator;
     public Animator anim;
 
-    
-
     void Start() {
-
-
         if(startTrue) {
             anim.Play("lever_True");
             leverActive = true;
@@ -39,7 +35,11 @@ public class DynamicLever:MonoBehaviour {
 
     void SetLeverFalse() {
         anim.Play("lever_False");
-        doorScript.openDoor = false;
+        if(elevator) {
+            elevatorScript.elevatorActive = false;
+        } else {
+            doorScript.openDoor = false;
+        }
         leverActive = false;
         if(oneTimeUse)
             return;
@@ -48,7 +48,11 @@ public class DynamicLever:MonoBehaviour {
 
     void SetLeverTrue() {
         anim.Play("lever_True");
-        doorScript.openDoor = true;
+        if(elevator) {
+            elevatorScript.elevatorActive = true;
+        } else {
+            doorScript.openDoor = true;
+        }
         leverActive = true;
         if(oneTimeUse)
             return;

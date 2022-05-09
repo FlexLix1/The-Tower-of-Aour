@@ -4,24 +4,35 @@ using UnityEngine;
 
 public class LadderTrigger : MonoBehaviour {
     public Ladder climb;
-    public Transform target;
-
-
+    public GameObject player;
+    public float facingLadder;
+    public BoxCollider upperCollider, lowerCollider;
+    public bool isTop;
+    public GameObject ladderPostion;
 
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
-            climb.isClimbing = true;
+        if (!other.CompareTag("Player")) return;
+        if (Vector3.Distance(lowerCollider.center, other.transform.position)
+            < Vector3.Distance(upperCollider.center, other.transform.position)) {
+            if (isTop) {
+                climb.isClimbing = false;
+                isTop = false;
+            } else {
+                climb.isClimbing = true;
+                player.transform.rotation = Quaternion.Euler(0, facingLadder, 0);
+                player.transform.position = ladderPostion.transform.position + ladderPostion.transform.forward;
+            }
         }
-    }
-
-    void OnTriggerStay(Collider other) {
-        if (other.gameObject.tag == "Player") {
-            other.gameObject.transform.rotation = Quaternion.LookRotation(transform.forward);
-        }
-    }
-    void OnTriggerExit(Collider other) {
-        if (other.tag == "Player") {
-            climb.isClimbing = false;
+        if (Vector3.Distance(upperCollider.center, other.transform.position)
+            < Vector3.Distance(lowerCollider.center, other.transform.position)) {
+            if (isTop) {
+                climb.isClimbing = true;
+                player.transform.rotation = Quaternion.Euler(0, facingLadder, 0);
+                player.transform.position = ladderPostion.transform.position + ladderPostion.transform.forward;
+            } else {
+                climb.isClimbing = false;
+                isTop = true;
+            }
         }
     }
 }

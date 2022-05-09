@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class Box:MonoBehaviour {
 
+    PlayerMovement movementScript;
+    Rigidbody rgbd, playerRGBD;
+
     GameObject player;
-    public bool hasBox;
+    public bool hasBox, checkAbove;
     public Vector3 offset;
 
     void Start() {
+        rgbd = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerRGBD = player.GetComponent<Rigidbody>();
     }
 
     void Update() {
-        if(!hasBox)
-            return;
+        Debug.DrawLine(transform.position, transform.position + transform.up * 5, Color.green);
 
-        transform.position = player.transform.position + offset;
+        if(!hasBox) {
+            rgbd.constraints = RigidbodyConstraints.FreezeRotation | ~RigidbodyConstraints.FreezePositionY;
+            return;
+        }
+
+        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+        rgbd.velocity = playerRGBD.velocity;
     }
 }

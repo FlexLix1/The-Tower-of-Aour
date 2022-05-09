@@ -15,11 +15,16 @@ public class WallVisibility:MonoBehaviour {
 
     MeshRenderer meshRenderer;
 
+    void Start() {
+        alphaValue = 0.45f;
+        transparant.color = Color.white;    
+    }
+
     void Update() {
         if(!transitioning)
             return;
 
-        if(alphaValue <= 0.45f) {
+        if(alphaValue <= 0f) {
             transitioning = false;
         }
 
@@ -47,9 +52,9 @@ public class WallVisibility:MonoBehaviour {
             for(int i = 0; i < makeOtherWallsSolid.Length; i++) {
                 makeOtherWallsSolid[i].MakeWallsSolid();
                 makeOtherWallsSolid[i].wallsTransparent = false;
+                makeOtherWallsSolid[i].alphaValue = 1;
+                makeOtherWallsSolid[i].transparant.color = Color.white;
             }
-            alphaValue = 1;
-            transparant.color = Color.white; 
             MakeWallsTransparent();
             wallsTransparent = true;
             transitioning = true;

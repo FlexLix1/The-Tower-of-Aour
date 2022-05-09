@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pushing:MonoBehaviour {
-    GameObject tempBox;
+    GameObject holdBox;
     public float rayDistance = 2f, boxOffset = 2f;
     public bool hasBox, movingPlayerTowardsBox;
 
@@ -33,14 +33,14 @@ public class Pushing:MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.Space)) {
                 hasBox = false;
                 boxScript.hasBox = false;
-                tempBox = null;
+                holdBox = null;
                 return;
             }
 
             if(Input.GetKeyDown(KeyCode.E)) {
                 hasBox = false;
                 boxScript.hasBox = false;
-                tempBox = null;
+                holdBox = null;
             }
             return;
         }
@@ -48,12 +48,18 @@ public class Pushing:MonoBehaviour {
         if(!Input.GetKeyDown(KeyCode.E))
             return;
 
+       
+
         RaycastHit hit;
         if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             if(hit.collider.CompareTag("Box")) {
-                tempBox = hit.collider.gameObject;
-                boxScript = tempBox.GetComponent<Box>();
-                Vector3 forcedDir = tempBox.transform.position - transform.position;
+                holdBox = hit.collider.gameObject;
+                RaycastHit aboveHit;
+                if(Physics.Raycast(holdBox.transform.position, transform.up, out aboveHit, 5))
+                    return;
+
+                boxScript = holdBox.GetComponent<Box>();
+                Vector3 forcedDir = holdBox.transform.position - transform.position;
                 float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
                 if(angle < 35 && angle > -35) {
                     //Left
@@ -86,11 +92,11 @@ public class Pushing:MonoBehaviour {
     }
 
     void PlayerTowardsBox() {
-        Vector3 forcedDirection = (tempBox.transform.position - offset) - transform.position;
+        Vector3 forcedDirection = (holdBox.transform.position - offset) - transform.position;
         forcedDirection = forcedDirection.normalized;
-        if(Vector3.Distance(transform.position, (tempBox.transform.position - offset)) > 0.2f) {
+        if(Vector3.Distance(transform.position, (holdBox.transform.position - offset)) > 0.2f) {
             rgbd.velocity = forcedDirection * 4;
-            transform.LookAt(tempBox.transform);
+            transform.LookAt(holdBox.transform);
         } else {
             rgbd.velocity = Vector3.zero;
             movingPlayerTowardsBox = false;

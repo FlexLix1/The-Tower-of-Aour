@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement:MonoBehaviour {
 
-    Vector3 playerPosition, relativeForward, relativeRight;
+    public Vector3 playerPosition;
+    Vector3 relativeForward, relativeRight;
     Rigidbody rgbd;
 
     public float movementSpeed, rotationSpeed;
@@ -33,8 +34,10 @@ public class PlayerMovement:MonoBehaviour {
         if(pushScript.movingPlayerTowardsBox)
             return;
 
+       
+
         if(pushScript.hasBox) {
-            movementSpeed = 4.5f;
+            movementSpeed = 3;
             switch(pushScript.holdLockDirection) {
                 case Pushing.lockDirection.LockAxisY:
                     rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
@@ -51,6 +54,12 @@ public class PlayerMovement:MonoBehaviour {
         if(groundMovement) {
             //Update forward direction relative to camera
             UpdateCameraForward();
+
+            if(Input.GetKey(KeyCode.LeftShift)) {
+                movementSpeed = 10;
+            } else {
+                movementSpeed = 4;
+            }
 
             //Update player input
             GetInput();

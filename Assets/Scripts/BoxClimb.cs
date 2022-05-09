@@ -7,12 +7,14 @@ public class BoxClimb:MonoBehaviour {
     GameObject holdBox;
     AnimationManager animManager;
     public float rayDistance;
+    [SerializeField] Transform bone;
 
     void Start() {
         animManager = GetComponent<AnimationManager>();
     }
 
     void Update() {
+
         if(animManager.climbingBox)
             return;
 
@@ -24,6 +26,12 @@ public class BoxClimb:MonoBehaviour {
             switch(hit.collider.tag) {
                 case "Box":
                     holdBox = hit.collider.gameObject;
+                    RaycastHit aboveHit;
+                    if(Physics.Raycast(holdBox.transform.position, transform.up, out aboveHit, 5)) {
+                        Debug.Log(aboveHit.collider.gameObject.name);
+                        return;
+                    }
+
                     Vector3 forcedDir = holdBox.transform.position - transform.position;
                     float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
                     if(angle < 35 && angle > -35) {
@@ -41,16 +49,18 @@ public class BoxClimb:MonoBehaviour {
                     }
 
                     animManager.climbingBox = true;
-                    Invoke(nameof(WaitForAnimation), 4.9f);
                     break;
             }
         }
     }
 
-    void WaitForAnimation() {
-        transform.position = new Vector3(holdBox.transform.position.x, holdBox.transform.position.y + 2.5f, holdBox.transform.position.z);
+    public void WaitForAnimation() {
         holdBox = null;
         animManager.climbingBox = false;
-        CancelInvoke();
+
+        RaycastHit hit;
+        if(Physics.Raycast(bone.position, -transform.up, out hit, rayDistance * 2)) {
+            transform.position = hit.point;
+        }
     }
 }

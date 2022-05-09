@@ -55,7 +55,7 @@ public class Pushing:MonoBehaviour {
             if(hit.collider.CompareTag("Box")) {
                 holdBox = hit.collider.gameObject;
                 RaycastHit aboveHit;
-                if(Physics.Raycast(holdBox.transform.position, transform.up, out aboveHit, 5))
+                if(Physics.Raycast(new Vector3(holdBox.transform.position.x, holdBox.transform.position.y + 2, holdBox.transform.position.z), transform.up, out aboveHit, 1))
                     return;
 
                 boxScript = holdBox.GetComponent<Box>();

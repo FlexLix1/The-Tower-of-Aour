@@ -18,8 +18,6 @@ public class Box:MonoBehaviour {
     }
 
     void Update() {
-        Debug.DrawLine(transform.position, transform.position + transform.up * 5, Color.green);
-
         if(!hasBox) {
             rgbd.constraints = RigidbodyConstraints.FreezeRotation | ~RigidbodyConstraints.FreezePositionY;
             return;

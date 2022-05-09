@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ffc587747508f4b598d1b0210ccde708
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 09b744750f9054f6aa5281472f5641ee, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/METAL FLOOR/Wire+Metal_Flooring.sbsar

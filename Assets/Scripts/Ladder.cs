@@ -15,8 +15,9 @@ public class Ladder : MonoBehaviour {
 
     void Update() {
         if (isClimbing) {
+            movementScript.enabled = false;
             m_Rigidbody.useGravity = false;
-            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
             float velocity = Input.GetAxisRaw("Vertical");
             m_Rigidbody.velocity = new Vector3(0, velocity * speed, 0);
 

@@ -19,7 +19,7 @@ public class WallVisibility:MonoBehaviour {
         if(!transitioning)
             return;
 
-        if(alphaValue <= 0.45f) {
+        if(alphaValue <= 0f) {
             transitioning = false;
         }
 

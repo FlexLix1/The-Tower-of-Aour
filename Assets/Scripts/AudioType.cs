@@ -20,7 +20,10 @@ namespace UnityCore {
             SFX_SteamEngine,
             SFX_TickingSound,
             SFX_TimeStop,
+            SFX_Walking,
             SFX_WoodenDoorSound,
+            SFX_Hint,
+            SFX_MechanicalDoor,
             ST_01
             //. . This is just placeholder name for now it'll be changed to clarify for future purposes, it'll be like "SFX_Climb" etc.
         }

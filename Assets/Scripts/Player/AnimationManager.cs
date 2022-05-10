@@ -49,8 +49,9 @@ public class AnimationManager:MonoBehaviour {
         }
         runFloat = Mathf.Clamp(runFloat, 0, 1);
 
-        anim.SetFloat("WalkToRun", runFloat);
         anim.SetFloat("IdleToWalk", velocityMagnitude);
+        anim.SetFloat("WalkToRun", runFloat);
+        anim.Play("IdleToWalkToRun");
     }
 
     public void ChangeAnimation(string newState) {

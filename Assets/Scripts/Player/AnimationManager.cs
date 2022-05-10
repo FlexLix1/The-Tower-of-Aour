@@ -22,8 +22,8 @@ public class AnimationManager:MonoBehaviour {
 
     void Update() {
         if(climbingBox) {
-            velocityMagnitude = 0;
             anim.Play("BoxClimb");
+            velocityMagnitude = 0;
             return;
         }
 
@@ -39,10 +39,14 @@ public class AnimationManager:MonoBehaviour {
             return;
         }
 
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            anim.SetFloat("IdleToRun", velocityMagnitude);
+            return;
+        }
         ChangeAnimation("IdleToWalk");
     }
 
-    void ChangeAnimation(string newState) {
+    public void ChangeAnimation(string newState) {
         anim.Play(newState);
         anim.SetFloat(newState, velocityMagnitude);
     }

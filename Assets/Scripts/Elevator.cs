@@ -16,7 +16,7 @@ public class Elevator:MonoBehaviour {
         elevatorStart = transform.position;
         elevatorTarget += elevatorStart;
     }
-
+    
     void Update() {
 
         if(!elevatorActive) {

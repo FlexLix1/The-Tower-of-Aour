@@ -24,6 +24,8 @@ namespace UnityCore {
             SFX_WoodenDoorSound,
             SFX_Hint,
             SFX_MechanicalDoor,
+            SFX_ClickInTextBox,
+            SFX_GlidingOnOil,
             ST_01
             //. . This is just placeholder name for now it'll be changed to clarify for future purposes, it'll be like "SFX_Climb" etc.
         }

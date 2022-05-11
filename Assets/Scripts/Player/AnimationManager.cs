@@ -8,6 +8,7 @@ public class AnimationManager:MonoBehaviour {
     Rigidbody rgbd;
     Animator anim;
     public float blendSpeed, velocityMagnitude;
+    float runFloat;
 
     string currentState;
 
@@ -39,11 +40,18 @@ public class AnimationManager:MonoBehaviour {
             return;
         }
 
-        if(Input.GetKey(KeyCode.LeftShift)) {
-            anim.SetFloat("IdleToRun", velocityMagnitude);
-            return;
+        if(Input.GetKey(KeyCode.LeftShift) && rgbd.velocity.magnitude > 0.2) {
+            blendSpeed = 4;
+            runFloat += Time.deltaTime * blendSpeed;
+        } else {
+            blendSpeed = 6;
+            runFloat -= Time.deltaTime * blendSpeed;
         }
-        ChangeAnimation("IdleToWalk");
+        runFloat = Mathf.Clamp(runFloat, 0, 1);
+
+        anim.SetFloat("IdleToWalk", velocityMagnitude);
+        anim.SetFloat("WalkToRun", runFloat);
+        anim.Play("IdleToWalkToRun");
     }
 
     public void ChangeAnimation(string newState) {

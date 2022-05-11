@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c3ce0d09c0a4647059cc2e745b960717
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 352efc48d921749a18592b9e2104c903, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/CARPET/Trim-Edge/Carpet_Trim_Edge.sbsar

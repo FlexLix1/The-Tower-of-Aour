@@ -4,24 +4,41 @@ using UnityEngine;
 
 public class AnimationManager:MonoBehaviour {
 
+    public DynamicLever leverScript;
+    Ladder ladderClimbScript;
     Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
     public float blendSpeed, velocityMagnitude;
-    float runFloat;
+    float runFloat, ladderFloat;
 
     string currentState;
 
-    public bool climbingBox;
+    public bool climbingBox, usingLever;
     bool pushBox, pullBox;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pushBoxScript = GetComponent<Pushing>();
+        ladderClimbScript = GetComponent<Ladder>();
     }
 
     void Update() {
+        if(ladderClimbScript.isClimbing) {
+            LadderClimb();
+            return;
+        }
+
+        if(usingLever) {
+            if(leverScript.leverActive) {
+                anim.Play("CharLeverUp");
+            } else {
+                anim.Play("CharLeverDown");
+            }
+            return;
+        }
+
         if(climbingBox) {
             anim.Play("BoxClimb");
             velocityMagnitude = 0;
@@ -31,7 +48,7 @@ public class AnimationManager:MonoBehaviour {
         if(rgbd.velocity.magnitude > 0.2) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {
-            velocityMagnitude -= Time.deltaTime * blendSpeed;
+            velocityMagnitude -= Time.deltaTime * (blendSpeed * 0.5f);
         }
         velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);
 
@@ -41,10 +58,8 @@ public class AnimationManager:MonoBehaviour {
         }
 
         if(Input.GetKey(KeyCode.LeftShift) && rgbd.velocity.magnitude > 0.2) {
-            blendSpeed = 4;
             runFloat += Time.deltaTime * blendSpeed;
         } else {
-            blendSpeed = 6;
             runFloat -= Time.deltaTime * blendSpeed;
         }
         runFloat = Mathf.Clamp(runFloat, 0, 1);
@@ -57,6 +72,24 @@ public class AnimationManager:MonoBehaviour {
     public void ChangeAnimation(string newState) {
         anim.Play(newState);
         anim.SetFloat(newState, velocityMagnitude);
+    }
+
+    void LadderClimb() {
+        if(rgbd.velocity.magnitude > 0.2f) {
+            anim.enabled = true;
+        } else {
+            anim.enabled = false;
+        }
+
+        if(Input.GetAxisRaw("Vertical") > 0) {
+            ladderFloat += Time.deltaTime * blendSpeed;
+        } else if(Input.GetAxisRaw("Vertical") < 0) {
+            ladderFloat -= Time.deltaTime * blendSpeed;
+        }
+        ladderFloat = Mathf.Clamp(ladderFloat, -1, 1);
+
+        anim.Play("LadderClimb");
+        anim.SetFloat("LadderBlend", ladderFloat);
     }
 
     void CheckPushDirection() {

@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class Interact:MonoBehaviour {
 
+    AnimationManager animScript;
+    PlayerMovement movementScript;
     DynamicLever leverScript;
     DynamicDoor doorScript;
     PickUp inventoryScript;
     string saveTag;
-    bool onTrigger;
+    bool onTrigger, moveTowards;
+
+    Rigidbody rgbd;
+    GameObject holdLever;
 
     void Start() {
-        inventoryScript = GetComponent<PickUp>();    
+        movementScript = GetComponent<PlayerMovement>();
+        animScript = GetComponent<AnimationManager>();
+        inventoryScript = GetComponent<PickUp>();
+        rgbd = GetComponent<Rigidbody>();
     }
 
     void Update() {
+        if(moveTowards) {
+            MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 1.5f));
+            return;
+        }
+
         if(!onTrigger)
             return;
 
@@ -29,11 +42,8 @@ public class Interact:MonoBehaviour {
                 if(leverScript.inUse)
                     return;
 
-                if(leverScript.leverActive) {
-                    leverScript.LeverDown();
-                } else {
-                    leverScript.LeverUp();
-                }
+                movementScript.moveTowardsLever = true;
+                moveTowards = true;
                 break;
             case "Door":
                 doorScript.openDoor = true;
@@ -42,12 +52,33 @@ public class Interact:MonoBehaviour {
         }
     }
 
+    void MoveTowards(Vector3 destination) {
+        Vector3 forcedDirection = destination - transform.position;
+        if(Vector3.Distance(destination, transform.position) > 0.2f) {
+            rgbd.velocity = forcedDirection * 3;
+            return;
+        }
+        moveTowards = false;
+        transform.forward = holdLever.transform.forward;
+        leverScript.FlipSwitch();
+    }
+
+    public void LeverAnimComplete() {
+        movementScript.moveTowardsLever = false;
+        if(leverScript.leverActive) {
+            leverScript.SetLeverFalse();
+        } else {
+            leverScript.SetLeverTrue();
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         switch(other.tag) {
             case "Lever":
                 onTrigger = true;
                 saveTag = other.tag;
-                leverScript = other.gameObject.GetComponent<DynamicLever>();
+                holdLever = other.gameObject;
+                leverScript = animScript.leverScript = holdLever.GetComponent<DynamicLever>();
                 break;
             case "Door":
                 onTrigger = true;

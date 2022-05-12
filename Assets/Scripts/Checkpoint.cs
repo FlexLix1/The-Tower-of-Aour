@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
     public HealthManager theHealthMan;
-
+    public SaveManager theSaveMan;
     public Renderer theRenderer;
     public Material cpOff;
     public Material cpOn;
@@ -20,6 +20,14 @@ public class Checkpoint : MonoBehaviour {
         theRenderer.material = cpOn;
     }
 
+    public void LoadData() {
+        theSaveMan.LoadPlayer();
+    }
+
+    public void SaveData() {
+        theSaveMan.SavePlayer();
+    }
+
     public void CheckpointOff() {
         theRenderer.material = cpOff;
     }
@@ -27,6 +35,12 @@ public class Checkpoint : MonoBehaviour {
         if (other.tag.Equals("Player")) {
             theHealthMan.SetSpawnPoint(transform.position);
             CheckpointOn();
+            SaveData();
+        }
+    }
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.I)) {
+            LoadData();
         }
     }
 }

@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class DynamicLever:MonoBehaviour {
 
+    AnimationManager animScript;
     public Elevator elevatorScript;
     public DynamicDoor doorScript;
-    public bool leverActive, startTrue, inUse, oneTimeUse, elevator;
+    public bool leverActive, startTrue, inUse, oneTimeUse, elevator, moveToLever;
     public Animator anim;
 
     void Start() {
+        animScript = GameObject.FindGameObjectWithTag("Player").GetComponent<AnimationManager>();
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity)) {
+            transform.position = hit.point;
+        }
+
         if(startTrue) {
             anim.Play("lever_True");
             leverActive = true;
@@ -19,21 +26,26 @@ public class DynamicLever:MonoBehaviour {
         }
     }
 
-    public void LeverUp() {
+    public void FlipSwitch() {
+        animScript.usingLever = true;
+        if(leverActive) {
+            LeverDown();
+        } else {
+            LeverUp();
+        }
+    }
+
+    void LeverUp() {
         inUse = true;
         anim.Play("lever_MTrue");
-        CancelInvoke();
-        Invoke(nameof(SetLeverTrue), 1);
     }
 
-    public void LeverDown() {
+    void LeverDown() {
         inUse = true;
         anim.Play("lever_MFalse");
-        CancelInvoke();
-        Invoke(nameof(SetLeverFalse), 1);
     }
 
-    void SetLeverFalse() {
+    public void SetLeverFalse() {
         anim.Play("lever_False");
         if(elevator) {
             elevatorScript.elevatorActive = false;
@@ -44,9 +56,10 @@ public class DynamicLever:MonoBehaviour {
         if(oneTimeUse)
             return;
         inUse = false;
+        animScript.usingLever = false;
     }
 
-    void SetLeverTrue() {
+    public void SetLeverTrue() {
         anim.Play("lever_True");
         if(elevator) {
             elevatorScript.elevatorActive = true;
@@ -57,5 +70,6 @@ public class DynamicLever:MonoBehaviour {
         if(oneTimeUse)
             return;
         inUse = false;
+        animScript.usingLever = false;
     }
 }

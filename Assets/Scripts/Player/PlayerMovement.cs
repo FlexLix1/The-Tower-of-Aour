@@ -12,10 +12,10 @@ public class PlayerMovement:MonoBehaviour {
     float cameraAngle, startMovementSpeed;
 
     public GameObject mainCamera;
-    Pushing pushScript;
     AnimationManager animScript;
+    Pushing pushScript;
 
-    public bool groundMovement;
+    public bool groundMovement, moveTowardsLever;
     private SlipperyOil slipperyOilMovement;
 
     void Start() {
@@ -28,13 +28,14 @@ public class PlayerMovement:MonoBehaviour {
     }
 
     void Update() {
+        if(moveTowardsLever)
+            return;
+
         if(animScript.climbingBox)
             return;
 
         if(pushScript.movingPlayerTowardsBox)
             return;
-
-       
 
         if(pushScript.hasBox) {
             movementSpeed = 3;
@@ -51,29 +52,30 @@ public class PlayerMovement:MonoBehaviour {
             rgbd.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if(groundMovement) {
-            //Update forward direction relative to camera
-            UpdateCameraForward();
+        if(!groundMovement)
+            return;
 
-            if(Input.GetKey(KeyCode.LeftShift)) {
-                movementSpeed = 10;
-            } else {
-                movementSpeed = 4;
-            }
+        //Update forward direction relative to camera
+        UpdateCameraForward();
 
-            //Update player input
-            GetInput();
+        if(Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox) {
+            movementSpeed = 10;
+        } else {
+            movementSpeed = startMovementSpeed;
+        }
 
-            //Update player Input
-            UpdatePosition();
+        //Update player input
+        GetInput();
 
-            if(pushScript.hasBox)
-                return;
+        //Update player Input
+        UpdatePosition();
 
-            //Rotate character towards walking direction
-            RotateCharacter();
+        if(pushScript.hasBox)
+            return;
 
-        } 
+        //Rotate character towards walking direction
+        RotateCharacter();
+
     }
 
     void UpdateCameraForward() {

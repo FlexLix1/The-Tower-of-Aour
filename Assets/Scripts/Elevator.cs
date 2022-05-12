@@ -2,42 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator:MonoBehaviour {
-    [SerializeField] Vector3 elevatorTarget;
-    Vector3 elevatorStart;
+namespace UnityCore {
 
-    public float speed;
-    Rigidbody rgbd;
+    namespace Audio {
 
-    public bool elevatorActive;
 
-    void Start() {
-        rgbd = GetComponent<Rigidbody>();
-        elevatorStart = transform.position;
-        elevatorTarget += elevatorStart;
-    }
-    
-    void Update() {
+        public class Elevator : MonoBehaviour {
+            [SerializeField] Vector3 elevatorTarget;
+            Vector3 elevatorStart;
 
-        if(!elevatorActive) {
-            if(Vector3.Distance(elevatorStart, transform.position) > 0.05f) {
-                MoveDoorTo(elevatorStart);
-            } else {
-                rgbd.velocity = Vector3.zero;
+            public float speed;
+            Rigidbody rgbd;
+            AudioController audioController;
+            public bool elevatorActive;
+            
+            void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+                rgbd = GetComponent<Rigidbody>();
+                elevatorStart = transform.position;
+                elevatorTarget += elevatorStart;
             }
-            return;
-        }
 
-        if(Vector3.Distance(elevatorTarget, transform.position) > 0.05f) {
-            MoveDoorTo(elevatorTarget);
-        } else {
-            rgbd.velocity = Vector3.zero;
-        }
-    }
+            void Update() {
 
-    void MoveDoorTo(Vector3 target) {
-        Vector3 forcedDirection = target - transform.position;
-        Vector3.Normalize(forcedDirection);
-        rgbd.velocity = forcedDirection * speed;
+                if (!elevatorActive) {
+                    if (Vector3.Distance(elevatorStart, transform.position) > 0.05f) {
+                        MoveDoorTo(elevatorStart);
+                    } else {
+                        rgbd.velocity = Vector3.zero;
+                    }
+                    return;
+                }
+
+                if (Vector3.Distance(elevatorTarget, transform.position) > 0.05f) {
+                    MoveDoorTo(elevatorTarget);
+                } else {
+                    rgbd.velocity = Vector3.zero;
+                }
+            }
+
+            void MoveDoorTo(Vector3 target) {
+                Vector3 forcedDirection = target - transform.position;
+                Vector3.Normalize(forcedDirection);
+                rgbd.velocity = forcedDirection * speed;
+            }
+        }
     }
 }

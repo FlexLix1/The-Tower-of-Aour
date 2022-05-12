@@ -12,10 +12,11 @@ namespace UnityCore {
             GameObject holdBox;
             AnimationManager animManager;
             public float rayDistance;
-            public AudioController audioController;
+            AudioController audioController;
             [SerializeField] Transform bone;
 
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 animManager = GetComponent<AnimationManager>();
             }
 

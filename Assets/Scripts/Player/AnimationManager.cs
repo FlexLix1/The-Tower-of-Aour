@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimationManager:MonoBehaviour {
 
+    public DynamicLever leverScript;
     Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
@@ -12,7 +13,7 @@ public class AnimationManager:MonoBehaviour {
 
     string currentState;
 
-    public bool climbingBox;
+    public bool climbingBox, usingLever;
     bool pushBox, pullBox;
 
     void Start() {
@@ -22,6 +23,15 @@ public class AnimationManager:MonoBehaviour {
     }
 
     void Update() {
+        if(usingLever) {
+            if(leverScript.leverActive) {
+                anim.Play("CharLeverUp");
+            } else {
+                anim.Play("CharLeverDown");
+            }
+            return;
+        }
+
         if(climbingBox) {
             anim.Play("BoxClimb");
             velocityMagnitude = 0;
@@ -31,7 +41,7 @@ public class AnimationManager:MonoBehaviour {
         if(rgbd.velocity.magnitude > 0.2) {
             velocityMagnitude += Time.deltaTime * blendSpeed;
         } else {
-            velocityMagnitude -= Time.deltaTime * blendSpeed;
+            velocityMagnitude -= Time.deltaTime * (blendSpeed * 0.5f);
         }
         velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);
 
@@ -41,10 +51,8 @@ public class AnimationManager:MonoBehaviour {
         }
 
         if(Input.GetKey(KeyCode.LeftShift) && rgbd.velocity.magnitude > 0.2) {
-            blendSpeed = 4;
             runFloat += Time.deltaTime * blendSpeed;
         } else {
-            blendSpeed = 6;
             runFloat -= Time.deltaTime * blendSpeed;
         }
         runFloat = Mathf.Clamp(runFloat, 0, 1);

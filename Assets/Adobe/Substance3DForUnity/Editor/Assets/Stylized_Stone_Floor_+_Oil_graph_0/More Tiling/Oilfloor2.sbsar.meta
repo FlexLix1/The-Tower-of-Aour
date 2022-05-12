@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3c7fd5d9c42304af3ba8774566db21e6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 04e90a654e7b146fda1c867db4d27282, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/Stylized_Stone_Floor_+_Oil_graph_0/More
+    Tiling/Oilfloor2.sbsar

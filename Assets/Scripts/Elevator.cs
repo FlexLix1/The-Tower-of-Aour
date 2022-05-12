@@ -17,6 +17,7 @@ namespace UnityCore {
             public bool elevatorActive;
             
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
                 elevatorStart = transform.position;
                 elevatorTarget += elevatorStart;

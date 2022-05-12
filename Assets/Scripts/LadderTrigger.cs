@@ -14,7 +14,11 @@ namespace UnityCore {
             public BoxCollider upperCollider, lowerCollider;
             public bool isTop, isBottom;
             public GameObject ladderPostion;
-            public AudioController audioController;
+            AudioController audioController;
+
+            void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+            }
 
             void OnTriggerEnter(Collider other) {
                 if (!other.CompareTag("Player"))

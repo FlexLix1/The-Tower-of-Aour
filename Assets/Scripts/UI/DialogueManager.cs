@@ -17,6 +17,10 @@ namespace UnityCore {
             bool dialogueActive, writingOut;
             int numInDialogue;
 
+            void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+            }
+
             void Update() {
                 if (!dialogueActive)
                     return;

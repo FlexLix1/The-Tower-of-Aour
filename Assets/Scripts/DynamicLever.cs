@@ -14,9 +14,10 @@ namespace UnityCore {
             public DynamicDoor doorScript;
             public bool leverActive, startTrue, inUse, oneTimeUse, elevator, moveToLever;
             public Animator anim;
-            public AudioController audioController;
+            AudioController audioController;
 
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 animScript = GameObject.FindGameObjectWithTag("Player").GetComponent<AnimationManager>();
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity)) {

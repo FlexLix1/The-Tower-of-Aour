@@ -19,6 +19,10 @@ namespace UnityCore {
             bool hintActive, writingOut;
             int numInDialogue;
 
+            void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+            }
+
             void Update() {
                 if (!hintActive)
                     return;

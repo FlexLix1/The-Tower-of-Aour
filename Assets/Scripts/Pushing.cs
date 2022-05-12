@@ -23,6 +23,7 @@ namespace UnityCore {
             Box boxScript;
 
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
             }
 

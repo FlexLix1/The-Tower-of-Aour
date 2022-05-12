@@ -12,17 +12,16 @@ namespace UnityCore {
         public class SlipperyOil : MonoBehaviour {
             public Rigidbody rb;
             Vector3 saveVelocity;
-            public AudioController audioController;
+            AudioController audioController;
 
             private PlayerMovement playermovement;
 
-            // Start is called before the first frame update
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rb = gameObject.GetComponent<Rigidbody>();
                 playermovement = GetComponent<PlayerMovement>();
             }
 
-            // Update is called once per frame
             void Update() {
                 if (playermovement.groundMovement) return;
                 rb.velocity = saveVelocity;

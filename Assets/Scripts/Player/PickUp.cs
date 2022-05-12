@@ -30,6 +30,7 @@ public class PickUp:MonoBehaviour {
     }
 
     public void UseItem() {
+        //Add keyopendoor soundFX
         inventory[saveInventoryNumber].SetActive(false);
         hasPickup = false;
         Invoke(nameof(CanPickup), 0.025f);

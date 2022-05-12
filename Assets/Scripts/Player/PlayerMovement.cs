@@ -23,6 +23,7 @@ namespace UnityCore {
             AudioController audioController;
 
             void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
                 slipperyOilMovement = GetComponent<SlipperyOil>();

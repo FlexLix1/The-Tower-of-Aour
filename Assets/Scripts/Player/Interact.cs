@@ -13,7 +13,6 @@ namespace UnityCore {
             PickUp inventoryScript;
             string saveTag;
             bool onTrigger, moveTowards;
-            AudioController audioController;
 
             Rigidbody rgbd;
             GameObject holdLever;
@@ -23,6 +22,7 @@ namespace UnityCore {
                 animScript = GetComponent<AnimationManager>();
                 inventoryScript = GetComponent<PickUp>();
                 rgbd = GetComponent<Rigidbody>();
+                
             }
 
             void Update() {

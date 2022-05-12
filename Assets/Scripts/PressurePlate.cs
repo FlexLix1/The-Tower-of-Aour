@@ -24,6 +24,7 @@ namespace UnityCore {
                 pressed = false;
                 plateTransform = transform.GetChild(0).transform;
                 pressedPosition = plateTransform.position - pressedOffset;
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
             }
 
             private void OnTriggerEnter(Collider other) {

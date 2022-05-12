@@ -9,10 +9,10 @@ namespace UnityCore {
             public AudioController audioController;
 
             #region Unity Functions
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             private void Update() {
                 if (Input.GetKeyUp(KeyCode.T)) {
-                    audioController.PlayAudio(AudioType.ST_01, true);
+                    audioController.PlayAudio(AudioType.SFX_ClimbingLadder, true);
                 }
                 if (Input.GetKeyUp(KeyCode.G)) {
                     audioController.StopAudio(AudioType.ST_01, true);

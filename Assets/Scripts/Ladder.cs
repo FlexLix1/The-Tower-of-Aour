@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Ladder : MonoBehaviour {
     public float speed = 10f;
     public bool isClimbing;
     Rigidbody m_Rigidbody;
     PlayerMovement movementScript;
-
     void Start() {
         m_Rigidbody = GetComponent<Rigidbody>();
         movementScript = GetComponent<PlayerMovement>();
@@ -21,6 +21,7 @@ public class Ladder : MonoBehaviour {
             float velocity = Input.GetAxisRaw("Vertical");
             m_Rigidbody.velocity = new Vector3(0, velocity * speed, 0);
 
+
         } else {
             movementScript.enabled = true;
             m_Rigidbody.useGravity = true;
@@ -28,3 +29,4 @@ public class Ladder : MonoBehaviour {
         }
     }
 }
+

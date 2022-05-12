@@ -1,71 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace UnityCore {
+    namespace Audio {
+        public class TimeStop : MonoBehaviour {
 
-public class TimeStop:MonoBehaviour {
+            public Material timeFreezeMat, normalMat;
+            MeshRenderer material;
+            Rigidbody rgbd;
+            AudioController audioController;
+            Vector3 saveVelocity;
 
-    public Material timeFreezeMat, normalMat;
-    MeshRenderer material;
-    Rigidbody rgbd;
+            public float freezeTime = 5;
+            public bool timeStoped, isRotating;
+            float time;
 
-    Vector3 saveVelocity;
+            void Start() {
+                material = GetComponent<MeshRenderer>();
+                rgbd = GetComponent<Rigidbody>();
+            }
 
-    public float freezeTime = 5;
-    public bool timeStoped, isRotating;
-    float time;
+            void Update() {
+                if (Input.GetMouseButtonDown(1)) {
+                    timeStoped = !timeStoped;
+                    Unfreeze();
+                }
 
-    void Start() {
-        material = GetComponent<MeshRenderer>();
-        rgbd = GetComponent<Rigidbody>();
-    }
+                if (!timeStoped)
+                    return;
 
-    void Update() {
-        if(Input.GetMouseButtonDown(1)) {
-            timeStoped = !timeStoped;
-            Unfreeze();
-        }
+                if (time < freezeTime) {
+                    time += Time.deltaTime;
+                    rgbd.velocity = Vector3.zero;
+                    return;
+                }
+                audioController.StopAudio(AudioType.SFX_TimeStop, true);
+                Unfreeze();
+            }
 
-        if(!timeStoped)
-            return;
+            //Removes all constraints, Implaments saved velocity
+            void Unfreeze() {
+                time = 0;
+                material.material = normalMat;
+                if (isRotating) {
+                    rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
+                    rgbd.angularVelocity = saveVelocity;
+                } else {
+                    rgbd.constraints = RigidbodyConstraints.None;
+                    rgbd.velocity = saveVelocity;
+                }
 
-        if(time < freezeTime) {
-            time += Time.deltaTime;
-            rgbd.velocity = Vector3.zero;
-            return;
-        }
-        Unfreeze();
-    }
+                timeStoped = false;
+            }
 
-    //Removes all constraints, Implaments saved velocity
-    void Unfreeze() {
-        time = 0;
-        material.material = normalMat;
-        if(isRotating) {
-            rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
-            rgbd.angularVelocity = saveVelocity;
-        } else {
-            rgbd.constraints = RigidbodyConstraints.None; 
-            rgbd.velocity = saveVelocity;
-        }
+            //An update that works everytime mouse hovers over objectscript
+            //If L_Mouse_click saves velocity, activates all rgbd constraints
+            void OnMouseOver() {
+                Debug.Log(transform.position);
+                Debug.Log("Over");
 
-        timeStoped = false;
-    }
+                if (timeStoped)
+                    return;
 
-    //An update that works everytime mouse hovers over objectscript
-    //If L_Mouse_click saves velocity, activates all rgbd constraints
-    void OnMouseOver() {
-        Debug.Log(transform.position);
-        Debug.Log("Over");
+                if (Input.GetMouseButtonDown(0)) {
 
-        if(timeStoped)
-            return;
-
-        if(Input.GetMouseButtonDown(0)) {
-
-            timeStoped = true;
-            saveVelocity = rgbd.velocity;
-            material.material = timeFreezeMat;
-            rgbd.constraints = RigidbodyConstraints.FreezeAll;
+                    timeStoped = true;
+                    saveVelocity = rgbd.velocity;
+                    material.material = timeFreezeMat;
+                    rgbd.constraints = RigidbodyConstraints.FreezeAll;
+                    audioController.PlayAudio(AudioType.SFX_TimeStop);
+                }
+            }
         }
     }
 }

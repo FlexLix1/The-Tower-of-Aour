@@ -12,6 +12,11 @@ public class DynamicLever:MonoBehaviour {
 
     void Start() {
         animScript = GameObject.FindGameObjectWithTag("Player").GetComponent<AnimationManager>();
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity)) {
+            transform.position = hit.point;
+        }
+
         if(startTrue) {
             anim.Play("lever_True");
             leverActive = true;

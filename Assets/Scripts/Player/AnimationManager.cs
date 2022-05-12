@@ -5,11 +5,12 @@ using UnityEngine;
 public class AnimationManager:MonoBehaviour {
 
     public DynamicLever leverScript;
+    Ladder ladderClimbScript;
     Pushing pushBoxScript;
     Rigidbody rgbd;
     Animator anim;
     public float blendSpeed, velocityMagnitude;
-    float runFloat;
+    float runFloat, ladderFloat;
 
     string currentState;
 
@@ -20,9 +21,15 @@ public class AnimationManager:MonoBehaviour {
         rgbd = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pushBoxScript = GetComponent<Pushing>();
+        ladderClimbScript = GetComponent<Ladder>();
     }
 
     void Update() {
+        if(ladderClimbScript.isClimbing) {
+            LadderClimb();
+            return;
+        }
+
         if(usingLever) {
             if(leverScript.leverActive) {
                 anim.Play("CharLeverUp");
@@ -65,6 +72,24 @@ public class AnimationManager:MonoBehaviour {
     public void ChangeAnimation(string newState) {
         anim.Play(newState);
         anim.SetFloat(newState, velocityMagnitude);
+    }
+
+    void LadderClimb() {
+        if(rgbd.velocity.magnitude > 0.2f) {
+            anim.enabled = true;
+        } else {
+            anim.enabled = false;
+        }
+
+        if(Input.GetAxisRaw("Vertical") > 0) {
+            ladderFloat += Time.deltaTime * blendSpeed;
+        } else if(Input.GetAxisRaw("Vertical") < 0) {
+            ladderFloat -= Time.deltaTime * blendSpeed;
+        }
+        ladderFloat = Mathf.Clamp(ladderFloat, -1, 1);
+
+        anim.Play("LadderClimb");
+        anim.SetFloat("LadderBlend", ladderFloat);
     }
 
     void CheckPushDirection() {

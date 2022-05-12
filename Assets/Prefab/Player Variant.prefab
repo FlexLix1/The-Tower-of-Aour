@@ -1125,6 +1125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 1.5
+  audioController: {fileID: 0}
+  bone: {fileID: 0}
 --- !u!114 &348669808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,9 +1235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df3018f9e1f9f64eaf6abe48b816395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leverScript: {fileID: 0}
   blendSpeed: 6
   velocityMagnitude: 0
   climbingBox: 0
+  usingLever: 0
 --- !u!114 &348669815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,7 +1252,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d22e68e6753a54081c8bbe84ac4605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPosition: {x: 0, y: 0, z: 0}
   movementSpeed: 4
   rotationSpeed: 350
   mainCamera: {fileID: 0}
   groundMovement: 0
+  moveTowardsLever: 0
+--- !u!114 &5968921322019606113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986958466128622137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0c84a13317ef0469520bf63d58cdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentfloor: 0
+--- !u!114 &9100416608085726182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986958466128622137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5232c391dcf3c17498cbd0e6de0d2647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  audioController: {fileID: 0}
+--- !u!114 &4991083420718667385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986958466128622137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a00ed9e050c46240b79b17215142e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  isClimbing: 0

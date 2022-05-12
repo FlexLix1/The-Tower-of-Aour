@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityCore {
     namespace Audio {
 
-        public class Interact : MonoBehaviour {
+        public class Interact:MonoBehaviour {
 
             AnimationManager animScript;
             PlayerMovement movementScript;
@@ -26,25 +26,24 @@ namespace UnityCore {
             }
 
             void Update() {
-                if (moveTowards) {
+                if(moveTowards) {
                     MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 1.5f));
                     return;
                 }
 
-                if (!onTrigger)
+                if(!onTrigger)
                     return;
 
-                if (Input.GetKeyDown(KeyCode.E)) {
+                if(Input.GetKeyDown(KeyCode.E)) {
                     UseItem();
                 }
             }
 
             void UseItem() {
-                switch (saveTag) {
+                switch(saveTag) {
                     case "Lever":
-                        if (leverScript.inUse)
-                            audioController.PlayAudio(AudioType.SFX_LeverSound, true);
-                        return;
+                        if(leverScript.inUse) 
+                            return;
 
                         movementScript.moveTowardsLever = true;
                         moveTowards = true;
@@ -58,7 +57,7 @@ namespace UnityCore {
 
             void MoveTowards(Vector3 destination) {
                 Vector3 forcedDirection = destination - transform.position;
-                if (Vector3.Distance(destination, transform.position) > 0.2f) {
+                if(Vector3.Distance(destination, transform.position) > 0.2f) {
                     rgbd.velocity = forcedDirection * 3;
                     return;
                 }
@@ -69,7 +68,7 @@ namespace UnityCore {
 
             public void LeverAnimComplete() {
                 movementScript.moveTowardsLever = false;
-                if (leverScript.leverActive) {
+                if(leverScript.leverActive) {
                     leverScript.SetLeverFalse();
                 } else {
                     leverScript.SetLeverTrue();
@@ -77,7 +76,7 @@ namespace UnityCore {
             }
 
             void OnTriggerEnter(Collider other) {
-                switch (other.tag) {
+                switch(other.tag) {
                     case "Lever":
                         onTrigger = true;
                         saveTag = other.tag;
@@ -93,7 +92,7 @@ namespace UnityCore {
             }
 
             void OnTriggerExit(Collider other) {
-                if (onTrigger) {
+                if(onTrigger) {
                     onTrigger = false;
                     saveTag = null;
                 }

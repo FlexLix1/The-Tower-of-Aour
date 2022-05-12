@@ -20,6 +20,8 @@ namespace UnityCore {
             public bool groundMovement, moveTowardsLever;
             private SlipperyOil slipperyOilMovement;
 
+            AudioController audioController;
+
             void Start() {
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
@@ -41,6 +43,7 @@ namespace UnityCore {
 
                 if (pushScript.hasBox) {
                     movementSpeed = 3;
+                    audioController.PlayAudio(AudioType.SFX_PullingBoxes, true);
                     switch (pushScript.holdLockDirection) {
                         case Pushing.lockDirection.LockAxisY:
                             rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;

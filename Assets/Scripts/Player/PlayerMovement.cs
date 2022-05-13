@@ -108,18 +108,6 @@ namespace UnityCore {
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
                 }
             }
-
-            void OnTriggerEnter(Collider other) {
-                if(other.gameObject.name == "Platform") {
-                    transform.SetParent(other.transform);
-                }
-            }
-
-            void OnTriggerExit(Collider other) {
-                if(other.gameObject.name == "Platform") {
-                    transform.SetParent(null);
-                }
-            }
         }
     }
 }

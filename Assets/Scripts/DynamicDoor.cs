@@ -20,7 +20,6 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     void Update() {
-
         if(swiningDoor) {
             if(openDoor) {
                 rgbd.constraints = RigidbodyConstraints.None;

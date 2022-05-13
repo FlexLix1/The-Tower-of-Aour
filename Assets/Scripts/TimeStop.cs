@@ -3,73 +3,103 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UnityCore {
     namespace Audio {
-        public class TimeStop : MonoBehaviour {
+        public class TimeStop:MonoBehaviour {
 
-            public Material timeFreezeMat, normalMat;
-            MeshRenderer material;
+            public Material timeFreezeMat;
+            MeshRenderer meshRenderer;
+            public Material normalMat;
             Rigidbody rgbd;
+
             AudioController audioController;
             Vector3 saveVelocity;
+            GameObject saveFrozenObject;
 
+            public GameObject timeFreezeOverlay;
             public float freezeTime = 5;
             public bool timeStoped, isRotating;
+            bool usingTimeStop;
             float time;
 
             void Start() {
-                material = GetComponent<MeshRenderer>();
+                meshRenderer = GetComponent<MeshRenderer>();
                 rgbd = GetComponent<Rigidbody>();
             }
 
             void Update() {
-                if (Input.GetMouseButtonDown(1)) {
+                if(Input.GetMouseButtonDown(1)) {
                     timeStoped = !timeStoped;
                     Unfreeze();
                 }
 
-                if (!timeStoped)
+                if(Input.GetKeyDown(KeyCode.Q) && !timeStoped) {
+                    usingTimeStop = !usingTimeStop;
+                }
+
+                if(usingTimeStop) {
+                    CheckFreezeItem();
+                } else {
+                    timeFreezeOverlay.SetActive(false);
+                }
+
+                if(!timeStoped)
                     return;
 
-                if (time < freezeTime) {
+                if(time < freezeTime) {
                     time += Time.deltaTime;
                     rgbd.velocity = Vector3.zero;
                     return;
                 }
-                audioController.StopAudio(AudioType.SFX_TimeStop, true);
+
+                //audioController.StopAudio(AudioType.SFX_TimeStop, true);
                 Unfreeze();
             }
 
-            //Removes all constraints, Implaments saved velocity
-            void Unfreeze() {
-                time = 0;
-                material.material = normalMat;
-                if (isRotating) {
-                    rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
-                    rgbd.angularVelocity = saveVelocity;
-                } else {
-                    rgbd.constraints = RigidbodyConstraints.None;
-                    rgbd.velocity = saveVelocity;
-                }
+            void CheckFreezeItem() {
+                timeFreezeOverlay.SetActive(true);
+                RaycastHit hit;
+                if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
+                    if(hit.transform.gameObject.CompareTag("TimeFreeze")) {
+                        if(saveFrozenObject == null || saveFrozenObject != hit.transform.gameObject /*|| meshRenderer.material != timeFreezeMat*/) {
+                            meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+                            normalMat = meshRenderer.material;
+                            saveFrozenObject = hit.transform.gameObject;
+                        }
 
-                timeStoped = false;
+                        meshRenderer.material = timeFreezeMat;
+                        if(Input.GetMouseButtonDown(0) && !timeStoped) {
+                            saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = true;
+                            timeStoped = true;
+                            usingTimeStop = false;
+                        }
+                    } else {
+                        if(normalMat == null && meshRenderer == null)
+                            return;
+
+                        meshRenderer.material = normalMat;
+                        normalMat = null;
+                        meshRenderer = null;
+                        saveFrozenObject = null;
+                    }
+                }
             }
 
-            //An update that works everytime mouse hovers over objectscript
-            //If L_Mouse_click saves velocity, activates all rgbd constraints
-            void OnMouseOver() {
-                Debug.Log(transform.position);
-                Debug.Log("Over");
+            void Unfreeze() {
+                time = 0;
+                if(normalMat != null)
+                    meshRenderer.material = normalMat;
 
-                if (timeStoped)
-                    return;
-
-                if (Input.GetMouseButtonDown(0)) {
-
-                    timeStoped = true;
-                    saveVelocity = rgbd.velocity;
-                    material.material = timeFreezeMat;
-                    rgbd.constraints = RigidbodyConstraints.FreezeAll;
-                    audioController.PlayAudio(AudioType.SFX_TimeStop);
+                if(isRotating) {
+                    rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
+                } else {
+                    rgbd.constraints = RigidbodyConstraints.None;
                 }
+
+                normalMat = null;
+                meshRenderer = null;
+                saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = false;
+                saveFrozenObject = null;
+                timeStoped = false;
+                usingTimeStop = false;
             }
         }
     }

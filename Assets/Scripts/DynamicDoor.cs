@@ -9,7 +9,7 @@ public class DynamicDoor:MonoBehaviour {
     public bool swiningDoor, openDoor;
     bool holdDoorState;
 
-    Animator anim;
+    public Animator anim;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();

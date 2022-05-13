@@ -13,6 +13,7 @@ TagManager:
   - Hint
   - OilPuzzleWall
   - HintEnd
+  - TimeFreeze
   layers:
   - Default
   - TransparentFX

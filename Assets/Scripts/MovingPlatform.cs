@@ -32,6 +32,7 @@ public class MovingPlatform:MonoBehaviour {
             transform.position += forcedDirection.normalized * speed;
             return;
         }
+
         flipMovement = !flipMovement;
     }
 }

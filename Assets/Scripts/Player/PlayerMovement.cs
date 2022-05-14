@@ -1,87 +1,126 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace UnityCore {
+    namespace Audio {
 
-public class PlayerMovement:MonoBehaviour {
+        public class PlayerMovement : MonoBehaviour {
 
-    Vector3 playerPosition, relativeForward, relativeRight;
-    Rigidbody rgbd;
+            public Vector3 playerPosition;
+            Vector3 relativeForward, relativeRight;
+            Rigidbody rgbd;
 
-    public float movementSpeed, rotationSpeed;
-    float cameraAngle, startMovementSpeed;
+            public float movementSpeed, rotationSpeed;
+            float cameraAngle, startMovementSpeed;
 
-    public GameObject mainCamera;
-    Pushing pushScript;
+            public GameObject mainCamera;
+            AnimationManager animScript;
+            Pushing pushScript;
 
-    public bool GroundMovement;
-    private SlipperyOil slipperyOilMovement;
+            public bool groundMovement, moveTowardsLever;
+            private SlipperyOil slipperyOilMovement;
 
-    void Start() {
-        rgbd = GetComponent<Rigidbody>();
-        pushScript = GetComponent<Pushing>();
-        slipperyOilMovement = GetComponent<SlipperyOil>();
-        startMovementSpeed = movementSpeed;
-        GroundMovement = true;
-    }
+            AudioController audioController;
 
-    void Update() {
-
-        if(pushScript.hasBox) {
-            movementSpeed = 4.5f;
-            switch(pushScript.holdDirection) {
-                case Pushing.lockDirection.LeftUp:
-                    rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-                    break;
-                case Pushing.lockDirection.DownRight:
-                    rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
-                    break;
+            void Start() {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+                rgbd = GetComponent<Rigidbody>();
+                pushScript = GetComponent<Pushing>();
+                slipperyOilMovement = GetComponent<SlipperyOil>();
+                animScript = GetComponent<AnimationManager>();
+                startMovementSpeed = movementSpeed;
+                groundMovement = true;
             }
-        } else {
-            movementSpeed = startMovementSpeed;
-            rgbd.constraints = RigidbodyConstraints.FreezeRotation;
-        }
 
-        if(GroundMovement) {
-            //Update forward direction relative to camera
-            UpdateCameraForward();
+            void Update() {
+                if (moveTowardsLever)
+                    return;
 
-            //Update player input
-            GetInput();
+                if (animScript.climbingBox)
+                    return;
 
-            //Update player Input
-            UpdatePosition();
+                if (pushScript.movingPlayerTowardsBox)
+                    return;
 
-            if(pushScript.hasBox)
-                return;
+                if (pushScript.hasBox) {
+                    movementSpeed = 3;
+                    audioController.PlayAudio(AudioType.SFX_PullingBoxes, true);
+                    switch (pushScript.holdLockDirection) {
+                        case Pushing.lockDirection.LockAxisY:
+                            rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+                            break;
+                        case Pushing.lockDirection.LockAxisX:
+                            rgbd.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+                            break;
+                    }
+                } else {
+                    movementSpeed = startMovementSpeed;
+                    rgbd.constraints = RigidbodyConstraints.FreezeRotation;
+                }
 
-            //Rotate character towards walking direction
-            RotateCharacter();
+                if (!groundMovement)
+                    return;
 
-        } 
-    }
+                //Update forward direction relative to camera
+                UpdateCameraForward();
 
-    void UpdateCameraForward() {
-        relativeForward = mainCamera.transform.forward;
-        relativeForward.y = 0;
-        Vector3.Normalize(relativeForward);
-        relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward;
-    }
+                if (Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox) {
+                    movementSpeed = 10;
+                } else {
+                    movementSpeed = startMovementSpeed;
+                }
 
-    void GetInput() {
-        Vector3 forwardDirection = Input.GetAxisRaw("Vertical") * relativeForward;
-        Vector3 rightDirection = Input.GetAxisRaw("Horizontal") * relativeRight;
-        playerPosition = Vector3.Normalize(rightDirection + forwardDirection) * movementSpeed;
-    }
+                //Update player input
+                GetInput();
 
-    void UpdatePosition() {
-        playerPosition.y = rgbd.velocity.y;
-        rgbd.velocity = playerPosition;
-    }
+                //Update player Input
+                UpdatePosition();
 
-    void RotateCharacter() {
-        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, transform.position.y - transform.position.y, playerPosition.z), Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+                if (pushScript.hasBox)
+                    return;
+
+                //Rotate character towards walking direction
+                RotateCharacter();
+
+            }
+
+            void UpdateCameraForward() {
+                relativeForward = mainCamera.transform.forward;
+                relativeForward.y = 0;
+                Vector3.Normalize(relativeForward);
+                relativeRight = Quaternion.Euler(new Vector3(0, 90, 0)) * relativeForward;
+            }
+
+            void GetInput() {
+                Vector3 forwardDirection = Input.GetAxisRaw("Vertical") * relativeForward;
+                Vector3 rightDirection = Input.GetAxisRaw("Horizontal") * relativeRight;
+                playerPosition = Vector3.Normalize(rightDirection + forwardDirection) * movementSpeed;
+            }
+
+            void UpdatePosition() {
+                playerPosition.y = rgbd.velocity.y;
+                rgbd.velocity = playerPosition;
+            }
+
+            void RotateCharacter() {
+                if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) {
+                    Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, 0, playerPosition.z), Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+                }
+            }
+
+            void OnTriggerEnter(Collider other) {
+                if(other.gameObject.name == "Platform") {
+                    transform.SetParent(other.transform);
+                }
+            }
+
+            void OnTriggerExit(Collider other) {
+                if(other.gameObject.name == "Platform") {
+                    transform.SetParent(null);
+                }
+            }
+
         }
     }
 }

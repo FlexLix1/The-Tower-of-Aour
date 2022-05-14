@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DynamicDoor:MonoBehaviour {
-    [SerializeField] Vector3 doorTarget;
-    Vector3 doorStart;
 
-    public float speed;
-    BoxCollider colliderActive;
     Rigidbody rgbd;
 
     public bool swiningDoor, openDoor;
-    bool moving;
+    bool holdDoorState;
+
+    public Animator anim;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
-        colliderActive = GetComponent<BoxCollider>();
-        doorStart = transform.position;
-        doorTarget += doorStart;
+        holdDoorState = openDoor;
+        if(TryGetComponent<Animator>(out Animator animator)) {
+            anim = animator;
+        }
     }
 
     void Update() {
-
         if(swiningDoor) {
             if(openDoor) {
                 rgbd.constraints = RigidbodyConstraints.None;
@@ -31,29 +29,32 @@ public class DynamicDoor:MonoBehaviour {
             return;
         }
 
-        if(!openDoor) {
-            if(Vector3.Distance(doorStart, transform.position) > 0.025f) {
-                MoveDoorTo(doorStart);
-            } else {
-                rgbd.velocity = Vector3.zero;
-                rgbd.constraints = RigidbodyConstraints.FreezeAll;
-                colliderActive.isTrigger = false;
-            }
+        if(holdDoorState == openDoor)
             return;
-        }
 
-        colliderActive.isTrigger = true;
-        rgbd.constraints = RigidbodyConstraints.FreezeRotation;
-        if(Vector3.Distance(doorTarget, transform.position) > 0.025f) {
-            MoveDoorTo(doorTarget);
+        if(openDoor) {
+            DoorOpen();
         } else {
-            rgbd.velocity = Vector3.zero;
+            DoorClose();
         }
     }
 
-    void MoveDoorTo(Vector3 target) {
-        Vector3 forcedDirection = target - transform.position;
-        Vector3.Normalize(forcedDirection);
-        rgbd.velocity = forcedDirection * speed;
+    void DoorOpen() {
+        anim.Play("door_open");
+    }
+
+    void DoorClose() {
+        anim.Play("door_close");
+    }
+
+    public void SetDoorOpen() {
+        anim.Play("door_open_static");
+        holdDoorState = openDoor;
+
+    }
+
+    public void SetDoorClosed() {
+        anim.Play("door_close_static");
+        holdDoorState = openDoor;
     }
 }

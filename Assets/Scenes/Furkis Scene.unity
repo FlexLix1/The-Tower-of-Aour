@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 166532865}
   - component: {fileID: 166532871}
   - component: {fileID: 166532864}
+  - component: {fileID: 166532872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -398,6 +399,7 @@ MonoBehaviour:
   movementSpeed: 5
   rotationSpeed: 5
   mainCamera: {fileID: 1776676285}
+  groundMovement: 0
 --- !u!136 &166532867
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -483,7 +485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166532863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c87e59cfc5ca1b4dbf25dc1005f180d, type: 3}
   m_Name: 
@@ -492,6 +494,24 @@ MonoBehaviour:
   TouchingWall: 0
   UpwardSpeed: 3.3
   ladderCam: {fileID: 573787983}
+--- !u!114 &166532872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166532863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a00ed9e050c46240b79b17215142e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 166532863}
+  speed: 10
+  isClimbing: 0
+  m_Rigidbody: {fileID: 166532864}
+  exit: 0.1
+  drop: 0.1
 --- !u!1 &179614891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,10 +1756,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600970752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e765424108e79b141a2bba7fc08ee587, type: 3}
+  m_Script: {fileID: 11500000, guid: 86600ac3281f5764c9f295ae8785088c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climb: 2
+  climb: {fileID: 166532872}
+  target: {fileID: 1600970753}
 --- !u!1 &1614607441
 GameObject:
   m_ObjectHideFlags: 0

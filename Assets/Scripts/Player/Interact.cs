@@ -1,66 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace UnityCore {
+    namespace Audio {
 
-public class Interact:MonoBehaviour {
+        public class Interact:MonoBehaviour {
 
-    DynamicLever leverScript;
-    DynamicDoor doorScript;
-    PickUp inventoryScript;
-    string saveTag;
-    bool onTrigger;
+            AnimationManager animScript;
+            PlayerMovement movementScript;
+            DynamicLever leverScript;
+            DynamicDoor doorScript;
+            PickUp inventoryScript;
+            string saveTag;
+            bool onTrigger, moveTowards;
 
-    void Start() {
-        inventoryScript = GetComponent<PickUp>();    
-    }
+            Rigidbody rgbd;
+            GameObject holdLever;
 
-    void Update() {
-        if(!onTrigger)
-            return;
+            void Start() {
+                movementScript = GetComponent<PlayerMovement>();
+                animScript = GetComponent<AnimationManager>();
+                inventoryScript = GetComponent<PickUp>();
+                rgbd = GetComponent<Rigidbody>();
+                
+            }
 
-        if(Input.GetKeyDown(KeyCode.E)) {
-            UseItem();
-        }
-    }
+            void Update() {
+                if(moveTowards) {
+                    MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 1.5f));
+                    return;
+                }
 
-    void UseItem() {
-        switch(saveTag) {
-            case "Lever":
-                if(leverScript.inUse)
+                if(!onTrigger)
                     return;
 
-                if(leverScript.leverActive) {
-                    leverScript.LeverDown();
-                } else {
-                    leverScript.LeverUp();
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    UseItem();
                 }
-                break;
-            case "Door":
-                doorScript.openDoor = true;
-                inventoryScript.UseItem();
-                break;
-        }
-    }
+            }
 
-    void OnTriggerEnter(Collider other) {
-        switch(other.tag) {
-            case "Lever":
-                onTrigger = true;
-                saveTag = other.tag;
-                leverScript = other.gameObject.GetComponent<DynamicLever>();
-                break;
-            case "Door":
-                onTrigger = true;
-                saveTag = other.tag;
-                doorScript = other.gameObject.GetComponent<DynamicDoor>();
-                break;
-        }
-    }
+            void UseItem() {
+                switch(saveTag) {
+                    case "Lever":
+                        if(leverScript.inUse) 
+                            return;
 
-    void OnTriggerExit(Collider other) {
-        if(onTrigger) {
-            onTrigger = false;
-            saveTag = null;
+                        movementScript.moveTowardsLever = true;
+                        moveTowards = true;
+                        break;
+                    case "Door":
+                        doorScript.openDoor = true;
+                        inventoryScript.UseItem();
+                        break;
+                }
+            }
+
+            void MoveTowards(Vector3 destination) {
+                Vector3 forcedDirection = destination - transform.position;
+                if(Vector3.Distance(destination, transform.position) > 0.2f) {
+                    rgbd.velocity = forcedDirection * 3;
+                    return;
+                }
+                moveTowards = false;
+                transform.forward = holdLever.transform.forward;
+                leverScript.FlipSwitch();
+            }
+
+            public void LeverAnimComplete() {
+                movementScript.moveTowardsLever = false;
+                if(leverScript.leverActive) {
+                    leverScript.SetLeverFalse();
+                } else {
+                    leverScript.SetLeverTrue();
+                }
+            }
+
+            void OnTriggerEnter(Collider other) {
+                switch(other.tag) {
+                    case "Lever":
+                        onTrigger = true;
+                        saveTag = other.tag;
+                        holdLever = other.gameObject;
+                        leverScript = animScript.leverScript = holdLever.GetComponent<DynamicLever>();
+                        break;
+                    case "Door":
+                        onTrigger = true;
+                        saveTag = other.tag;
+                        doorScript = other.gameObject.GetComponent<DynamicDoor>();
+                        break;
+                }
+            }
+
+            void OnTriggerExit(Collider other) {
+                if(onTrigger) {
+                    onTrigger = false;
+                    saveTag = null;
+                }
+            }
         }
     }
 }

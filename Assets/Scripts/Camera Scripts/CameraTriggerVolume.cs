@@ -9,6 +9,7 @@ public class CameraTriggerVolume : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera cam;
     [SerializeField] private Vector3 boxsize;
+    [SerializeField] private Quaternion boxrotation;
 
     BoxCollider box;
     Rigidbody rb;
@@ -20,6 +21,7 @@ public class CameraTriggerVolume : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         box.isTrigger = true;
         box.size = boxsize;
+        box.transform.rotation = boxrotation;
         rb.isKinematic = true;
     }
 

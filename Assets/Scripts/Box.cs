@@ -4,29 +4,32 @@ using UnityEngine;
 namespace UnityCore {
     namespace Audio {
 
-        public class Box : MonoBehaviour {
+        public class Box:MonoBehaviour {
 
             PlayerMovement movementScript;
-            Rigidbody rgbd, playerRGBD;
 
             GameObject player;
             public bool hasBox, checkAbove;
             public Vector3 offset;
 
+            Rigidbody rgbd;
+
             void Start() {
-                rgbd = GetComponent<Rigidbody>();
                 player = GameObject.FindGameObjectWithTag("Player");
-                playerRGBD = player.GetComponent<Rigidbody>();
+                rgbd = GetComponent<Rigidbody>();
+                
             }
 
             void Update() {
-                if (!hasBox) {
-                    rgbd.constraints = RigidbodyConstraints.FreezeRotation | ~RigidbodyConstraints.FreezePositionY;
+                if(!hasBox) {
+                    if(rgbd == null) {
+                        rgbd = gameObject.AddComponent<Rigidbody>();
+                        rgbd.constraints = RigidbodyConstraints.FreezeRotation | ~RigidbodyConstraints.FreezePositionY;
+                    }
                     return;
                 }
 
-                rgbd.constraints = RigidbodyConstraints.FreezeRotation;
-                rgbd.velocity = playerRGBD.velocity;
+                Destroy(rgbd);
             }
         }
     }

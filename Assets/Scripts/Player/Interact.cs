@@ -27,7 +27,7 @@ namespace UnityCore {
 
             void Update() {
                 if(moveTowards) {
-                    MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 0.9f));
+                    MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 0.8f));
                     return;
                 }
 

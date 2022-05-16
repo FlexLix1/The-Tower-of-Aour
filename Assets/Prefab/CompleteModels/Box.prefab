@@ -74,7 +74,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6040d65379e576c48bb5b8f9ccb52264, type: 3}
   m_PrefabInstance: {fileID: 5798219887986757797}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1829201319
+--- !u!54 &282334137971802261
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,4 +116,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBox: 0
+  checkAbove: 0
   offset: {x: 0, y: 0, z: 0}

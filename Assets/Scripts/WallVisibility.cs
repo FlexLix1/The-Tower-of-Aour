@@ -11,14 +11,9 @@ public class WallVisibility:MonoBehaviour {
     public bool wallsTransparent;
     bool transitioning;
 
-    float alphaValue, alphaSpeed = .4f;
+    float alphaValue, alphaSpeed = .6f;
 
     MeshRenderer meshRenderer;
-
-    void Start() {
-        alphaValue = 0.45f;
-        transparant.color = Color.white;    
-    }
 
     void Update() {
         if(!transitioning)

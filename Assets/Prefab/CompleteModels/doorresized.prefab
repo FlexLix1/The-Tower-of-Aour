@@ -267,7 +267,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6f9c36a777b834aad51dd9a5b3115c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorTarget: {x: 0, y: 0, z: 0}
-  speed: 0
   swiningDoor: 0
   openDoor: 0
+  anim: {fileID: 0}
+--- !u!65 &5323288856113296153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4548058334819287513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.36003786, y: 0.07802193, z: 0.8079184}
+  m_Center: {x: 0.002370216, y: 0.034514207, z: 0.22710416}

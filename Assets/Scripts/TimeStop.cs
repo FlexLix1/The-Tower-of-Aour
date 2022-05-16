@@ -49,6 +49,7 @@ namespace UnityCore {
                     rgbd.velocity = Vector3.zero;
                     return;
                 }
+
                 //audioController.StopAudio(AudioType.SFX_TimeStop, true);
                 Unfreeze();
             }

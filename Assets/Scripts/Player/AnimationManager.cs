@@ -64,8 +64,6 @@ namespace UnityCore {
                     return;
                 }
 
-                anim.enabled = true;
-
                 //Walking float change
                 if(rgbd.velocity.magnitude > 0.2) {
                     velocityMagnitude += Time.deltaTime * blendSpeed;
@@ -82,6 +80,7 @@ namespace UnityCore {
                 }
                 runFloat = Mathf.Clamp(runFloat, 0, 1);
 
+                anim.enabled = true;
                 //IdleToWalkToRun animation
                 anim.SetFloat("IdleToWalk", velocityMagnitude);
                 anim.SetFloat("WalkToRun", runFloat);

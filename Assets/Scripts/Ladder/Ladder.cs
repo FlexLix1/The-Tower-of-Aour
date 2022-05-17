@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UnityCore {
     namespace Audio {
-
-
         public class Ladder : MonoBehaviour {
             public float speed = 10f;
             public bool isClimbing;

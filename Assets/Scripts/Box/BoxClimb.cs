@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityCore {
-   
     namespace Audio {
-
-
         public class BoxClimb : MonoBehaviour {
 
             GameObject holdBox;

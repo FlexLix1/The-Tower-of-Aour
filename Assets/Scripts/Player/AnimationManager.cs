@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityCore {
-
     namespace Audio {
-
         public class AnimationManager:MonoBehaviour {
 
             public DynamicLever leverScript;
@@ -19,7 +17,7 @@ namespace UnityCore {
             string currentState;
 
             public bool climbingBox, usingLever;
-            bool pushBox, pullBox;
+            bool pullBox;
 
             void Start() {
                 rgbd = GetComponent<Rigidbody>();
@@ -114,43 +112,34 @@ namespace UnityCore {
                 CancelInvoke();
                 switch(pushBoxScript.holdPushDirection) {
                     case Pushing.pushDirection.Left:
-                        if(rgbd.velocity.x > 0) {
-                            pullBox = false;
-                            pushBox = true;
-                        } else if(rgbd.velocity.x < 0) {
-                            pushBox = false;
+                        if(rgbd.velocity.x < 0) {
                             pullBox = true;
+                        } else {
+                            pullBox = false;
                         }
                         break;
                     case Pushing.pushDirection.Down:
-                        if(rgbd.velocity.z > 0) {
-                            pullBox = false;
-                            pushBox = true;
-                        } else if(rgbd.velocity.z < 0) {
-                            pushBox = false;
+                        if(rgbd.velocity.z < 0) {
                             pullBox = true;
+                        } else {
+                            pullBox = false;
                         }
                         break;
                     case Pushing.pushDirection.Up:
                         if(rgbd.velocity.z > 0) {
-                            pushBox = false;
                             pullBox = true;
-                        } else if(rgbd.velocity.z < 0) {
+                        } else {
                             pullBox = false;
-                            pushBox = true;
                         }
                         break;
                     case Pushing.pushDirection.Right:
                         if(rgbd.velocity.x > 0) {
-                            pushBox = false;
                             pullBox = true;
-                        } else if(rgbd.velocity.x < 0) {
+                        } else {
                             pullBox = false;
-                            pushBox = true;
                         }
                         break;
                 }
-
 
                 if(rgbd.velocity.magnitude > 0.2f) {
                     anim.enabled = true;

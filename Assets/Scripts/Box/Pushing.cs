@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UnityCore {
     namespace Audio {
-
         public class Pushing:MonoBehaviour {
             AudioController audioController;
             GameObject holdBox;
@@ -53,8 +52,6 @@ namespace UnityCore {
 
                 if(!Input.GetKeyDown(KeyCode.E))
                     return;
-
-
 
                 RaycastHit hit;
                 if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {

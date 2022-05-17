@@ -14,7 +14,7 @@ namespace UnityCore {
             Rigidbody rgbd;
             Animator anim;
             public float blendSpeed, velocityMagnitude;
-            float runFloat, ladderFloat;
+            float runFloat, ladderFloat, boxPushPullFloat;
 
             string currentState;
 
@@ -29,11 +29,13 @@ namespace UnityCore {
             }
 
             void Update() {
+                //Ladder animation
                 if(ladderClimbScript.isClimbing) {
                     LadderClimb();
                     return;
                 }
 
+                //Lever animation
                 if(usingLever) {
                     if(leverScript.leverActive) {
                         anim.Play("CharLeverUp");
@@ -43,12 +45,28 @@ namespace UnityCore {
                     return;
                 }
 
+                //Climbing box animation
                 if(climbingBox) {
                     anim.Play("BoxClimb");
                     velocityMagnitude = 0;
                     return;
                 }
 
+                //Pushing box animation
+                if(pushBoxScript.hasBox) {
+                    if(!anim.GetCurrentAnimatorStateInfo(0).IsName("PushToPull")) {
+                        anim.Play("PushToPull");
+                        Invoke(nameof(CheckPushDirection), 0.05f);
+                        return;
+                    }
+
+                    CheckPushDirection();
+                    return;
+                }
+
+                anim.enabled = true;
+
+                //Walking float change
                 if(rgbd.velocity.magnitude > 0.2) {
                     velocityMagnitude += Time.deltaTime * blendSpeed;
                 } else {
@@ -56,11 +74,7 @@ namespace UnityCore {
                 }
                 velocityMagnitude = Mathf.Clamp(velocityMagnitude, 0, 1);
 
-                if(pushBoxScript.hasBox) {
-                    CheckPushDirection();
-                    return;
-                }
-
+                //Running float change
                 if(Input.GetKey(KeyCode.LeftShift) && rgbd.velocity.magnitude > 0.2) {
                     runFloat += Time.deltaTime * blendSpeed;
                 } else {
@@ -68,6 +82,7 @@ namespace UnityCore {
                 }
                 runFloat = Mathf.Clamp(runFloat, 0, 1);
 
+                //IdleToWalkToRun animation
                 anim.SetFloat("IdleToWalk", velocityMagnitude);
                 anim.SetFloat("WalkToRun", runFloat);
                 anim.Play("IdleToWalkToRun");
@@ -92,11 +107,12 @@ namespace UnityCore {
                 }
                 ladderFloat = Mathf.Clamp(ladderFloat, -1, 1);
 
-                anim.Play("LadderClimb");
                 anim.SetFloat("LadderBlend", ladderFloat);
+                anim.Play("LadderClimb");
             }
 
             void CheckPushDirection() {
+                CancelInvoke();
                 switch(pushBoxScript.holdPushDirection) {
                     case Pushing.pushDirection.Left:
                         if(rgbd.velocity.x > 0) {
@@ -136,11 +152,22 @@ namespace UnityCore {
                         break;
                 }
 
-                if(pushBox) {
-                    ChangeAnimation("IdleToPush");
-                } else if(pullBox) {
-                    ChangeAnimation("IdleToPull");
+
+                if(rgbd.velocity.magnitude > 0.2f) {
+                    anim.enabled = true;
+                } else {
+                    anim.enabled = false;
                 }
+
+                if(pullBox) {
+                    boxPushPullFloat += Time.deltaTime * blendSpeed;
+                } else {
+                    boxPushPullFloat -= Time.deltaTime * blendSpeed;
+                }
+                boxPushPullFloat = Mathf.Clamp(boxPushPullFloat, 0, 1);
+
+                anim.SetFloat("PushToPull", boxPushPullFloat);
+                anim.Play("PushToPull");
             }
         }
     }

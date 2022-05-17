@@ -5,7 +5,7 @@ using UnityEngine;
 public class WallVisibility:MonoBehaviour {
 
     public WallVisibility[] makeOtherWallsSolid;
-    public GameObject[] walls;
+    public GameObject[] walls, disableMiscellaneous;
     public Material original, transparant;
 
     public bool wallsTransparent;
@@ -24,19 +24,31 @@ public class WallVisibility:MonoBehaviour {
         }
 
         alphaValue -= alphaSpeed * Time.deltaTime;
-        transparant.color = new Color(1, 1, 1, alphaValue);        
+        transparant.color = new Color(1, 1, 1, alphaValue);
     }
 
     void MakeWallsTransparent() {
         for(int i = 0; i < walls.Length; i++) {
             walls[i].GetComponent<MeshRenderer>().material = transparant;
         }
+
+        if(disableMiscellaneous == null)
+            return;
+
+        foreach(GameObject miscs in disableMiscellaneous)
+            miscs.SetActive(false);
     }
 
     public void MakeWallsSolid() {
         for(int i = 0; i < walls.Length; i++) {
             walls[i].GetComponent<MeshRenderer>().material = original;
         }
+
+        if(disableMiscellaneous == null)
+            return;
+
+        foreach(GameObject miscs in disableMiscellaneous)
+            miscs.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other) {

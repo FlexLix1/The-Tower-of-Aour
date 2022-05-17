@@ -9,27 +9,12 @@ public class WallVisibility:MonoBehaviour {
     public Material original, transparant;
 
     public bool wallsTransparent;
-    bool transitioning;
-
-    float alphaValue, alphaSpeed = 1f;
 
     MeshRenderer meshRenderer;
 
-    void Update() {
-        if(!transitioning)
-            return;
-
-        if(alphaValue <= 0f) {
-            transitioning = false;
-        }
-
-        alphaValue -= alphaSpeed * Time.deltaTime;
-        transparant.color = new Color(1, 1, 1, alphaValue);
-    }
-
     void MakeWallsTransparent() {
-        for(int i = 0; i < walls.Length; i++) {
-            walls[i].GetComponent<MeshRenderer>().material = transparant;
+        foreach(GameObject wall in walls) {
+            wall.GetComponent<MeshRenderer>().material = transparant;
         }
 
         if(disableMiscellaneous == null)
@@ -40,8 +25,8 @@ public class WallVisibility:MonoBehaviour {
     }
 
     public void MakeWallsSolid() {
-        for(int i = 0; i < walls.Length; i++) {
-            walls[i].GetComponent<MeshRenderer>().material = original;
+        foreach(GameObject wall in walls) {
+            wall.GetComponent<MeshRenderer>().material = original;
         }
 
         if(disableMiscellaneous == null)
@@ -59,12 +44,9 @@ public class WallVisibility:MonoBehaviour {
             for(int i = 0; i < makeOtherWallsSolid.Length; i++) {
                 makeOtherWallsSolid[i].MakeWallsSolid();
                 makeOtherWallsSolid[i].wallsTransparent = false;
-                makeOtherWallsSolid[i].alphaValue = 1;
-                makeOtherWallsSolid[i].transparant.color = Color.white;
             }
             MakeWallsTransparent();
             wallsTransparent = true;
-            transitioning = true;
         }
     }
 }

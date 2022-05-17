@@ -11,7 +11,7 @@ public class WallVisibility:MonoBehaviour {
     public bool wallsTransparent;
     bool transitioning;
 
-    float alphaValue, alphaSpeed = .6f;
+    float alphaValue, alphaSpeed = 1f;
 
     MeshRenderer meshRenderer;
 

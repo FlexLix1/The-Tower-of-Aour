@@ -8,7 +8,7 @@ namespace UnityCore {
 
 
         public class HintManager : MonoBehaviour {
-            [SerializeField] GameObject dialogueBox;
+            [SerializeField] GameObject dialogueBox, nextDialogueArrow;
             [SerializeField] Text nameText, dialogueText;
             AudioController audioController;
             HintHolder getHit;
@@ -41,12 +41,14 @@ namespace UnityCore {
             void SkipSentence() {
                 StopAllCoroutines();
                 dialogueText.text = holdHint[numInDialogue];
+                nextDialogueArrow.SetActive(false);
                 writingOut = false;
                 numInDialogue++;
             }
 
             void NextSentence() {
                 if (numInDialogue == getHit.hintText.Length) {
+                    nextDialogueArrow.SetActive(false);
                     getHit.hintDone = true;
                     hintActive = false;
                     dialogueBox.SetActive(false);
@@ -54,7 +56,6 @@ namespace UnityCore {
                     return;
                 }
 
-                StopAllCoroutines();
                 StartCoroutine(TypeSentence(holdHint[numInDialogue]));
             }
 
@@ -94,6 +95,8 @@ namespace UnityCore {
                     yield return new WaitForSeconds(textSpeed);
                 }
                 writingOut = false;
+                nextDialogueArrow.SetActive(false);
+                StopCoroutine(TypeSentence(holdHint[numInDialogue]));
                 numInDialogue++;
             }
         }

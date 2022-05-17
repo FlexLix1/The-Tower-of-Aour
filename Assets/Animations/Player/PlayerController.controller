@@ -35,7 +35,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 3946399515741230964, guid: 738891968a97b7c43876d6979e7f4c59, type: 3}
+    m_Motion: {fileID: -5304649680059675348, guid: c79620c0eaa7593428c772e3968ec66d, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -43,14 +43,14 @@ BlendTree:
     m_DirectBlendParameter: IdleToWalk
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5304649680059675348, guid: c79620c0eaa7593428c772e3968ec66d, type: 3}
+    m_Motion: {fileID: 5134632096380714640, guid: ad4f8e8d1b9c6174fbd53f025ded6ea7, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: IdleToWalk
     m_Mirror: 0
-  m_BlendParameter: IdleToPush
+  m_BlendParameter: PushToPull
   m_BlendParameterY: IdleToWalk
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -83,63 +83,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!206 &-6107754478648366949
-BlendTree:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
-  m_Childs:
-  - serializedVersion: 2
-    m_Motion: {fileID: 3946399515741230964, guid: 738891968a97b7c43876d6979e7f4c59, type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: IdleToWalk
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 5134632096380714640, guid: ad4f8e8d1b9c6174fbd53f025ded6ea7, type: 3}
-    m_Threshold: 1
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: IdleToWalk
-    m_Mirror: 0
-  m_BlendParameter: IdleToPull
-  m_BlendParameterY: IdleToWalk
-  m_MinThreshold: 0
-  m_MaxThreshold: 1
-  m_UseAutomaticThresholds: 1
-  m_NormalizedBlendValues: 0
-  m_BlendType: 0
---- !u!1102 &-5746542692909222193
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: IdleToPull
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -6107754478648366949}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-4828143362425916646
 AnimatorState:
   serializedVersion: 6
@@ -160,7 +103,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1328417d66a754043877a52584cbca53, type: 2}
+  m_Motion: {fileID: 2101764514867831398, guid: 7e7ea2acce4c7ed4fb60442b25f8acad, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -310,37 +253,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: WalkToRun
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: IdleToPush
+    m_Controller: {fileID: 0}
+  - m_Name: PushToPull
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: IdleToPull
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IdleToRun
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: LadderBlend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -361,7 +298,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IdleToPush
+  m_Name: PushToPull
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -586,7 +523,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3210885400088431628}
-    m_Position: {x: 100, y: 200, z: 0}
+    m_Position: {x: 100, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1454904963174406216}
     m_Position: {x: 400, y: 150, z: 0}
@@ -595,10 +532,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 68987400306616894}
-    m_Position: {x: 100, y: 300, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5746542692909222193}
-    m_Position: {x: 100, y: 350, z: 0}
+    m_Position: {x: 100, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4828143362425916646}
     m_Position: {x: 400, y: 300, z: 0}
@@ -607,7 +541,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7927647013687446586}
-    m_Position: {x: 100, y: 250, z: 0}
+    m_Position: {x: 100, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 474056287152063650}
     m_Position: {x: 100, y: 100, z: 0}
@@ -625,7 +559,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4345537409597976674}
-    m_Position: {x: 100, y: 400, z: 0}
+    m_Position: {x: 100, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1788668565522263222}
     m_Position: {x: 400, y: 400, z: 0}

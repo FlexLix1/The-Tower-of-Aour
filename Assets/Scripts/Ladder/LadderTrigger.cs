@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityCore {
-
     namespace Audio {
-
-
         public class LadderTrigger : MonoBehaviour {
             public Ladder climb;
             public GameObject player;
-            public float facingLadder;
             public BoxCollider upperCollider, lowerCollider;
             public bool isTop, isBottom;
             public GameObject ladderPostion;
@@ -37,7 +33,7 @@ namespace UnityCore {
                         audioController.StopAudio(AudioType.SFX_ClimbingLadder, true);
                     } else if (!isBottom && !isTop) {
                         climb.isClimbing = true;
-                        player.transform.rotation = Quaternion.Euler(0, facingLadder, 0);
+                        player.transform.forward = -transform.forward;
                         Vector3 playerOffset = transform.position + transform.forward;
                         player.transform.position = new Vector3(playerOffset.x, player.transform.position.y, playerOffset.z);
                         isTop = false;
@@ -58,7 +54,7 @@ namespace UnityCore {
                         isBottom = false;
                     } else if (!isTop && !isBottom) {
                         climb.isClimbing = true;
-                        player.transform.rotation = Quaternion.Euler(0, facingLadder, 0);
+                        player.transform.forward = -transform.forward;
                         Vector3 playerOffset = transform.position + transform.forward;
                         player.transform.position = new Vector3(playerOffset.x, player.transform.position.y, playerOffset.z);
                         isTop = true;

@@ -20,6 +20,9 @@ namespace UnityCore {
             bool usingTimeStop;
             float time;
 
+            RaycastHit hit;
+            LayerMask mask;
+            
             void Start() {
                 meshRenderer = GetComponent<MeshRenderer>();
                 rgbd = GetComponent<Rigidbody>();
@@ -56,8 +59,8 @@ namespace UnityCore {
 
             void CheckFreezeItem() {
                 timeFreezeOverlay.SetActive(true);
-                RaycastHit hit;
                 if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
+                    Debug.Log(hit.collider.name);
                     if(hit.transform.gameObject.CompareTag("TimeFreeze")) {
                         if(saveFrozenObject == null || saveFrozenObject != hit.transform.gameObject /*|| meshRenderer.material != timeFreezeMat*/) {
                             meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9138266317099002429}
   - component: {fileID: 3710557719007047639}
   - component: {fileID: 5156476862154608145}
+  - component: {fileID: 3191900770601484756}
   m_Layer: 0
   m_Name: doorresized
   m_TagString: Untagged
@@ -133,6 +134,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3768535, y: 8.333136, z: 1.9766527}
   m_Center: {x: 3.3397396, y: 4.200322, z: 0.16777128}
+--- !u!65 &3191900770601484756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310805606168105681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.0568495, y: 8.333136, z: 1.9766527}
+  m_Center: {x: -0.00025844574, y: 4.200322, z: 0.16777033}
 --- !u!1001 &3737032372359904392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +250,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c81527e912b994838bb91fdc183d0c0a, type: 3}
   m_PrefabInstance: {fileID: 3737032372359904392}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &5323288856113296153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4548058334819287513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.36003786, y: 0.07802193, z: 0.8079184}
+  m_Center: {x: 0.002370216, y: 0.034514207, z: 0.22710416}
 --- !u!95 &5722425300260788523
 Animator:
   serializedVersion: 3
@@ -270,16 +297,3 @@ MonoBehaviour:
   swiningDoor: 0
   openDoor: 0
   anim: {fileID: 0}
---- !u!65 &5323288856113296153
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4548058334819287513}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.36003786, y: 0.07802193, z: 0.8079184}
-  m_Center: {x: 0.002370216, y: 0.034514207, z: 0.22710416}

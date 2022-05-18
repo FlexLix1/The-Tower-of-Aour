@@ -17,7 +17,7 @@ namespace UnityCore {
             string currentState;
 
             public bool climbingBox, usingLever;
-            bool pullBox;
+            bool pullBox, pushBox;
 
             void Start() {
                 rgbd = GetComponent<Rigidbody>();
@@ -114,29 +114,37 @@ namespace UnityCore {
                     case Pushing.pushDirection.Left:
                         if(rgbd.velocity.x < 0) {
                             pullBox = true;
-                        } else {
+                            pushBox = false;
+                        } else if(rgbd.velocity.x > 0){
                             pullBox = false;
+                            pushBox = true;
                         }
                         break;
                     case Pushing.pushDirection.Down:
                         if(rgbd.velocity.z < 0) {
                             pullBox = true;
-                        } else {
+                            pushBox = false;
+                        } else if(rgbd.velocity.z > 0) {
                             pullBox = false;
+                            pushBox = true;
                         }
                         break;
                     case Pushing.pushDirection.Up:
                         if(rgbd.velocity.z > 0) {
                             pullBox = true;
-                        } else {
+                            pushBox = false;
+                        } else if(rgbd.velocity.z < 0) {
                             pullBox = false;
+                            pushBox = true;
                         }
                         break;
                     case Pushing.pushDirection.Right:
                         if(rgbd.velocity.x > 0) {
                             pullBox = true;
-                        } else {
+                            pushBox = false;
+                        } else if(rgbd.velocity.x < 0) {
                             pullBox = false;
+                            pushBox = true;
                         }
                         break;
                 }
@@ -149,7 +157,7 @@ namespace UnityCore {
 
                 if(pullBox) {
                     boxPushPullFloat += Time.deltaTime * blendSpeed;
-                } else {
+                } else if(pushBox) {
                     boxPushPullFloat -= Time.deltaTime * blendSpeed;
                 }
                 boxPushPullFloat = Mathf.Clamp(boxPushPullFloat, 0, 1);

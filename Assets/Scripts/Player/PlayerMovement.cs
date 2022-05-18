@@ -43,7 +43,6 @@ namespace UnityCore {
 
                 if (pushScript.hasBox) {
                     movementSpeed = 3;
-                    audioController.PlayAudio(AudioType.SFX_PullingBoxes, true);
                     switch (pushScript.holdLockDirection) {
                         case Pushing.lockDirection.LockAxisY:
                             rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UnityCore {
     namespace Audio {
-
         public class PlayerMovement : MonoBehaviour {
 
             public Vector3 playerPosition;

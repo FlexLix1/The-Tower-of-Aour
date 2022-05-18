@@ -32,7 +32,6 @@ namespace UnityCore {
                 //Ladder animation
                 if(ladderClimbScript.isClimbing) {
                     LadderClimb();
-                    audioController.PlayAudio(AudioType.SFX_ClimbingLadder);
                     return;
                 }
 

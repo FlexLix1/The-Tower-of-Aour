@@ -25,12 +25,11 @@ namespace UnityCore {
                     if (isBottom && !isTop) {
                         climb.isClimbing = false;
                         isBottom = false;
-                        audioController.StopAudio(AudioType.SFX_ClimbingLadder, true);
+                        
                     } else if (!isBottom && isTop) {
                         climb.isClimbing = false;
                         isTop = false;
                         isBottom = false;
-                        audioController.StopAudio(AudioType.SFX_ClimbingLadder, true);
                     } else if (!isBottom && !isTop) {
                         climb.isClimbing = true;
                         player.transform.forward = -transform.forward;
@@ -38,7 +37,6 @@ namespace UnityCore {
                         player.transform.position = new Vector3(playerOffset.x, player.transform.position.y, playerOffset.z);
                         isTop = false;
                         isBottom = true;
-                        audioController.PlayAudio(AudioType.SFX_ClimbingLadder, true);
 
                     }
                 }
@@ -59,8 +57,6 @@ namespace UnityCore {
                         player.transform.position = new Vector3(playerOffset.x, player.transform.position.y, playerOffset.z);
                         isTop = true;
                         isBottom = false;
-                        audioController.PlayAudio(AudioType.SFX_ClimbingLadder, true);
-
                     }
                 }
             }

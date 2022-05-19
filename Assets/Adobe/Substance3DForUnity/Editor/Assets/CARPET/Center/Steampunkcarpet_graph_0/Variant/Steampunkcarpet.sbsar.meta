@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ae564394f82274fe59610d345bcd98ab
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: b961f466c6304468dbcb59617b5f20cf, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/CARPET/Center/Steampunkcarpet_graph_0/Variant/Steampunkcarpet.sbsar

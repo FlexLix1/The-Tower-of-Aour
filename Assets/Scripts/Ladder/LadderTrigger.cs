@@ -15,7 +15,7 @@ namespace UnityCore {
             void Start() {
                 player = GameObject.FindGameObjectWithTag("Player");
                 climb = player.GetComponent<Ladder>();
-                pickupScript = GetComponent<PickUp>();
+                pickupScript = player.GetComponent<PickUp>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
             }
 

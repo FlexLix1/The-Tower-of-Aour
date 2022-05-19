@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UnityCore {
     namespace Audio {
-        public class Ladder : MonoBehaviour {
+        public class Ladder:MonoBehaviour {
             public float speed = 10f;
             public bool isClimbing;
             Rigidbody m_Rigidbody;
@@ -14,18 +14,19 @@ namespace UnityCore {
             }
 
             void Update() {
-                if (isClimbing) {
+                if(isClimbing) {
                     movementScript.enabled = false;
                     m_Rigidbody.useGravity = false;
                     m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
                     float velocity = Input.GetAxisRaw("Vertical");
                     m_Rigidbody.velocity = new Vector3(0, velocity * speed, 0);
 
-
                 } else {
-                    movementScript.enabled = true;
-                    m_Rigidbody.useGravity = true;
-                    m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                    if(!movementScript) {
+                        movementScript.enabled = true;
+                        m_Rigidbody.useGravity = true;
+                        m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                    }
                 }
             }
         }

@@ -9,11 +9,13 @@ namespace UnityCore {
             public DynamicLever leverScript;
             Ladder ladderClimbScript;
             Pushing pushBoxScript;
+            PickUp pickupScript;
+
             Rigidbody rgbd;
             Animator anim;
+
             public float blendSpeed, velocityMagnitude;
             float runFloat, ladderFloat, boxPushPullFloat;
-            AudioController audioController;
 
             string currentState;
 
@@ -21,10 +23,10 @@ namespace UnityCore {
             bool pullBox, pushBox;
 
             void Start() {
-                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
                 anim = GetComponent<Animator>();
                 pushBoxScript = GetComponent<Pushing>();
+                pickupScript = GetComponent<PickUp>();
                 ladderClimbScript = GetComponent<Ladder>();
             }
 
@@ -84,6 +86,11 @@ namespace UnityCore {
                 //IdleToWalkToRun animation
                 anim.SetFloat("IdleToWalk", velocityMagnitude);
                 anim.SetFloat("WalkToRun", runFloat);
+
+                if(pickupScript.hasPickup) {
+                    anim.Play("IdleToWalkToRunItem");
+                    return;
+                }
                 anim.Play("IdleToWalkToRun");
             }
 
@@ -153,10 +160,8 @@ namespace UnityCore {
 
                 if(rgbd.velocity.magnitude > 0.2f) {
                     anim.enabled = true;
-                    audioController.PlayAudio(AudioType.SFX_PullingBoxes);
                 } else {
                     anim.enabled = false;
-                    audioController.StopAudio(AudioType.SFX_PullingBoxes);
                 }
 
                 if(pullBox) {

@@ -8,7 +8,8 @@ public class PickUp:MonoBehaviour {
     public float rayDistance = 1.5f, placeDistance = 2;
     GameObject savePickup;
     int saveInventoryNumber;
-    bool hasPickup, canPickup = true;
+    public bool hasPickup;
+    bool canPickup = true;
 
     void Update() {
         if(Input.GetKeyDown(KeyCode.E) && hasPickup) {
@@ -53,6 +54,10 @@ public class PickUp:MonoBehaviour {
                     savePickup = hit.collider.gameObject;
                     PickInventory(0);
                     break;
+                case "SparkPlug":
+                    savePickup = hit.collider.gameObject;
+                    PickInventory(1);
+                    break;  
             }
         }
     }

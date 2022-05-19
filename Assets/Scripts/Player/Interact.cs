@@ -10,6 +10,7 @@ namespace UnityCore {
             PlayerMovement movementScript;
             DynamicLever leverScript;
             DynamicDoor doorScript;
+            Generator generatorScript;
             PickUp inventoryScript;
             string saveTag;
             bool onTrigger, moveTowards;
@@ -52,6 +53,10 @@ namespace UnityCore {
                         doorScript.openDoor = true;
                         inventoryScript.UseItem();
                         break;
+                    case "Generator":
+                        generatorScript.generatorActive = true;
+                        inventoryScript.UseItem();
+                        break;
                 }
             }
 
@@ -88,6 +93,11 @@ namespace UnityCore {
                         saveTag = other.tag;
                         doorScript = other.gameObject.GetComponent<DynamicDoor>();
                         break;
+                    case "Generator":
+                        onTrigger = true;
+                        saveTag = other.tag;
+                        generatorScript = other.gameObject.GetComponent<Generator>();
+                        break;
                 }
             }
 
@@ -95,6 +105,9 @@ namespace UnityCore {
                 if(onTrigger) {
                     onTrigger = false;
                     saveTag = null;
+                    leverScript = null;
+                    doorScript = null;
+                    generatorScript = null;
                 }
             }
         }

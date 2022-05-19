@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DynamicDoor:MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class DynamicDoor:MonoBehaviour {
 
     public Animator anim;
 
-
+    public CinemachineVirtualCamera camera;
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         holdDoorState = openDoor;
@@ -68,11 +69,11 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     private void cameraPrio() {
-        //camera.Priority = 11;
+        camera.Priority = 11;
         Invoke(nameof(resetCameraPriority), 3);
     }
 
     private void resetCameraPriority() {
-        //camera.Priority = 0;
+        camera.Priority = 0;
     }
 }

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DynamicDoor:MonoBehaviour {
 
     Rigidbody rgbd;
 
-    public bool swiningDoor, openDoor;
+    public bool swiningDoor, openDoor, needVirtualCamera;
     bool holdDoorState;
 
     public Animator anim;
+
+    public CinemachineVirtualCamera camera;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
@@ -17,6 +20,7 @@ public class DynamicDoor:MonoBehaviour {
         if(TryGetComponent<Animator>(out Animator animator)) {
             anim = animator;
         }
+        needVirtualCamera = false;
     }
 
     void Update() {
@@ -37,6 +41,12 @@ public class DynamicDoor:MonoBehaviour {
         } else {
             DoorClose();
         }
+
+        if (!needVirtualCamera)
+        {
+            cameraPrio();
+            needVirtualCamera = true;
+        }
     }
 
     void DoorOpen() {
@@ -56,5 +66,15 @@ public class DynamicDoor:MonoBehaviour {
     public void SetDoorClosed() {
         anim.Play("door_close_static");
         holdDoorState = openDoor;
+    }
+
+    private void cameraPrio()
+    {
+        camera.Priority = 11;
+        Invoke(nameof(resetCameraPriority), 3);
+    }
+    private void resetCameraPriority()
+    {
+        camera.Priority = 0;
     }
 }

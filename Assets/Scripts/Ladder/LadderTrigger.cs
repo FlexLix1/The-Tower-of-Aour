@@ -11,7 +11,6 @@ namespace UnityCore {
             bool isTop, isBottom, onLadder;
             AudioController audioController;
 
-            public Cinemachine camera;
             void Start() {
                 player = GameObject.FindGameObjectWithTag("Player");
                 climb = player.GetComponent<Ladder>();

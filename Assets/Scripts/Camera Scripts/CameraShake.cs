@@ -3,33 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraShake : MonoBehaviour
-{
-    private bool shakeIsTrue;
-    CinemachineImpulseSource impulse;
-    // Start is called before the first frame update
-    void Start()
+namespace UnityCore{
+    namespace Audio
     {
-        impulse = transform.GetComponent<CinemachineImpulseSource>();
-
-        shakeIsTrue = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (shakeIsTrue)
+        public class CameraShake : MonoBehaviour
         {
-            Invoke("shake", 3f);
-            shakeIsTrue = false;
-        }
-    }
+            public float delayBetweenCameraShake;
+            CinemachineImpulseSource impulse;
+            AudioController audioController;
+            private bool shakeIsTrue;
+            // Start is called before the first frame update
+            void Start()
+            {
+                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+                impulse = transform.GetComponent<CinemachineImpulseSource>();
 
-    void shake()
-    {
-        impulse.GenerateImpulse();
-        shakeIsTrue = true;
-        
+                shakeIsTrue = true;
+            }
+
+            // Update is called once per frame
+            void Update()
+            {
+                if (shakeIsTrue)
+                {
+                    Invoke("shake", delayBetweenCameraShake);
+                    shakeIsTrue = false;
+                }
+            }
+
+            void shake()
+            {
+                impulse.GenerateImpulse();
+                shakeIsTrue = true;
+                audioController.PlayAudio(AudioType.SFX_BellSound, true);
+            }
+        }
     }
 }
   

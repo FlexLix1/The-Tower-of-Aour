@@ -8,8 +8,7 @@ namespace UnityCore {
             Ladder climb;
             GameObject player;
             public BoxCollider upperCollider, lowerCollider;
-            public bool isTop, isBottom, onLadder;
-            public GameObject ladderPostion;
+            bool isTop, isBottom, onLadder;
             AudioController audioController;
 
             void Start() {
@@ -19,13 +18,6 @@ namespace UnityCore {
             }
 
             void Update() {
-                if(climb.isClimbing && Input.GetKeyDown(KeyCode.E)) {
-                    climb.isClimbing = false;
-                    isBottom = false;
-                    isTop = false;
-                    onLadder = false;
-                }
-
                 if(!onLadder)
                     return;
 
@@ -36,7 +28,6 @@ namespace UnityCore {
                     player.transform.position = new Vector3(playerOffset.x, player.transform.position.y, playerOffset.z);
                     audioController.PlayAudio(AudioType.SFX_ClimbingLadder, true);
                 }
-
             }
 
             void OnTriggerEnter(Collider other) {

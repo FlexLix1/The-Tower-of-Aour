@@ -77,8 +77,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 6.6, z: 0.25}
+  m_Size: {x: 0.5, y: 0.5, z: 1.06492}
+  m_Center: {x: 4.6128737e-16, y: 6.6, z: 0.5324601}
 --- !u!114 &399319522509397029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,13 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86600ac3281f5764c9f295ae8785088c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climb: {fileID: 0}
-  player: {fileID: 0}
-  facingLadder: -90
   upperCollider: {fileID: 6366255243493001058}
   lowerCollider: {fileID: 6925615957457638707}
   isTop: 0
   isBottom: 0
+  onLadder: 0
   ladderPostion: {fileID: 0}
 --- !u!65 &6925615957457638707
 BoxCollider:

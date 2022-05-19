@@ -21,7 +21,6 @@ namespace UnityCore {
                     float velocity = Input.GetAxisRaw("Vertical");
                     m_Rigidbody.velocity = new Vector3(0, velocity * speed, 0);
 
-
                 } else {
                     movementScript.enabled = true;
                     m_Rigidbody.useGravity = true;

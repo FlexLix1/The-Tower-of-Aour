@@ -35,9 +35,9 @@ namespace UnityCore {
                 if(hasBox) {
                     if(Input.GetKeyDown(KeyCode.Space)) {
                         holdBox.transform.SetParent(null);
-                        hasBox = false;
                         boxScript.hasBox = false;
                         holdBox = null;
+                        hasBox = false;
                         return;
                     }
 
@@ -111,7 +111,6 @@ namespace UnityCore {
                 holdBox.transform.SetParent(transform);
                 boxScript.hasBox = true;
                 hasBox = true;
-                audioController.PlayAudio(AudioType.SFX_PullingBoxes);
                 movingPlayerTowardsBox = false;
                 CancelInvoke();
             }

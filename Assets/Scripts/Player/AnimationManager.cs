@@ -13,7 +13,6 @@ namespace UnityCore {
             Animator anim;
             public float blendSpeed, velocityMagnitude;
             float runFloat, ladderFloat, boxPushPullFloat;
-            AudioController audioController;
 
             string currentState;
 
@@ -21,7 +20,6 @@ namespace UnityCore {
             bool pullBox, pushBox;
 
             void Start() {
-                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
                 anim = GetComponent<Animator>();
                 pushBoxScript = GetComponent<Pushing>();
@@ -153,10 +151,8 @@ namespace UnityCore {
 
                 if(rgbd.velocity.magnitude > 0.2f) {
                     anim.enabled = true;
-                    audioController.PlayAudio(AudioType.SFX_PullingBoxes);
                 } else {
                     anim.enabled = false;
-                    audioController.StopAudio(AudioType.SFX_PullingBoxes);
                 }
 
                 if(pullBox) {

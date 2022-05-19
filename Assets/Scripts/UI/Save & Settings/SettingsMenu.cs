@@ -3,88 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
-using UnityEngine.UI;
 
-namespace UnityCore {
-    namespace Audio {
-        public class SettingsMenu : MonoBehaviour {
-            
-            public AudioMixer audioMixer;
-            public List<ResItem> resolution = new List<ResItem>();
-            private int selectedResolution;
-            public bool fullScreen;
-            public TMP_Text resolutionLabel;
+public class SettingsMenu : MonoBehaviour {
+    Resolution[] resolutions;
+    public TMPro.TMP_Dropdown resolutionDropdown;
+    public AudioMixer audioMixer;
 
-            public void Start() {
-                bool foundRes = false;
-                for(int i = 0; i < resolution.Count; i++) {
-                    if(Screen.width == resolution[i].horizontal && Screen.height == resolution[i].vertical) {
-                        foundRes = true;
+    private void Start() {
+        resolutions = Screen.resolutions;
 
-                        selectedResolution = i;
+        resolutionDropdown.ClearOptions();
 
-                        UpdateResLabel();
-                    }
-                }
-                if (!foundRes) {
-                    ResItem newRes = new ResItem();
-                    newRes.horizontal = Screen.width;
-                    newRes.vertical = Screen.height;
+        List<string> options = new List<string>();
 
-                    resolution.Add(newRes);
-                    selectedResolution = resolution.Count - 1;
-                    UpdateResLabel();
-                }
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++) {
+            string option = resolutions[i].width + "x" + resolutions[i].height + "@" + resolutions[i].refreshRate + "hz";
+            options.Add(option);
 
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height) {
+                currentResolutionIndex = i;
             }
-
-            public void Update() {
-                if(fullScreen == true) {
-                    Screen.fullScreen = !Screen.fullScreen;
-                }
-            }
-
-            public void ApplyGraphics() {
-                Screen.SetResolution(resolution[selectedResolution].horizontal, resolution[selectedResolution].vertical, fullScreen = true);
-            }
-
-            public void ResLeft() {
-                selectedResolution--;
-                if (selectedResolution < 0) {
-                    selectedResolution = 0;
-                }
-                UpdateResLabel();
-            }
-
-            public void ResRight() {
-                selectedResolution++;
-                if (selectedResolution > resolution.Count - 1) {
-                    selectedResolution = resolution.Count - 1;
-                }
-                UpdateResLabel();
-            }
-
-            public void UpdateResLabel() {
-                resolutionLabel.text = resolution[selectedResolution].horizontal.ToString() + " x " + resolution[selectedResolution].vertical.ToString();
-            }
-
-            public void SetVolume(float volume) {
-                audioMixer.SetFloat("Volume", volume);
-            }
-
-            public void SetQuailty(int qualityIndex) {
-                QualitySettings.SetQualityLevel(qualityIndex);
-            }
-
-            public void SetFullScreen(bool isFullscreen) {
-                Screen.fullScreen = isFullscreen;
-            }
-
-         
         }
-        [System.Serializable]
-        public class ResItem {
-            public int horizontal, vertical;
-        }
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+
+    public void SetVolume(float volume) {
+        audioMixer.SetFloat("Volume", volume);
+    }
+
+    public void SetQuailty(int qualityIndex) {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    public void SetFullScreen(bool isFullscreen) {
+        Screen.fullScreen = isFullscreen;
+    }
+
+    public void SetResolution(int resolutionIndex) {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }

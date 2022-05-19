@@ -111,7 +111,6 @@ namespace UnityCore {
                 holdBox.transform.SetParent(transform);
                 boxScript.hasBox = true;
                 hasBox = true;
-                audioController.PlayAudio(AudioType.SFX_PullingBoxes);
                 movingPlayerTowardsBox = false;
                 CancelInvoke();
             }

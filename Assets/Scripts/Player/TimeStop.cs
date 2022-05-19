@@ -5,17 +5,17 @@ namespace UnityCore {
     namespace Audio {
         public class TimeStop:MonoBehaviour {
 
-            public Material timeFreezeMat;
             MeshRenderer meshRenderer;
+            public Material timeFreezeMat;
             public Material normalMat;
 
             AudioController audioController;
-            Vector3 saveVelocity;
             GameObject saveFrozenObject;
+            Vector3 saveVelocity;
 
             public GameObject timeFreezeOverlay;
-            public float freezeTime = 5;
             public bool timeStoped, isRotating;
+            public float freezeTime = 5;
             bool usingTimeStop;
             float time;
 
@@ -57,27 +57,16 @@ namespace UnityCore {
                 timeFreezeOverlay.SetActive(true);
                 RaycastHit hit;
                 if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask("TimeFreezeRay"), QueryTriggerInteraction.Collide)) {
-                    if(hit.transform.gameObject.CompareTag("TimeFreeze")) {
-                        if(saveFrozenObject == null || saveFrozenObject != hit.transform.gameObject) {
-                            meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
-                            normalMat = meshRenderer.material;
-                            saveFrozenObject = hit.transform.gameObject;
-                        }
-
+                    if(hit.transform.gameObject.CompareTag("Platform")) {
+                        meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+                        normalMat = meshRenderer.material;
+                        saveFrozenObject = hit.transform.gameObject;
                         meshRenderer.material = timeFreezeMat;
                         if(Input.GetMouseButtonDown(0) && !timeStoped) {
                             saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = true;
                             timeStoped = true;
                             usingTimeStop = false;
                         }
-                    } else {
-                        if(normalMat == null && meshRenderer == null)
-                            return;
-
-                        meshRenderer.material = normalMat;
-                        normalMat = null;
-                        meshRenderer = null;
-                        saveFrozenObject = null;
                     }
                 }
             }

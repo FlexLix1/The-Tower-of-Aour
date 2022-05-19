@@ -8,8 +8,7 @@ namespace UnityCore {
             Ladder climb;
             GameObject player;
             public BoxCollider upperCollider, lowerCollider;
-            public bool isTop, isBottom, onLadder;
-            public GameObject ladderPostion;
+            bool isTop, isBottom, onLadder;
             AudioController audioController;
 
             void Start() {

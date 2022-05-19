@@ -39,7 +39,6 @@ namespace UnityCore {
                 if(animScript.climbingBox) {
                     if(animScript.climbingBox) {
                         Vector3 forcedDirection = destination - transform.position;
-                        Debug.Log(Vector3.Distance(destination, transform.position));
                         if(Vector3.Distance(destination, transform.position) > 0.005f) {
                             rgbd.velocity = forcedDirection.normalized * 2.5f;
                         } else {

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6366255243493001058}
   - component: {fileID: 399319522509397029}
   - component: {fileID: 6925615957457638707}
+  - component: {fileID: 9119148452561489496}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -93,10 +94,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upperCollider: {fileID: 6366255243493001058}
   lowerCollider: {fileID: 6925615957457638707}
-  isTop: 0
-  isBottom: 0
-  onLadder: 0
-  ladderPostion: {fileID: 0}
 --- !u!65 &6925615957457638707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,6 +107,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.10735798, z: 0.515023}
   m_Center: {x: -1.6696112e-15, y: -2.571321, z: 0.38251144}
+--- !u!65 &9119148452561489496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548797653356755434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.16261673, z: 1.06492}
+  m_Center: {x: 4.6128737e-16, y: 6.768692, z: 0.5324601}
 --- !u!1 &5380798966835689978
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +212,7 @@ GameObject:
   - component: {fileID: 2856433745556889599}
   - component: {fileID: 1113295139154519733}
   - component: {fileID: 4491920781388431905}
+  - component: {fileID: 6271442599933808061}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -272,3 +283,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6271442599933808061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418254154506259652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7321692, y: 7.8928638, z: 0.15176332}
+  m_Center: {x: -0.29000026, y: 3.7504318, z: -0.062118452}

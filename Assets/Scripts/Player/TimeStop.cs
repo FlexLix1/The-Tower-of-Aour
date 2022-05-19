@@ -8,7 +8,6 @@ namespace UnityCore {
             public Material timeFreezeMat;
             MeshRenderer meshRenderer;
             public Material normalMat;
-            Rigidbody rgbd;
 
             AudioController audioController;
             Vector3 saveVelocity;
@@ -24,7 +23,6 @@ namespace UnityCore {
 
             void Start() {
                 meshRenderer = GetComponent<MeshRenderer>();
-                rgbd = GetComponent<Rigidbody>();
             }
 
             void Update() {
@@ -48,7 +46,6 @@ namespace UnityCore {
 
                 if(time < freezeTime) {
                     time += Time.deltaTime;
-                    rgbd.velocity = Vector3.zero;
                     return;
                 }
 
@@ -89,12 +86,6 @@ namespace UnityCore {
                 time = 0;
                 if(normalMat != null)
                     meshRenderer.material = normalMat;
-
-                if(isRotating) {
-                    rgbd.constraints = ~RigidbodyConstraints.FreezePositionY; // "~" before an constrain sets it to false
-                } else {
-                    rgbd.constraints = RigidbodyConstraints.None;
-                }
 
                 normalMat = null;
                 meshRenderer = null;

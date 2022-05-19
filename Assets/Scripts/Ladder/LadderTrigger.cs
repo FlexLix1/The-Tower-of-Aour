@@ -10,14 +10,19 @@ namespace UnityCore {
             public BoxCollider upperCollider, lowerCollider;
             bool isTop, isBottom, onLadder;
             AudioController audioController;
+            PickUp pickupScript;
 
             void Start() {
                 player = GameObject.FindGameObjectWithTag("Player");
                 climb = player.GetComponent<Ladder>();
+                pickupScript = GetComponent<PickUp>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
             }
 
             void Update() {
+                if(pickupScript.hasPickup)
+                    return;
+
                 if(!onLadder)
                     return;
 

@@ -42,8 +42,10 @@ public class DynamicDoor:MonoBehaviour {
             DoorClose();
         }
 
-        if (!needVirtualCamera)
-        {
+        if(!openDoor)
+            return;
+
+        if(!needVirtualCamera) {
             cameraPrio();
             needVirtualCamera = true;
         }
@@ -68,13 +70,12 @@ public class DynamicDoor:MonoBehaviour {
         holdDoorState = openDoor;
     }
 
-    private void cameraPrio()
-    {
+    private void cameraPrio() {
         camera.Priority = 11;
         Invoke(nameof(resetCameraPriority), 3);
     }
-    private void resetCameraPriority()
-    {
+
+    private void resetCameraPriority() {
         camera.Priority = 0;
     }
 }

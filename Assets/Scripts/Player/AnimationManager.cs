@@ -9,8 +9,11 @@ namespace UnityCore {
             public DynamicLever leverScript;
             Ladder ladderClimbScript;
             Pushing pushBoxScript;
+            PickUp pickupScript;
+
             Rigidbody rgbd;
             Animator anim;
+
             public float blendSpeed, velocityMagnitude;
             float runFloat, ladderFloat, boxPushPullFloat;
 
@@ -23,6 +26,7 @@ namespace UnityCore {
                 rgbd = GetComponent<Rigidbody>();
                 anim = GetComponent<Animator>();
                 pushBoxScript = GetComponent<Pushing>();
+                pickupScript = GetComponent<PickUp>();
                 ladderClimbScript = GetComponent<Ladder>();
             }
 
@@ -82,6 +86,11 @@ namespace UnityCore {
                 //IdleToWalkToRun animation
                 anim.SetFloat("IdleToWalk", velocityMagnitude);
                 anim.SetFloat("WalkToRun", runFloat);
+
+                if(pickupScript.hasPickup) {
+                    anim.Play("IdleToWalkToRunItem");
+                    return;
+                }
                 anim.Play("IdleToWalkToRun");
             }
 

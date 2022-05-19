@@ -35,9 +35,9 @@ namespace UnityCore {
                 if(hasBox) {
                     if(Input.GetKeyDown(KeyCode.Space)) {
                         holdBox.transform.SetParent(null);
-                        hasBox = false;
                         boxScript.hasBox = false;
                         holdBox = null;
+                        hasBox = false;
                         return;
                     }
 

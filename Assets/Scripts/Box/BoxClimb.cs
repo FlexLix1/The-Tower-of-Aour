@@ -10,15 +10,16 @@ namespace UnityCore {
             AnimationManager animManager;
             public float rayDistance;
             AudioController audioController;
-            [SerializeField] Transform bone;
+
+            Rigidbody rgbd;
 
             void Start() {
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 animManager = GetComponent<AnimationManager>();
+                rgbd = GetComponent<Rigidbody>();
             }
 
             void Update() {
-
                 if (animManager.climbingBox)
                     return;
 
@@ -51,6 +52,7 @@ namespace UnityCore {
                             }
                             audioController.PlayAudio(AudioType.SFX_ClimbingBoxes, true);
                             animManager.climbingBox = true;
+                            rgbd.useGravity = false;
                             break;
                     }
                 }
@@ -59,12 +61,7 @@ namespace UnityCore {
             public void WaitForAnimation() {
                 holdBox = null;
                 animManager.climbingBox = false;
-                audioController.StopAudio(AudioType.SFX_ClimbingBoxes, true);
-
-                RaycastHit hit;
-                if (Physics.Raycast(bone.position, -transform.up, out hit, rayDistance * 2)) {
-                    transform.position = hit.point;
-                }
+                rgbd.useGravity = true;
             }
         }
     }

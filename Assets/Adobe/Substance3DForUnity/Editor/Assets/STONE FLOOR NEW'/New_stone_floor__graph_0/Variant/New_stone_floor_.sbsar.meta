@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6e7440f8648f64f5687228ca43f0c3c2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 2ff4cdc3a79964d1eaa1eabc151cd34a, type: 2}
+  _assetPath: Assets/Adobe/Substance3DForUnity/Editor/Assets/STONE FLOOR NEW'/New_stone_floor__graph_0/Variant/New_stone_floor_.sbsar

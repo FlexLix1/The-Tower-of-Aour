@@ -13,10 +13,10 @@ TagManager:
   - Hint
   - OilPuzzleWall
   - HintEnd
-  - TimeFreeze
   - OilFloor
   - SparkPlug
   - Generator
+  - Platform
   layers:
   - Default
   - TransparentFX

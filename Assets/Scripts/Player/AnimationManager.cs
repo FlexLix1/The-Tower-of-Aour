@@ -7,6 +7,7 @@ namespace UnityCore {
         public class AnimationManager:MonoBehaviour {
 
             public DynamicLever leverScript;
+            PlayerMovement movementScript;
             Ladder ladderClimbScript;
             Pushing pushBoxScript;
             PickUp pickupScript;
@@ -28,9 +29,16 @@ namespace UnityCore {
                 pushBoxScript = GetComponent<Pushing>();
                 pickupScript = GetComponent<PickUp>();
                 ladderClimbScript = GetComponent<Ladder>();
+                movementScript = GetComponent<PlayerMovement>();
             }
 
             void Update() {
+                //Player is slippery
+                if(!movementScript.groundMovement) {
+                    anim.Play("Slippery");
+                    return;
+                }
+
                 //Ladder animation
                 if(ladderClimbScript.isClimbing) {
                     LadderClimb();

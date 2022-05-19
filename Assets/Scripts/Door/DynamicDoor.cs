@@ -7,9 +7,10 @@ public class DynamicDoor:MonoBehaviour {
     Rigidbody rgbd;
 
     public bool swiningDoor, openDoor;
-    bool holdDoorState;
+    bool holdDoorState, needVirtualCamera;
 
     public Animator anim;
+
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
@@ -67,11 +68,11 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     private void cameraPrio() {
-        camera.Priority = 11;
+        //camera.Priority = 11;
         Invoke(nameof(resetCameraPriority), 3);
     }
 
     private void resetCameraPriority() {
-        camera.Priority = 0;
+        //camera.Priority = 0;
     }
 }

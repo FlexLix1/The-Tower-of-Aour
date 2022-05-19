@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
 public class DynamicDoor:MonoBehaviour {
 
     Rigidbody rgbd;
 
-    public bool swiningDoor, openDoor, needVirtualCamera;
+    public bool swiningDoor, openDoor;
     bool holdDoorState;
 
     public Animator anim;
-
-    public CinemachineVirtualCamera camera;
 
     void Start() {
         rgbd = GetComponent<Rigidbody>();
@@ -20,7 +17,6 @@ public class DynamicDoor:MonoBehaviour {
         if(TryGetComponent<Animator>(out Animator animator)) {
             anim = animator;
         }
-        needVirtualCamera = false;
     }
 
     void Update() {

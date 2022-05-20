@@ -13,6 +13,7 @@ public class DynamicDoor:MonoBehaviour {
     public Animator anim;
 
     public CinemachineVirtualCamera camera;
+
     void Start() {
         rgbd = GetComponent<Rigidbody>();
         holdDoorState = openDoor;

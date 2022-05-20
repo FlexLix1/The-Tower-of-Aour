@@ -11,6 +11,8 @@ public class DialogueManager:MonoBehaviour {
     public AudioClip nextSentence;
     AudioSource audioSource;
 
+    public enum TextSpeedSettings { Slow, Normal, Fast };
+    static public TextSpeedSettings currentTextSpeed;
     public float textSpeed = 0.025f;
 
     string[] holdDialogue;
@@ -18,10 +20,22 @@ public class DialogueManager:MonoBehaviour {
     int numInDialogue;
 
     void Start() {
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update() {
+        switch(currentTextSpeed) {
+            case TextSpeedSettings.Slow:
+                textSpeed = 0.1f;
+                break;
+            case TextSpeedSettings.Normal:
+                textSpeed = 0.025f;
+                break;
+            case TextSpeedSettings.Fast:
+                textSpeed = 0.01f;
+                break;
+        }
+
         if(!dialogueActive)
             return;
 

@@ -23,7 +23,7 @@ namespace UnityCore {
                 animScript = GetComponent<AnimationManager>();
                 inventoryScript = GetComponent<PickUp>();
                 rgbd = GetComponent<Rigidbody>();
-                
+
             }
 
             void Update() {
@@ -43,19 +43,23 @@ namespace UnityCore {
             void UseItem() {
                 switch(saveTag) {
                     case "Lever":
-                        if(leverScript.inUse) 
+                        if(leverScript.inUse)
                             return;
 
                         movementScript.moveTowardsLever = true;
                         moveTowards = true;
                         break;
                     case "Door":
-                        doorScript.openDoor = true;
-                        inventoryScript.UseItem();
+                        if(inventoryScript.inventory[0].activeInHierarchy) {
+                            doorScript.openDoor = true;
+                            inventoryScript.UseItem();
+                        }
                         break;
                     case "Generator":
-                        generatorScript.generatorActive = true;
-                        inventoryScript.UseItem();
+                        if(inventoryScript.inventory[1].activeInHierarchy) {
+                            generatorScript.generatorActive = true;
+                            inventoryScript.UseItem();
+                        }
                         break;
                 }
             }

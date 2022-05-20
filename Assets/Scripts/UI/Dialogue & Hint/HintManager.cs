@@ -10,16 +10,18 @@ namespace UnityCore {
         public class HintManager : MonoBehaviour {
             [SerializeField] GameObject dialogueBox, nextDialogueArrow;
             [SerializeField] Text nameText, dialogueText;
+            DialogueManager dialogueManager;
             AudioController audioController;
             HintHolder getHit;
 
-            public float textSpeed = 0.025f;
+            //public float textSpeed = 0.025f;
 
             string[] holdHint;
             bool hintActive, writingOut;
             int numInDialogue;
 
             void Start() {
+                dialogueManager = GetComponent<DialogueManager>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
             }
 
@@ -92,7 +94,7 @@ namespace UnityCore {
                 writingOut = true;
                 foreach (char letter in sentence.ToCharArray()) {
                     dialogueText.text += letter;
-                    yield return new WaitForSeconds(textSpeed);
+                    yield return new WaitForSeconds(dialogueManager.textSpeed);
                 }
                 writingOut = false;
                 nextDialogueArrow.SetActive(false);

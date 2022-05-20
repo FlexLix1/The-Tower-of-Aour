@@ -13,7 +13,7 @@ namespace UnityCore {
             public GameObject timeFreezeOverlay;
             public bool timeStoped, isRotating;
             public float freezeTime = 5;
-            bool usingTimeStop, textureEmitting;
+            bool usingTimeStop;
             float time;
 
             public Camera mainCamera;
@@ -62,7 +62,7 @@ namespace UnityCore {
                         }
                     }
                 } else {
-                    if(hit.transform.gameObject == saveFrozenObject) {
+                    if(meshRenderer == null) {
                         meshRenderer.material.DisableKeyword("_EMISSION");
                     }
                 }
@@ -73,7 +73,6 @@ namespace UnityCore {
                 if(meshRenderer != null)
                     meshRenderer.material.DisableKeyword("_EMISSION");
 
-                textureEmitting = false;
                 meshRenderer = null;
                 saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = false;
                 saveFrozenObject = null;

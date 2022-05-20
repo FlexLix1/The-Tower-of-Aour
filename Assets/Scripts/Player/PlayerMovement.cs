@@ -19,14 +19,15 @@ namespace UnityCore {
             public bool groundMovement, moveTowardsLever;
             private SlipperyOil slipperyOilMovement;
 
-            AudioController audioController;
+            public AudioClip walkingSound;
+            AudioSource audioSource;
 
             void Start() {
-                audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
                 slipperyOilMovement = GetComponent<SlipperyOil>();
                 animScript = GetComponent<AnimationManager>();
+                audioSource = GetComponent<AudioSource>();
                 startMovementSpeed = movementSpeed;
                 groundMovement = true;
 
@@ -53,7 +54,6 @@ namespace UnityCore {
 
                 if(pushScript.hasBox) {
                     movementSpeed = 3;
-                    audioController.PlayAudio(AudioType.SFX_PullingBoxes, true);
                     switch(pushScript.holdLockDirection) {
                         case Pushing.lockDirection.LockAxisY:
                             rgbd.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
@@ -110,6 +110,11 @@ namespace UnityCore {
                 playerPosition.y = rgbd.velocity.y;
                 rgbd.velocity = playerPosition;
                 destination = transform.position;
+                if(rgbd.velocity.magnitude > 0.2f && movementSpeed == startMovementSpeed) {
+                    Invoke(nameof(PlayWalkingSound), 0.4f);
+                } else {
+                    Invoke(nameof(PlayWalkingSound), 0.3f);
+                }
             }
 
             void RotateCharacter() {
@@ -117,6 +122,12 @@ namespace UnityCore {
                     Quaternion toRotation = Quaternion.LookRotation(new Vector3(playerPosition.x, 0, playerPosition.z), Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
                 }
+            }
+
+            public void PlayWalkingSound() {
+                audioSource.pitch = Random.Range(0.8f, 1.1f);
+                audioSource.PlayOneShot(walkingSound);
+                CancelInvoke();
             }
 
             public void BoxClimbFirstStep() {

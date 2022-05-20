@@ -33,16 +33,13 @@ namespace UnityCore {
                 } else {
                     timeFreezeOverlay.SetActive(false);
 
-                    if(timeStoped)
-                        return;
-
-                    if(platformScript != null) {
+                    if(platformScript != null && !timeStoped) {
                         platformScript.rayIsHovering = false;
                         saveFrozenObject = null;
                         platformScript = null;
                     }
 
-                    if(spinscript != null) {
+                    if(spinscript != null && !timeStoped) {
                         spinscript.rayIsHovering = false;
                         saveFrozenObject = null;
                         spinscript = null;
@@ -52,8 +49,10 @@ namespace UnityCore {
                 if(!timeStoped)
                     return;
 
+
                 if(time < freezeTime) {
                     time += Time.deltaTime;
+                    Debug.Log(time);
                     return;
                 }
 
@@ -114,6 +113,7 @@ namespace UnityCore {
                 time = 0;
 
                 if(platformScript != null) {
+                    Debug.Log("wtf");
                     platformScript.rayIsHovering = false;
                     platformScript.timeFroze = false;
                     saveFrozenObject = null;

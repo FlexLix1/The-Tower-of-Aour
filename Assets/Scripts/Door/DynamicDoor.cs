@@ -69,12 +69,12 @@ public class DynamicDoor:MonoBehaviour {
         holdDoorState = openDoor;
     }
 
-    private void cameraPrio() {
+    void cameraPrio() {
         camera.Priority = 11;
         Invoke(nameof(resetCameraPriority), 3);
     }
 
-    private void resetCameraPriority() {
+    void resetCameraPriority() {
         camera.Priority = 0;
     }
 }

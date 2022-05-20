@@ -50,16 +50,18 @@ namespace UnityCore {
                         moveTowards = true;
                         break;
                     case "Door":
-                        if(inventoryScript.inventory[0].activeInHierarchy) {
-                            doorScript.openDoor = true;
-                            inventoryScript.UseItem();
-                        }
+                        if(!inventoryScript.inventory[0].activeInHierarchy)
+                            return;
+
+                        doorScript.openDoor = true;
+                        inventoryScript.UseItem();
                         break;
                     case "Generator":
-                        if(inventoryScript.inventory[1].activeInHierarchy) {
-                            generatorScript.generatorActive = true;
-                            inventoryScript.UseItem();
-                        }
+                        if(!inventoryScript.inventory[1].activeInHierarchy)
+                            return;
+
+                        generatorScript.generatorActive = true;
+                        inventoryScript.UseItem();
                         break;
                 }
             }

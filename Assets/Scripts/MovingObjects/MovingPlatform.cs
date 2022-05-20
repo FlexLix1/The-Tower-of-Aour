@@ -5,17 +5,26 @@ using UnityEngine;
 public class MovingPlatform:MonoBehaviour {
     [SerializeField] float distanceToCover;
     [SerializeField] float speed;
-    public bool timeFroze, flipMovement;
+    public bool timeFroze, flipMovement, rayIsHovering;
+
+    MeshRenderer meshRenderer;
 
     Vector3 startPosition, left, right;
 
     void Start() {
+        meshRenderer = GetComponent<MeshRenderer>();
         startPosition  = transform.position;
         right = startPosition + transform.right * distanceToCover;
         left =  startPosition - transform.right * distanceToCover;
     }
 
     void FixedUpdate() {
+        if(rayIsHovering) {
+            meshRenderer.material.EnableKeyword("_EMISSION");
+        } else {
+            meshRenderer.material.DisableKeyword("_EMISSION");
+        }
+
         if(timeFroze)
             return;
 

@@ -5,8 +5,10 @@ namespace UnityCore {
     namespace Audio {
         public class TimeStop:MonoBehaviour {
 
-            MeshRenderer meshRenderer;
+            MovingPlatform platformScript;
+            spinscript spinscript;
 
+            MeshRenderer meshRenderer;
             AudioController audioController;
             GameObject saveFrozenObject;
 
@@ -32,6 +34,21 @@ namespace UnityCore {
                     CheckFreezeItem();
                 } else {
                     timeFreezeOverlay.SetActive(false);
+
+                    if(timeStoped)
+                        return;
+
+                    if(platformScript != null) {
+                        platformScript.rayIsHovering = false;
+                        saveFrozenObject = null;
+                        platformScript = null;
+                    }
+
+                    if(spinscript != null) {
+                        spinscript.rayIsHovering = false;
+                        saveFrozenObject = null;
+                        spinscript = null;
+                    }
                 }
 
                 if(!timeStoped)
@@ -51,31 +68,67 @@ namespace UnityCore {
                 RaycastHit hit;
                 if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask("TimeFreezeRay"), QueryTriggerInteraction.Collide)) {
                     if(hit.transform.gameObject.CompareTag("Platform")) {
+                        if(saveFrozenObject != hit.transform.gameObject) {
+                            if(platformScript != null) {
+                                platformScript.rayIsHovering = false;
+                                platformScript = null;
+                            }
+                            saveFrozenObject = hit.transform.gameObject;
+                        }
+                        platformScript = hit.transform.gameObject.GetComponent<MovingPlatform>();
+                        platformScript.rayIsHovering = true;
                         saveFrozenObject = hit.transform.gameObject;
-                        meshRenderer = saveFrozenObject.GetComponent<MeshRenderer>();
-                        meshRenderer.material.EnableKeyword("_EMISSION");
 
                         if(Input.GetMouseButtonDown(0) && !timeStoped) {
-                            saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = true;
+                            platformScript.timeFroze = true;
+                            timeStoped = true;
+                            usingTimeStop = false;
+                        }
+                    } else if(hit.transform.gameObject.CompareTag("Spinning")) {
+                        if(saveFrozenObject != hit.transform.gameObject) {
+                            if(spinscript != null) {
+                                spinscript.rayIsHovering = false;
+                                spinscript = null;
+                            }
+                            saveFrozenObject = hit.transform.gameObject;
+                        }
+                        spinscript = hit.transform.gameObject.GetComponent<spinscript>();
+                        spinscript.rayIsHovering = true;
+                        saveFrozenObject = hit.transform.gameObject;
+
+                        if(Input.GetMouseButtonDown(0) && !timeStoped) {
+                            spinscript.timeFroze = true;
                             timeStoped = true;
                             usingTimeStop = false;
                         }
                     }
-                } else {
-                    if(meshRenderer == null) {
-                        meshRenderer.material.DisableKeyword("_EMISSION");
-                    }
+                    return;
                 }
+
+                if(platformScript != null)
+                    platformScript.rayIsHovering = false;
+
+                if(spinscript != null)
+                    spinscript.rayIsHovering = false;
             }
 
             void Unfreeze() {
                 time = 0;
-                if(meshRenderer != null)
-                    meshRenderer.material.DisableKeyword("_EMISSION");
 
-                meshRenderer = null;
-                saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = false;
-                saveFrozenObject = null;
+                if(platformScript != null) {
+                    platformScript.rayIsHovering = false;
+                    platformScript.timeFroze = false;
+                    saveFrozenObject = null;
+                    platformScript = null;
+                }
+
+                if(spinscript != null) {
+                    spinscript.rayIsHovering = false;
+                    spinscript.timeFroze = false;
+                    saveFrozenObject = null;
+                    spinscript = null;
+                }
+
                 timeStoped = false;
                 usingTimeStop = false;
             }

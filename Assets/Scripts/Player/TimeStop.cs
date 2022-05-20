@@ -52,7 +52,6 @@ namespace UnityCore {
 
                 if(time < freezeTime) {
                     time += Time.deltaTime;
-                    Debug.Log(time);
                     return;
                 }
 
@@ -113,7 +112,6 @@ namespace UnityCore {
                 time = 0;
 
                 if(platformScript != null) {
-                    Debug.Log("wtf");
                     platformScript.rayIsHovering = false;
                     platformScript.timeFroze = false;
                     saveFrozenObject = null;

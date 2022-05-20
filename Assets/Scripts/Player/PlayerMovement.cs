@@ -126,7 +126,7 @@ namespace UnityCore {
 
             public void PlayWalkingSound() {
                 audioSource.pitch = Random.Range(0.8f, 1.1f);
-                audioSource.PlayOneShot(walkingSound);
+                //audioSource.PlayOneShot(walkingSound);
                 CancelInvoke();
             }
 

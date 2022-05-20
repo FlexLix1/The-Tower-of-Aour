@@ -20,6 +20,7 @@ TagManager:
   - Spinning
   - TimeFreeze
   - BirdFuck
+  - LastDoor
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,10 @@ public class SettingsMenu : MonoBehaviour {
     public List<ResItem> resolution = new List<ResItem>();
     private int selectedResolution;
     public bool fullScreen;
-    public TMP_Text resolutionLabel;
+    public RawImage resolutionLabel;
+    public Texture[] resolutionImg;
+    public Texture[] fullscreenImg;
+    public RawImage offImg;
 
     private void Start() {
         bool foundRes = false;
@@ -34,7 +37,7 @@ public class SettingsMenu : MonoBehaviour {
 
 
     public void Update() {
-        if(fullScreen == true) {
+        if (fullScreen == true) {
             Screen.fullScreen = !Screen.fullScreen;
         }
     }
@@ -60,7 +63,7 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void UpdateResLabel() {
-        resolutionLabel.text = resolution[selectedResolution].horizontal.ToString() + "x" + resolution[selectedResolution].vertical.ToString();
+        resolutionLabel.texture = resolutionImg[selectedResolution];
     }
 
     public void SetVolume(float volume) {
@@ -74,6 +77,15 @@ public class SettingsMenu : MonoBehaviour {
         Screen.fullScreen = isFullscreen;
     }
 
+    public void FullScreenOn() {
+        offImg.texture = fullscreenImg[0];
+        Screen.fullScreen = true;
+    }
+
+    public void FullScreenOff() {
+        offImg.texture = fullscreenImg[1];
+        Screen.fullScreen = false;
+    }
     [System.Serializable]
     public class ResItem {
         public int horizontal, vertical;

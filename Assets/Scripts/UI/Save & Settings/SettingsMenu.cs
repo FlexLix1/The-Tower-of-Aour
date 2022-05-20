@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using TMPro;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour {
@@ -14,6 +13,11 @@ public class SettingsMenu : MonoBehaviour {
     public Texture[] resolutionImg;
     public Texture[] fullscreenImg;
     public RawImage offImg;
+    public Texture[] qualityImg, textSpeedText;
+    public int textSelection;
+    public float[] textSpeeds;
+    
+    
 
     private void Start() {
         bool foundRes = false;
@@ -33,8 +37,8 @@ public class SettingsMenu : MonoBehaviour {
             UpdateResLabel();
         }
         List<string> options = new List<string>();
-    }
 
+    }
 
     public void Update() {
         if (fullScreen == true) {
@@ -86,8 +90,28 @@ public class SettingsMenu : MonoBehaviour {
         offImg.texture = fullscreenImg[1];
         Screen.fullScreen = false;
     }
-    [System.Serializable]
-    public class ResItem {
-        public int horizontal, vertical;
+
+    public void TextSpeedChange() {
+        PlayerPrefs.SetFloat("TextSpeed",textSpeeds[textSelection]);
+
     }
+
+    public void TextSpeedUp() {
+        if (textSelection == 2)
+            return;
+        textSelection++;
+        TextSpeedChange();
+    }
+    public void TextSpeedDown() {
+        if (textSelection == 0)
+            return;
+        textSelection--;
+        TextSpeedChange();
+    }
+
+}
+
+[System.Serializable]
+public class ResItem {
+    public int horizontal, vertical;
 }

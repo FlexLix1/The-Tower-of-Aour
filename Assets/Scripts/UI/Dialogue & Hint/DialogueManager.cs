@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager:MonoBehaviour {
+public class DialogueManager : MonoBehaviour {
     [SerializeField] GameObject dialogueBox, nextDialogueArrow;
     [SerializeField] Text nameText, dialogueText;
     DialogueHolder getDialogue;
@@ -11,9 +11,7 @@ public class DialogueManager:MonoBehaviour {
     public AudioClip nextSentence;
     AudioSource audioSource;
 
-    public enum TextSpeedSettings { Slow, Normal, Fast };
-    static public TextSpeedSettings currentTextSpeed;
-    public float textSpeed = 0.025f;
+    public float textSpeed;
 
     string[] holdDialogue;
     bool dialogueActive, writingOut;
@@ -21,30 +19,21 @@ public class DialogueManager:MonoBehaviour {
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
+        textSpeed = PlayerPrefs.GetFloat("TextSpeed");
     }
 
     void Update() {
-        switch(currentTextSpeed) {
-            case TextSpeedSettings.Slow:
-                textSpeed = 0.1f;
-                break;
-            case TextSpeedSettings.Normal:
-                textSpeed = 0.025f;
-                break;
-            case TextSpeedSettings.Fast:
-                textSpeed = 0.01f;
-                break;
-        }
+       
 
-        if(!dialogueActive)
+        if (!dialogueActive)
             return;
 
-        if(writingOut && Input.GetKeyDown(KeyCode.E)) {
+        if (writingOut && Input.GetKeyDown(KeyCode.E)) {
             SkipSentence();
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             NextSentence();
             audioSource.PlayOneShot(nextSentence);
         }
@@ -59,7 +48,7 @@ public class DialogueManager:MonoBehaviour {
     }
 
     void NextSentence() {
-        if(numInDialogue == getDialogue.dialogueText.Length) {
+        if (numInDialogue == getDialogue.dialogueText.Length) {
             nextDialogueArrow.SetActive(false);
             getDialogue.dialogueDone = true;
             dialogueActive = false;
@@ -73,19 +62,19 @@ public class DialogueManager:MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if(dialogueActive)
+        if (dialogueActive)
             return;
 
-        if(other.CompareTag("Dialogue")) {
+        if (other.CompareTag("Dialogue")) {
             getDialogue = other.GetComponent<DialogueHolder>();
-            if(getDialogue.dialogueDone)
+            if (getDialogue.dialogueDone)
                 return;
 
             dialogueActive = true;
             dialogueBox.SetActive(true);
             nameText.text = getDialogue.speakerName + ":";
             holdDialogue = new string[getDialogue.dialogueText.Length];
-            for(int i = 0; i < holdDialogue.Length; i++) {
+            for (int i = 0; i < holdDialogue.Length; i++) {
                 holdDialogue[i] = getDialogue.dialogueText[i];
             }
 
@@ -96,7 +85,7 @@ public class DialogueManager:MonoBehaviour {
     IEnumerator TypeSentence(string sentence) {
         dialogueText.text = "";
         writingOut = true;
-        foreach(char letter in sentence.ToCharArray()) {
+        foreach (char letter in sentence.ToCharArray()) {
             dialogueText.text += letter;
             yield return new WaitForSeconds(textSpeed);
         }

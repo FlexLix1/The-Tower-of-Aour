@@ -5,25 +5,18 @@ namespace UnityCore {
     namespace Audio {
         public class TimeStop:MonoBehaviour {
 
-            public Material timeFreezeMat;
             MeshRenderer meshRenderer;
-            public Material normalMat;
 
             AudioController audioController;
-            Vector3 saveVelocity;
             GameObject saveFrozenObject;
 
             public GameObject timeFreezeOverlay;
-            public float freezeTime = 5;
             public bool timeStoped, isRotating;
-            bool usingTimeStop;
+            public float freezeTime = 5;
+            bool usingTimeStop, textureEmitting;
             float time;
 
             public Camera mainCamera;
-
-            void Start() {
-                meshRenderer = GetComponent<MeshRenderer>();
-            }
 
             void Update() {
                 if(Input.GetMouseButtonDown(1) && timeStoped) {
@@ -57,37 +50,30 @@ namespace UnityCore {
                 timeFreezeOverlay.SetActive(true);
                 RaycastHit hit;
                 if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask("TimeFreezeRay"), QueryTriggerInteraction.Collide)) {
-                    if(hit.transform.gameObject.CompareTag("TimeFreeze")) {
-                        if(saveFrozenObject == null || saveFrozenObject != hit.transform.gameObject) {
-                            meshRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
-                            normalMat = meshRenderer.material;
-                            saveFrozenObject = hit.transform.gameObject;
-                        }
+                    if(hit.transform.gameObject.CompareTag("Platform")) {
+                        saveFrozenObject = hit.transform.gameObject;
+                        meshRenderer = saveFrozenObject.GetComponent<MeshRenderer>();
+                        meshRenderer.material.EnableKeyword("_EMISSION");
 
-                        meshRenderer.material = timeFreezeMat;
                         if(Input.GetMouseButtonDown(0) && !timeStoped) {
                             saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = true;
                             timeStoped = true;
                             usingTimeStop = false;
                         }
-                    } else {
-                        if(normalMat == null && meshRenderer == null)
-                            return;
-
-                        meshRenderer.material = normalMat;
-                        normalMat = null;
-                        meshRenderer = null;
-                        saveFrozenObject = null;
+                    }
+                } else {
+                    if(hit.transform.gameObject == saveFrozenObject) {
+                        meshRenderer.material.DisableKeyword("_EMISSION");
                     }
                 }
             }
 
             void Unfreeze() {
                 time = 0;
-                if(normalMat != null)
-                    meshRenderer.material = normalMat;
+                if(meshRenderer != null)
+                    meshRenderer.material.DisableKeyword("_EMISSION");
 
-                normalMat = null;
+                textureEmitting = false;
                 meshRenderer = null;
                 saveFrozenObject.GetComponent<MovingPlatform>().timeFroze = false;
                 saveFrozenObject = null;

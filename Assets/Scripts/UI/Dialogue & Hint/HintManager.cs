@@ -14,15 +14,15 @@ namespace UnityCore {
             AudioController audioController;
             HintHolder getHit;
 
-            //public float textSpeed = 0.025f;
+            public float textSpeed = 0.025f;
 
             string[] holdHint;
             bool hintActive, writingOut;
             int numInDialogue;
 
             void Start() {
-                dialogueManager = GetComponent<DialogueManager>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+                dialogueManager = GetComponent<DialogueManager>();
             }
 
             void Update() {

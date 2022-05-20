@@ -13,12 +13,10 @@ namespace UnityCore {
             GameObject saveFrozenObject;
 
             public GameObject timeFreezeOverlay;
-            public bool timeStoped, isRotating;
+            public bool timeStoped;
             public float freezeTime = 5;
             bool usingTimeStop;
             float time;
-
-            public Camera mainCamera;
 
             void Update() {
                 if(Input.GetMouseButtonDown(1) && timeStoped) {

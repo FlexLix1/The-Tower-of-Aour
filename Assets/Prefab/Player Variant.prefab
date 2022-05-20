@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f0d51e3b9d1f44e9b9dc847e47cbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 1.5
+  rayDistance: 1
 --- !u!114 &348669808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   groundMovement: 0
   moveTowardsLever: 0
-  walkingSound: {fileID: 0}
+  walkingSound: {fileID: 8300000, guid: 4910f39fd9dcb9e40b264623efb6b6fc, type: 3}
 --- !u!114 &1248035205965164884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5232c391dcf3c17498cbd0e6de0d2647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!114 &4729393839100826207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,6 +1594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.8
   isClimbing: 0
+  walkingSound: {fileID: 8300000, guid: e2d003e3aec012446aae3265d8c3805e, type: 3}
 --- !u!114 &7133898094463822517
 MonoBehaviour:
   m_ObjectHideFlags: 0

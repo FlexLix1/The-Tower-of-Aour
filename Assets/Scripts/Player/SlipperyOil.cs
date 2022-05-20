@@ -4,13 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace UnityCore {
-
     namespace Audio {
-
-
-
         public class SlipperyOil : MonoBehaviour {
-            public Rigidbody rb;
+            Rigidbody rb;
             Vector3 saveVelocity;
             AudioController audioController;
 

@@ -23,6 +23,12 @@ namespace UnityCore {
             AudioSource audioSource;
 
             void Start() {
+                Vector3 position;
+                position.x = PlayerPrefs.GetFloat("PlayerPosX");
+                position.y = PlayerPrefs.GetFloat("PlayerPosY");
+                position.z = PlayerPrefs.GetFloat("PlayerPosZ");
+                transform.position = position;
+
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
                 slipperyOilMovement = GetComponent<SlipperyOil>();

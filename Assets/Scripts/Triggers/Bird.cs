@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bird:MonoBehaviour {
 
     public bool bird;
+    bool madeKey;
     public Animator birdAnim;
     Animator thisAnimator;
     GameObject plugInstance, keyInstance;
@@ -27,9 +28,10 @@ public class Bird:MonoBehaviour {
             plugInstance = Instantiate(sparkPlug, transform.position + transform.up * 2.575f, Quaternion.Euler(-90, 0, 0), transform);
 
 
-        if(keyInstance == null) {
+        if(!madeKey) {
             keyInstance = Instantiate(keyPrefab, keyPlacement.transform.position, Quaternion.Euler(0, 90, 0));
             keyInstance.SetActive(false);
+            madeKey = true;
             Invoke(nameof(DropKeyFucker), 11);
         }
     }

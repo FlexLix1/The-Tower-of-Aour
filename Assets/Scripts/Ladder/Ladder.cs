@@ -8,9 +8,14 @@ namespace UnityCore {
             public bool isClimbing;
             Rigidbody m_Rigidbody;
             PlayerMovement movementScript;
+
+            public AudioClip walkingSound;
+            AudioSource audioSource;
+
             void Start() {
                 m_Rigidbody = GetComponent<Rigidbody>();
                 movementScript = GetComponent<PlayerMovement>();
+                audioSource = GetComponent<AudioSource>();
             }
 
             void Update() {
@@ -28,6 +33,11 @@ namespace UnityCore {
                         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                     }
                 }
+            }
+
+            public void LadderClimbSound() {
+                audioSource.pitch = Random.Range(0.8f, 1.1f);
+                audioSource.PlayOneShot(walkingSound);
             }
         }
     }

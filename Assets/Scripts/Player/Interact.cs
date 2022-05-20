@@ -6,6 +6,7 @@ namespace UnityCore {
 
         public class Interact:MonoBehaviour {
 
+            Bird birdScript;
             AnimationManager animScript;
             PlayerMovement movementScript;
             DynamicLever leverScript;
@@ -63,6 +64,13 @@ namespace UnityCore {
                         generatorScript.generatorActive = true;
                         inventoryScript.UseItem();
                         break;
+                    case "BirdFuck":
+                        if(!inventoryScript.inventory[1].activeInHierarchy)
+                            return;
+
+                        birdScript.bird = true;
+                        inventoryScript.UseItem();
+                        break;
                 }
             }
 
@@ -103,6 +111,11 @@ namespace UnityCore {
                         onTrigger = true;
                         saveTag = other.tag;
                         generatorScript = other.gameObject.GetComponent<Generator>();
+                        break;
+                    case "BirdFuck":
+                        onTrigger = true;
+                        saveTag = other.tag;
+                        birdScript = other.gameObject.GetComponent<Bird>();
                         break;
                 }
             }

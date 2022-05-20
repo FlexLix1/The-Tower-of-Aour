@@ -18,6 +18,8 @@ TagManager:
   - Generator
   - Platform
   - Spinning
+  - TimeFreeze
+  - BirdFuck
   layers:
   - Default
   - TransparentFX

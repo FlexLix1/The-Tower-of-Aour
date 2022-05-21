@@ -22,9 +22,9 @@ namespace UnityCore {
                 theRenderer.material = cpOn;
             }
 
-            public void LoadData() {
-                theSaveMan.LoadPlayer();
-            }
+            //public void LoadData() {
+            //    theSaveMan.LoadPlayer();
+            //}
 
             public void SaveData() {
                 theSaveMan.SavePlayer();
@@ -42,7 +42,7 @@ namespace UnityCore {
             }
             private void Update() {
                 if (Input.GetKeyDown(KeyCode.I)) {
-                    LoadData();
+                    //LoadData();
                 }
             }
         }

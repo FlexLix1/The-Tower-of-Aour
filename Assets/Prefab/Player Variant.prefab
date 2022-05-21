@@ -1466,6 +1466,7 @@ MonoBehaviour:
   nextDialogueArrow: {fileID: 0}
   nameText: {fileID: 0}
   dialogueText: {fileID: 0}
+  textSpeed: 0.025
 --- !u!114 &348669811
 MonoBehaviour:
   m_ObjectHideFlags: 0

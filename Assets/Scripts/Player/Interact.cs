@@ -13,6 +13,7 @@ namespace UnityCore {
             DynamicDoor doorScript;
             Generator generatorScript;
             PickUp inventoryScript;
+            DynamicLastDoor lastDoor;
             string saveTag;
             bool onTrigger, moveTowards;
 
@@ -24,6 +25,7 @@ namespace UnityCore {
                 animScript = GetComponent<AnimationManager>();
                 inventoryScript = GetComponent<PickUp>();
                 rgbd = GetComponent<Rigidbody>();
+                lastDoor = GetComponent<DynamicLastDoor>();
 
             }
 
@@ -71,6 +73,18 @@ namespace UnityCore {
                         birdScript.bird = true;
                         inventoryScript.UseItem();
                         break;
+
+                    //case "LastDoor":
+                    //    if (!inventoryScript.inventory[0].activeInHierarchy)
+                    //        return;
+                    //    inventoryScript.UseItem();
+
+                    //    if(lastDoor.keysAdded == 2)
+                    //    {
+                    //        lastDoor.openDoor = true;
+
+                    //    }
+                    //    break;
                 }
             }
 

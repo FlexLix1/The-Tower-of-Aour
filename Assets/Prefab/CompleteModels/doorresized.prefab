@@ -164,7 +164,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 3501793314738915435}
   m_Follow: {fileID: 3501793314738915435}
@@ -426,5 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swiningDoor: 0
   openDoor: 0
+  thisObjectUsesCamera: 0
   anim: {fileID: 0}
   camera: {fileID: 0}

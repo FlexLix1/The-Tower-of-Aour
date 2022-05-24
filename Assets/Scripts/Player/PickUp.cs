@@ -6,12 +6,18 @@ public class PickUp:MonoBehaviour {
 
     public GameObject[] inventory, prefabsInventory;
     public float rayDistance = 1.5f, placeDistance = 2;
+    public Transform itemInHand;
     GameObject savePickup;
+
     int saveInventoryNumber;
     public bool hasPickup;
     bool canPickup = true;
 
     void Update() {
+        if(hasPickup) {
+            inventory[saveInventoryNumber].transform.position = itemInHand.position;
+        }
+
         if(Input.GetKeyDown(KeyCode.E) && hasPickup) {
             CheckPlacement();
         }

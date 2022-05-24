@@ -9,7 +9,6 @@ public class PickUp:MonoBehaviour {
     public Transform itemInHand;
     GameObject savePickup;
 
-
     int saveInventoryNumber;
     public bool hasPickup;
     bool canPickup = true;

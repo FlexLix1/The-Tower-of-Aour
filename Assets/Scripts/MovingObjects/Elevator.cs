@@ -7,7 +7,7 @@ namespace UnityCore {
     namespace Audio {
 
 
-        public class Elevator : MonoBehaviour {
+        public class Elevator:MonoBehaviour {
             [SerializeField] Vector3 elevatorTarget;
             Vector3 elevatorStart;
 
@@ -15,7 +15,8 @@ namespace UnityCore {
             Rigidbody rgbd;
             AudioController audioController;
             public bool elevatorActive;
-            
+            bool moveToStart;
+
             void Start() {
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
@@ -24,27 +25,26 @@ namespace UnityCore {
             }
 
             void Update() {
-
-                if (!elevatorActive) {
-                    if (Vector3.Distance(elevatorStart, transform.position) > 0.05f) {
-                        MoveDoorTo(elevatorStart);
-                    } else {
-                        rgbd.velocity = Vector3.zero;
-                    }
+                if(!elevatorActive)
                     return;
-                }
 
-                if (Vector3.Distance(elevatorTarget, transform.position) > 0.05f) {
-                    MoveDoorTo(elevatorTarget);
+                if(moveToStart) {
+                    MoveElevatorTo(elevatorStart);
                 } else {
-                    rgbd.velocity = Vector3.zero;
+                    MoveElevatorTo(elevatorTarget);
                 }
             }
 
-            void MoveDoorTo(Vector3 target) {
+            void MoveElevatorTo(Vector3 target) {
+                rgbd.constraints = RigidbodyConstraints.FreezeRotation | ~RigidbodyConstraints.FreezePositionY;
                 Vector3 forcedDirection = target - transform.position;
-                Vector3.Normalize(forcedDirection);
-                rgbd.velocity = forcedDirection * speed;
+                rgbd.velocity = forcedDirection.normalized * speed;
+                if(Vector3.Distance(target, transform.position) < 0.1f) {
+                    rgbd.constraints = RigidbodyConstraints.FreezeAll;
+                    rgbd.velocity = Vector3.zero;
+                    moveToStart = !moveToStart;
+                    elevatorActive = false;
+                }
             }
         }
     }

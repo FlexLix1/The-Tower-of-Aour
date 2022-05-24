@@ -16,5 +16,11 @@ public class Cutscene : MonoBehaviour {
     void CheckOver(UnityEngine.Video.VideoPlayer vp) {
         SceneManager.LoadScene("Main Menu");
     }
+
+    private void Update() {
+        if (Input.anyKeyDown) {
+            SceneManager.LoadScene("Main Menu");
+        }
+    }
 }
 

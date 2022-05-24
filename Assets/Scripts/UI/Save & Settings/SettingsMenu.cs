@@ -7,15 +7,14 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour {
     public AudioMixer audioMixer;
     public List<ResItem> resolution = new List<ResItem>();
-    private int selectedResolution;
+    public List<QualityItem> qualityItems = new List<QualityItem>();
+    public RawImage resolutionLabel, offImg, qualityLabel;
+    public Texture[] resolutionImg, qualityImg, textSpeedText, fullscreenImg;
+    private int selectedResolution, selectedQualityImg;
     public bool fullScreen;
-    public RawImage resolutionLabel;
-    public Texture[] resolutionImg;
-    public Texture[] fullscreenImg;
-    public RawImage offImg;
-    public Texture[] qualityImg, textSpeedText;
     public int textSelection;
     public float[] textSpeeds;
+
     
     
 
@@ -69,6 +68,25 @@ public class SettingsMenu : MonoBehaviour {
     public void UpdateResLabel() {
         resolutionLabel.texture = resolutionImg[selectedResolution];
     }
+    
+    public void QualityImgChangeDown() {
+        selectedQualityImg--;
+        if(selectedQualityImg < 0) {
+            selectedQualityImg = 0;
+        }
+        UpdateQualityImg();
+    }
+
+    public void QualityImgChangeUp() {
+        selectedQualityImg++;
+        if(selectedQualityImg > qualityItems.Count - 1) {
+           selectedQualityImg = qualityItems.Count - 1;
+        }
+    }
+
+    public void UpdateQualityImg() {
+        qualityLabel.texture = qualityImg[selectedQualityImg];
+    }
 
     public void SetVolume(float volume) {
         audioMixer.SetFloat("Volume", volume);
@@ -93,7 +111,6 @@ public class SettingsMenu : MonoBehaviour {
 
     public void TextSpeedChange() {
         PlayerPrefs.SetFloat("TextSpeed",textSpeeds[textSelection]);
-
     }
 
     public void TextSpeedUp() {
@@ -114,4 +131,9 @@ public class SettingsMenu : MonoBehaviour {
 [System.Serializable]
 public class ResItem {
     public int horizontal, vertical;
+}
+
+[System.Serializable]
+public class QualityItem {
+    public Texture Verylow, Low, Medium, High, VeryHigh, Ultra;
 }

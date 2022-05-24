@@ -44,7 +44,6 @@ public class SettingsMenu : MonoBehaviour {
             Screen.fullScreen = !Screen.fullScreen;
         }
     }
-
     public void ApplyGraphics() {
         Screen.SetResolution(resolution[selectedResolution].horizontal, resolution[selectedResolution].vertical, fullScreen = true);
     }
@@ -92,9 +91,6 @@ public class SettingsMenu : MonoBehaviour {
         audioMixer.SetFloat("Volume", volume);
     }
 
-    public void SetQuailty(int qualityIndex) {
-        QualitySettings.SetQualityLevel(qualityIndex);
-    }
     public void SetFullScreen(bool isFullscreen) {
         Screen.fullScreen = isFullscreen;
     }
@@ -125,7 +121,6 @@ public class SettingsMenu : MonoBehaviour {
         textSelection--;
         TextSpeedChange();
     }
-
 }
 
 [System.Serializable]

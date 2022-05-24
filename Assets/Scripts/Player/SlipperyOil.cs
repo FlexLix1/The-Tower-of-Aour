@@ -24,7 +24,7 @@ namespace UnityCore {
             }
             private void OnTriggerEnter(Collider colider) {
                 if (colider.gameObject.tag == "OilFloor") {
-                    saveVelocity = rb.velocity;
+                    saveVelocity = rb.velocity * 1.2f;
                     playermovement.groundMovement = false;
                     audioController.PlayAudio(AudioType.SFX_GlidingOnOil, true);
                 }
@@ -38,7 +38,7 @@ namespace UnityCore {
 
             private void OnTriggerExit(Collider colider) {
                 if (colider.gameObject.tag == "OilPuzzleWall") {
-                    saveVelocity = rb.velocity;
+                    saveVelocity = rb.velocity * 1.2f;
                     playermovement.groundMovement = false;
                     audioController.StopAudio(AudioType.SFX_GlidingOnOil, true);
                 }

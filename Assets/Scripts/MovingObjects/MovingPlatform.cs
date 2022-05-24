@@ -5,17 +5,19 @@ using UnityEngine;
 public class MovingPlatform:MonoBehaviour {
     [SerializeField] float distanceToCover;
     [SerializeField] float speed;
-    public bool timeFroze, flipMovement, rayIsHovering;
+    public bool timeFroze, flipMovement, rayIsHovering, leftRight;
 
     MeshRenderer meshRenderer;
 
-    Vector3 startPosition, left, right;
+    Vector3 startPosition, left, right, up, down;
 
     void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
         startPosition  = transform.position;
         right = startPosition + transform.right * distanceToCover;
         left =  startPosition - transform.right * distanceToCover;
+        up = startPosition + transform.up * distanceToCover;
+        down =  startPosition - transform.up * distanceToCover;
     }
 
     void FixedUpdate() {
@@ -28,10 +30,23 @@ public class MovingPlatform:MonoBehaviour {
         if(timeFroze)
             return;
 
-        if(!flipMovement) {
-            MoveTowards(right);
-        } else {
-            MoveTowards(left);
+        if (leftRight)
+        {
+            if (!flipMovement)
+            {
+                MoveTowards(right);
+            }
+            else
+            {
+                MoveTowards(left);
+            }
+        }
+        else
+        {
+            if (!flipMovement)
+                MoveTowards(up);
+            else
+                MoveTowards(down);
         }
     }
 

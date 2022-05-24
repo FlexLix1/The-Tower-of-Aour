@@ -12,7 +12,7 @@ namespace UnityCore {
             AnimationManager animScript;
             public Elevator elevatorScript;
             public DynamicDoor doorScript;
-            public bool leverActive, startTrue, inUse, oneTimeUse, elevator, moveToLever;
+            public bool leverActive, startTrue, inUse, oneTimeUse, elevator;
             public Animator anim;
             AudioController audioController;
 

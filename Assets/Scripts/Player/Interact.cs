@@ -46,6 +46,9 @@ namespace UnityCore {
             void UseItem() {
                 switch(saveTag) {
                     case "Lever":
+                        if(inventoryScript.hasPickup)
+                            return;
+
                         if(leverScript.inUse)
                             return;
 

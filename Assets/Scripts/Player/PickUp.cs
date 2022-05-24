@@ -24,7 +24,7 @@ public class PickUp:MonoBehaviour {
     //Check if there are obsticles
     void CheckPlacement() {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward * rayDistance, out hit, rayDistance))
+        if(Physics.Raycast(transform.position + transform.up, transform.forward * rayDistance, out hit, rayDistance))
             return;
 
         PlaceItem();

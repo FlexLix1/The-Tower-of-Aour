@@ -4,10 +4,10 @@ using UnityEngine;
 namespace UnityCore {
     namespace Audio {
         public class Pushing:MonoBehaviour {
-            AudioController audioController;
-            GameObject holdBox;
+
             public float rayDistance = 2f, boxOffset = 2f;
             public bool hasBox, movingPlayerTowardsBox;
+            AudioController audioController;
 
             Vector3 offset;
             public enum lockDirection { LockAxisY, LockAxisX };
@@ -17,16 +17,21 @@ namespace UnityCore {
             public pushDirection holdPushDirection;
 
             Quaternion holdRotation;
-
+            PickUp inventoryScript;
+            GameObject holdBox;
             Rigidbody rgbd;
             Box boxScript;
 
             void Start() {
+                inventoryScript = GetComponent<PickUp>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
             }
 
             void Update() {
+                if(inventoryScript.hasPickup)
+                    return;
+
                 if(movingPlayerTowardsBox) {
                     PlayerTowardsBox();
                     return;

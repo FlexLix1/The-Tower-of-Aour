@@ -6,20 +6,26 @@ namespace UnityCore {
     namespace Audio {
         public class BoxClimb : MonoBehaviour {
 
-            GameObject holdBox;
             AnimationManager animManager;
-            public float rayDistance;
-            AudioController audioController;
+            PickUp inventoryScript;
 
+            AudioController audioController;
+            GameObject holdBox;
+
+            public float rayDistance;
             Rigidbody rgbd;
 
             void Start() {
+                inventoryScript = GetComponent<PickUp>();
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 animManager = GetComponent<AnimationManager>();
                 rgbd = GetComponent<Rigidbody>();
             }
 
             void Update() {
+                if(inventoryScript.hasPickup)
+                    return;
+
                 if (animManager.climbingBox)
                     return;
 

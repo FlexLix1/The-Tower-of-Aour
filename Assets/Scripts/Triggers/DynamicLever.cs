@@ -57,7 +57,7 @@ namespace UnityCore {
             public void SetLeverFalse() {
                 anim.Play("lever_False");
                 if (elevator) {
-                    elevatorScript.elevatorActive = false;
+                    elevatorScript.elevatorActive = true;
                 } else {
                     doorScript.openDoor = false;
                 }

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour {
-    public void SavePlayer() {
-        PlayerPrefs.SetFloat("PlayerPosX", transform.position.x);
-        PlayerPrefs.SetFloat("PlayerPosY", transform.position.y);
-        PlayerPrefs.SetFloat("PlayerPosZ", transform.position.z);
+    ActiveAndDeactivateFloors currentFloor;
+
+    void Start() {
+        currentFloor = GetComponent<ActiveAndDeactivateFloors>();    
     }
 
-    //public void LoadPlayer() {
-    //    Vector3 position;
-    //    position.x = PlayerPrefs.GetFloat("PlayerPosX");
-    //    position.y = PlayerPrefs.GetFloat("PlayerPosY");
-    //    position.z = PlayerPrefs.GetFloat("PlayerPosZ");
-    //    transform.position = position;
-    //}
+    public void SavePlayer() {
+        PlayerPrefs.SetFloat("PlayerPosX", transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPosY", transform.position.y + 1);
+        PlayerPrefs.SetFloat("PlayerPosZ", transform.position.z);
+        PlayerPrefs.SetInt("CurrentFloor", currentFloor.currentfloor);
+    }
 }

@@ -6,6 +6,7 @@ namespace UnityCore {
         public class TimeStop:MonoBehaviour {
 
             MovingPlatform platformScript;
+            PickUp inventoryScript;
             spinscript spinscript;
 
             MeshRenderer meshRenderer;
@@ -18,7 +19,14 @@ namespace UnityCore {
             bool usingTimeStop;
             float time;
 
+            void Start() {
+                inventoryScript = GetComponent<PickUp>();
+            }
+
             void Update() {
+                if(inventoryScript.hasPickup)
+                    return;
+
                 if(Input.GetMouseButtonDown(1) && timeStoped) {
                     timeStoped = !timeStoped;
                     Unfreeze();

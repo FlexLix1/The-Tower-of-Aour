@@ -22,10 +22,6 @@ namespace UnityCore {
                 theRenderer.material = cpOn;
             }
 
-            public void LoadData() {
-                theSaveMan.LoadPlayer();
-            }
-
             public void SaveData() {
                 theSaveMan.SavePlayer();
             }
@@ -38,11 +34,6 @@ namespace UnityCore {
                     theHealthMan.SetSpawnPoint(transform.position);
                     CheckpointOn();
                     SaveData();
-                }
-            }
-            private void Update() {
-                if (Input.GetKeyDown(KeyCode.I)) {
-                    LoadData();
                 }
             }
         }

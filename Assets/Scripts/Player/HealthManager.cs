@@ -22,9 +22,9 @@ namespace UnityCore {
                 respawnPoint = player.transform.position;
             }
             private void Update() {
-                if (Input.GetKeyDown("p")) {
-                    HurtPlayer(damage);
-                }
+                //if (Input.GetKeyDown("p")) {
+                //    HurtPlayer(damage);
+                //}
             }
             public void HurtPlayer(int damage) {
                 currentHealth -= damage;

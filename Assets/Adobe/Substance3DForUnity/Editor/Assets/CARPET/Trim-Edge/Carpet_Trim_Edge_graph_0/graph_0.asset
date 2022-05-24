@@ -139,8 +139,7 @@ MonoBehaviour:
     GenerateAllOutputs: 0
     GenerateAllMipmaps: 0
     DefaultPreset: " <sbspreset pkgurl=\"pkg://Carpet_Trim\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3467762054\" type=\"8\" value=\"10,10\" />\n
-      </sbspreset>\n"
+      identifier=\"$outputsize\" uid=\"3467762054\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
     CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Carpet_Trim\" label=\"\" >\n 
       <presetinput identifier=\"$outputsize\" uid=\"3467762054\" type=\"8\" value=\"10,10\"
       />\n </sbspreset>\n"

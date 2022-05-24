@@ -7,7 +7,7 @@ public class DynamicDoor:MonoBehaviour {
 
     Rigidbody rgbd;
 
-    public bool swiningDoor, openDoor;
+    public bool swiningDoor, openDoor, thisObjectUsesCamera;
     bool holdDoorState, needVirtualCamera;
 
     public Animator anim;
@@ -44,9 +44,13 @@ public class DynamicDoor:MonoBehaviour {
         if(!openDoor)
             return;
 
-        if(!needVirtualCamera) {
-            cameraPrio();
-            needVirtualCamera = true;
+        if (thisObjectUsesCamera)
+        {
+            if (!needVirtualCamera)
+            {
+                cameraPrio();
+                needVirtualCamera = true;
+            }
         }
     }
 

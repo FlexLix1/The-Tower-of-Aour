@@ -16,7 +16,7 @@ namespace UnityCore {
             AnimationManager animScript;
             Pushing pushScript;
 
-            public bool groundMovement, moveTowardsLever;
+            public bool groundMovement, moveTowardsLever, dialogueStoping;
             private SlipperyOil slipperyOilMovement;
 
             public AudioClip walkingSound;
@@ -72,6 +72,9 @@ namespace UnityCore {
                     movementSpeed = startMovementSpeed;
                     rgbd.constraints = RigidbodyConstraints.FreezeRotation;
                 }
+
+                if(dialogueStoping)
+                    return;
 
                 if(!groundMovement)
                     return;

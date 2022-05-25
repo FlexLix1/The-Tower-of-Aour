@@ -5,7 +5,9 @@ namespace UnityCore {
     namespace Audio {
         public class TimeStop:MonoBehaviour {
 
+            PlayerMovement movementScript;
             MovingPlatform platformScript;
+            AnimationManager animScript;
             PickUp inventoryScript;
             spinscript spinscript;
 
@@ -20,6 +22,8 @@ namespace UnityCore {
             float time;
 
             void Start() {
+                movementScript = GetComponent<PlayerMovement>();
+                animScript = GetComponent<AnimationManager>();
                 inventoryScript = GetComponent<PickUp>();
             }
 
@@ -34,6 +38,8 @@ namespace UnityCore {
 
                 if(Input.GetKeyDown(KeyCode.Q) && !timeStoped) {
                     usingTimeStop = !usingTimeStop;
+                    animScript.timeStopAbility = !animScript.timeStopAbility;
+                    movementScript.groundMovement = !movementScript.groundMovement;
                 }
 
                 if(usingTimeStop) {

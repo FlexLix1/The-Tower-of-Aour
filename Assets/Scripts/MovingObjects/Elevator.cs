@@ -20,6 +20,7 @@ namespace UnityCore {
             void Start() {
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rgbd = GetComponent<Rigidbody>();
+                rgbd.constraints = RigidbodyConstraints.FreezeAll;
                 elevatorStart = transform.position;
                 elevatorTarget += elevatorStart;
             }

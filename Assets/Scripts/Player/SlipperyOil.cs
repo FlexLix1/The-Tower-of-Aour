@@ -6,6 +6,9 @@ using UnityEngine.Events;
 namespace UnityCore {
     namespace Audio {
         public class SlipperyOil : MonoBehaviour {
+
+            public bool onSlipperyOil;
+            public float oilSpeed;
             Rigidbody rb;
             Vector3 saveVelocity;
             AudioController audioController;
@@ -16,6 +19,8 @@ namespace UnityCore {
                 audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
                 rb = gameObject.GetComponent<Rigidbody>();
                 playermovement = GetComponent<PlayerMovement>();
+
+                //rb.velocity = Vector3.ClampMagnitude(rb.velocity, playermovement.movementSpeed);
             }
 
             void Update() {
@@ -24,8 +29,9 @@ namespace UnityCore {
             }
             private void OnTriggerEnter(Collider colider) {
                 if (colider.gameObject.tag == "OilFloor") {
-                    saveVelocity = rb.velocity * 1.2f;
+                    saveVelocity = rb.velocity * oilSpeed;
                     playermovement.groundMovement = false;
+                    playermovement.canRun = false;
                     audioController.PlayAudio(AudioType.SFX_GlidingOnOil, true);
                 }
 
@@ -38,7 +44,7 @@ namespace UnityCore {
 
             private void OnTriggerExit(Collider colider) {
                 if (colider.gameObject.tag == "OilPuzzleWall") {
-                    saveVelocity = rb.velocity * 1.2f;
+                    saveVelocity = rb.velocity * oilSpeed;
                     playermovement.groundMovement = false;
                     audioController.StopAudio(AudioType.SFX_GlidingOnOil, true);
                 }
@@ -46,6 +52,7 @@ namespace UnityCore {
                     rb.velocity = Vector3.zero;
                     saveVelocity = Vector3.zero;
                     playermovement.groundMovement = true;
+                    playermovement.canRun = true;
                     audioController.StopAudio(AudioType.SFX_GlidingOnOil, true);
                 }
             }

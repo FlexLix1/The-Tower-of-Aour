@@ -93,6 +93,8 @@ namespace UnityCore {
                             platformScript.timeFroze = true;
                             timeStoped = true;
                             usingTimeStop = false;
+                            animScript.timeStopAbility = !animScript.timeStopAbility;
+                            movementScript.groundMovement = !movementScript.groundMovement;
                         }
                     } else if(hit.transform.gameObject.CompareTag("Spinning")) {
                         if(saveFrozenObject != hit.transform.gameObject) {
@@ -110,6 +112,8 @@ namespace UnityCore {
                             spinscript.timeFroze = true;
                             timeStoped = true;
                             usingTimeStop = false;
+                            animScript.timeStopAbility = !animScript.timeStopAbility;
+                            movementScript.groundMovement = !movementScript.groundMovement;
                         }
                     }
                     return;

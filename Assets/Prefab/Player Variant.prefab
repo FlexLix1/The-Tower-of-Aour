@@ -1545,6 +1545,7 @@ MonoBehaviour:
   velocityMagnitude: 0
   climbingBox: 0
   usingLever: 0
+  timeStopAbility: 0
 --- !u!114 &348669815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   groundMovement: 0
   moveTowardsLever: 0
+  dialogueStoping: 0
   walkingSound: {fileID: 8300000, guid: 4910f39fd9dcb9e40b264623efb6b6fc, type: 3}
 --- !u!114 &1248035205965164884
 MonoBehaviour:

@@ -74,7 +74,7 @@ public class DynamicDoor:MonoBehaviour {
     }
 
     void cameraPrio() {
-        camera.Priority = 11;
+        camera.Priority = 12;
         Invoke(nameof(resetCameraPriority), 3);
     }
 

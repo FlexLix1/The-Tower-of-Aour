@@ -16,7 +16,7 @@ namespace UnityCore {
             AnimationManager animScript;
             Pushing pushScript;
 
-            public bool groundMovement, moveTowardsLever, dialogueStoping;
+            public bool groundMovement, moveTowardsLever, dialogueStoping, canRun;
             private SlipperyOil slipperyOilMovement;
 
             public AudioClip walkingSound;

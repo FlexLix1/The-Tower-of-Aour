@@ -16,7 +16,7 @@ namespace UnityCore {
             AnimationManager animScript;
             Pushing pushScript;
 
-            public bool groundMovement, moveTowardsLever;
+            public bool groundMovement, moveTowardsLever, canRun;
             private SlipperyOil slipperyOilMovement;
 
             public AudioClip walkingSound;
@@ -36,6 +36,7 @@ namespace UnityCore {
                 audioSource = GetComponent<AudioSource>();
                 startMovementSpeed = movementSpeed;
                 groundMovement = true;
+                canRun = true;
 
             }
 
@@ -78,11 +79,16 @@ namespace UnityCore {
 
                 //Update forward direction relative to camera
                 UpdateCameraForward();
-
-                if(Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox) {
-                    movementSpeed = 10;
-                } else {
-                    movementSpeed = startMovementSpeed;
+                if (canRun)
+                {
+                    if (Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox)
+                    {
+                        movementSpeed = 10;
+                    }
+                    else
+                    {
+                        movementSpeed = startMovementSpeed;
+                    }
                 }
 
                 //Update player input

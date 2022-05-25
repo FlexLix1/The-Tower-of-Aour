@@ -836,7 +836,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282578}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: ResLeft
+        m_MethodName: QualityImgChangeDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1069,7 +1069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &580462707
@@ -1399,7 +1399,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282578}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: FullScreenOff
+        m_MethodName: FullScreenOn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 970783682}
   - component: {fileID: 970783681}
   m_Layer: 5
-  m_Name: Slow
+  m_Name: TextSpeedBaseImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1603,7 +1603,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282578}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: FullScreenOn
+        m_MethodName: FullScreenOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2072,6 +2072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1921874309dfe49a004e317b38e087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadButton: {fileID: 2112994961}
 --- !u!114 &1276282578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2086,30 +2087,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: eab67b6ee375f9e42b3351508edb7f03, type: 2}
   resolution:
-  - horizontal: 1920
-    vertical: 1080
-  - horizontal: 1280
-    vertical: 720
   - horizontal: 640
     vertical: 480
-  fullScreen: 0
+  - horizontal: 1280
+    vertical: 720
+  - horizontal: 1920
+    vertical: 1080
   resolutionLabel: {fileID: 1944143483}
-  resolutionImg:
-  - {fileID: 2800000, guid: b5dca09848fc110419663f9387bb7145, type: 3}
-  - {fileID: 2800000, guid: 881c07f601e89b34ea88f1105be95959, type: 3}
-  - {fileID: 2800000, guid: 6e6b8dbc5099a844e8c877f65df7bdca, type: 3}
-  fullscreenImg:
-  - {fileID: 2800000, guid: 1a893a3b4f66e3446ad922548f589c2c, type: 3}
-  - {fileID: 2800000, guid: 5fb9f2e642d4835468a4443d0cb9215d, type: 3}
   offImg: {fileID: 343430426}
+  qualityLabel: {fileID: 1897402177}
+  textSpeedImage: {fileID: 970783681}
+  resolutionImg:
+  - {fileID: 2800000, guid: 6e6b8dbc5099a844e8c877f65df7bdca, type: 3}
+  - {fileID: 2800000, guid: 881c07f601e89b34ea88f1105be95959, type: 3}
+  - {fileID: 2800000, guid: b5dca09848fc110419663f9387bb7145, type: 3}
   qualityImg:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2800000, guid: 91a8c5aebc386c84bb77dcb75bedf64b, type: 3}
+  - {fileID: 2800000, guid: df282f9507476b04492adc46da48e25c, type: 3}
+  - {fileID: 2800000, guid: 96bdc145168dae24b990c92c2c53e581, type: 3}
+  - {fileID: 2800000, guid: ce3d1ed3236ac214586f59e8f986d470, type: 3}
+  - {fileID: 2800000, guid: 43073762435cca842a950af76849f3a3, type: 3}
+  - {fileID: 2800000, guid: 363a65b15039c1b4aa84759dfb2d72c5, type: 3}
   textSpeedText:
   - {fileID: 2800000, guid: fcfd56a66db237945b381eb757a7571d, type: 3}
   - {fileID: 2800000, guid: 64d08e9ad39936d468c30de5b95d05fe, type: 3}
   - {fileID: 2800000, guid: 524afc5842d9c6d41a110556e2f38183, type: 3}
+  fullscreenImg:
+  - {fileID: 2800000, guid: 1a893a3b4f66e3446ad922548f589c2c, type: 3}
+  - {fileID: 2800000, guid: 5fb9f2e642d4835468a4443d0cb9215d, type: 3}
+  fullScreen: 0
   textSelection: 0
   textSpeeds:
   - 0.1
@@ -2407,7 +2413,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282578}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: TextSpeedUp
+        m_MethodName: TextSpeedDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2983,7 +2989,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: b5dca09848fc110419663f9387bb7145, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6e6b8dbc5099a844e8c877f65df7bdca, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3218,7 +3224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282578}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: ResRight
+        m_MethodName: QualityImgChangeUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3350,7 +3356,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276282577}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3373,7 +3379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

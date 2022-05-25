@@ -16,18 +16,18 @@ namespace UnityCore {
             AnimationManager animScript;
             Pushing pushScript;
 
-            public bool groundMovement, moveTowardsLever, canRun;
+            public bool groundMovement, moveTowardsLever, dialogueStoping;
             private SlipperyOil slipperyOilMovement;
 
             public AudioClip walkingSound;
             AudioSource audioSource;
 
             void Start() {
-                //Vector3 position;
-                ////position.x = PlayerPrefs.GetFloat("PlayerPosX");
-                ////position.y = PlayerPrefs.GetFloat("PlayerPosY");
-                ////position.z = PlayerPrefs.GetFloat("PlayerPosZ");
-                //transform.position = position;
+                Vector3 loadPosition;
+                loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
+                loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
+                loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
+                transform.position = loadPosition;
 
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
@@ -73,6 +73,9 @@ namespace UnityCore {
                     movementSpeed = startMovementSpeed;
                     rgbd.constraints = RigidbodyConstraints.FreezeRotation;
                 }
+
+                if(dialogueStoping)
+                    return;
 
                 if(!groundMovement)
                     return;

@@ -14,6 +14,7 @@ namespace UnityCore {
             void Start() {
                 theHealthMan = FindObjectOfType<HealthManager>();
             }
+
             public void CheckpointOn() {
                 Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>();
                 foreach (Checkpoint cp in checkpoints) {
@@ -29,6 +30,7 @@ namespace UnityCore {
             public void CheckpointOff() {
                 theRenderer.material = cpOff;
             }
+
             private void OnTriggerEnter(Collider other) {
                 if (other.tag.Equals("Player")) {
                     theHealthMan.SetSpawnPoint(transform.position);

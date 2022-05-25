@@ -20,7 +20,7 @@ namespace UnityCore {
 
             string currentState;
 
-            public bool climbingBox, usingLever;
+            public bool climbingBox, usingLever, timeStopAbility;
             bool pullBox, pushBox;
 
             void Start() {
@@ -33,6 +33,11 @@ namespace UnityCore {
             }
 
             void Update() {
+                if(timeStopAbility) {
+                    anim.Play("TimeStoped");
+                    return;
+                }
+
                 //Player is slippery
                 if(!movementScript.groundMovement) {
                     anim.Play("Slippery");

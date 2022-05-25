@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5616829459494890455}
   - component: {fileID: 5616829459494890454}
   m_Layer: 0
-  m_Name: HintTest
+  m_Name: Hint
   m_TagString: Hint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

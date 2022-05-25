@@ -9,7 +9,8 @@ public class ActiveAndDeactivateFloors:MonoBehaviour {
     int floorChecker;
 
     void Start() {
-        floorChecker = currentfloor;
+        floorChecker = currentfloor = PlayerPrefs.GetInt("CurrentFloor");
+        ChangeCurrentFloor();
     }
 
     void ChangeCurrentFloor() {

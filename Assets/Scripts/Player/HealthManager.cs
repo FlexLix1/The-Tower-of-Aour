@@ -21,11 +21,13 @@ namespace UnityCore {
                 currentHealth = maxHealth;
                 respawnPoint = player.transform.position;
             }
-            private void Update() {
+
+            void Update() {
                 //if (Input.GetKeyDown("p")) {
                 //    HurtPlayer(damage);
                 //}
             }
+
             public void HurtPlayer(int damage) {
                 currentHealth -= damage;
 

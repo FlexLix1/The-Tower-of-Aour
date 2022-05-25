@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3420194177947281650}
   - component: {fileID: 3420194177947281651}
   m_Layer: 0
-  m_Name: DialogueTest
+  m_Name: Dialogue
   m_TagString: Dialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

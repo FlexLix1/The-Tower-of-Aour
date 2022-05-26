@@ -23,11 +23,19 @@ namespace UnityCore {
             AudioSource audioSource;
 
             void Start() {
+<<<<<<< HEAD
+                vector3 loadposition;
+                loadposition.x = playerprefs.getfloat("playerposx");
+                loadposition.y = playerprefs.getfloat("playerposy");
+                loadposition.z = playerprefs.getfloat("playerposz");
+                transform.position = loadposition;
+=======
                 Vector3 loadPosition;
                 loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
                 loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
                 loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
                 transform.position = loadPosition;
+>>>>>>> JeppesBranch
 
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();

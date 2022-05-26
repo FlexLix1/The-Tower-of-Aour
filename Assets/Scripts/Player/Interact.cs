@@ -23,10 +23,9 @@ namespace UnityCore {
             void Start() {
                 movementScript = GetComponent<PlayerMovement>();
                 animScript = GetComponent<AnimationManager>();
+                lastDoor = GetComponent<DynamicLastDoor>();
                 inventoryScript = GetComponent<PickUp>();
                 rgbd = GetComponent<Rigidbody>();
-                lastDoor = GetComponent<DynamicLastDoor>();
-
             }
 
             void Update() {
@@ -144,6 +143,7 @@ namespace UnityCore {
                     leverScript = null;
                     doorScript = null;
                     generatorScript = null;
+                    birdScript = null;
                 }
             }
         }

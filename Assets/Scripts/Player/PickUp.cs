@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PickUp:MonoBehaviour {
 
+    ElevatorInventory elevatorInvScript;
+
     public GameObject[] inventory, prefabsInventory;
     public float rayDistance = 1.5f, placeDistance = 2;
     public Transform itemInHand;
@@ -11,11 +13,24 @@ public class PickUp:MonoBehaviour {
 
     int saveInventoryNumber;
     public bool hasPickup;
-    bool canPickup = true;
+    bool canPickup = true, onElevator;
 
     void Update() {
         if(hasPickup) {
             inventory[saveInventoryNumber].transform.position = itemInHand.position;
+        }
+
+        if(onElevator) {
+            if(Input.GetKeyDown(KeyCode.E)) {
+                if(hasPickup) {
+                    elevatorInvScript.ActivateItem(saveInventoryNumber);
+                    UseItem();
+                } else if(canPickup) {
+                    elevatorInvScript.DeactivateItem();
+                    PickInventory(elevatorInvScript.inventoryActiveNumber);
+                }
+            }
+            return;
         }
 
         if(Input.GetKeyDown(KeyCode.E) && hasPickup) {
@@ -30,8 +45,10 @@ public class PickUp:MonoBehaviour {
     //Check if there are obsticles
     void CheckPlacement() {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position + transform.up, transform.forward * rayDistance, out hit, rayDistance))
-            return;
+        if(Physics.Raycast(transform.position + transform.up, transform.forward * rayDistance, out hit, rayDistance)) {
+            if(!hit.collider.CompareTag("Elevator"))
+                return;
+        }
 
         PlaceItem();
     }
@@ -57,13 +74,18 @@ public class PickUp:MonoBehaviour {
         if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), transform.forward * rayDistance, out hit, rayDistance)) {
             switch(hit.collider.tag) {
                 case "Key":
-                    savePickup = hit.collider.gameObject;
+                    Destroy(hit.collider.gameObject);
                     PickInventory(0);
                     break;
                 case "SparkPlug":
-                    savePickup = hit.collider.gameObject;
+                    Destroy(hit.collider.gameObject);
                     PickInventory(1);
-                    break;  
+                    break;
+                case "Elevator":
+                    elevatorInvScript = hit.collider.gameObject.GetComponent<ElevatorInventory>();
+                    elevatorInvScript.DeactivateItem();
+                    PickInventory(elevatorInvScript.inventoryActiveNumber);
+                    break;
             }
         }
     }
@@ -74,11 +96,24 @@ public class PickUp:MonoBehaviour {
         saveInventoryNumber = selectedNumber;
         hasPickup = true;
         canPickup = false;
-        Destroy(savePickup);
     }
 
     //Dumbfuck bool needs a cooldown
     void CanPickup() {
         canPickup = true;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Elevator")) {
+            elevatorInvScript = other.gameObject.GetComponent<ElevatorInventory>();
+            onElevator = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if(other.CompareTag("Elevator")) {
+            elevatorInvScript = null;
+            onElevator = false;
+        }
     }
 }

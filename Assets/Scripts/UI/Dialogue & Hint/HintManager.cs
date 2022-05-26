@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 namespace UnityCore {
     namespace Audio {
-
-
         public class HintManager : MonoBehaviour {
             [SerializeField] GameObject dialogueBox, nextDialogueArrow;
             [SerializeField] Text nameText, dialogueText;

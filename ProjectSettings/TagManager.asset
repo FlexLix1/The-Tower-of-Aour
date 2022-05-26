@@ -21,6 +21,7 @@ TagManager:
   - TimeFreeze
   - BirdFuck
   - LastDoor
+  - Elevator
   layers:
   - Default
   - TransparentFX

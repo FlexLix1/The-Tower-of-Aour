@@ -41,7 +41,7 @@ public class MainMenu:MonoBehaviour {
     }
 
     public void backToMainMenu() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }
 

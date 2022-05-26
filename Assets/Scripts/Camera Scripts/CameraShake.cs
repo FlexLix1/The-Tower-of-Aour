@@ -10,11 +10,11 @@ namespace UnityCore
         public class CameraShake : MonoBehaviour
         {
             public float delayBetweenCameraShake;
+            public float offsetFromPlayer;
             public ParticleSystem bricks;
             public ParticleSystem dust;
             public ParticleSystem cogwheel;
 
-            public float offsetFromPlayer;
 
             Vector3 followPlayer;
             GameObject player;

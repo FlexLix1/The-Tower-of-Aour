@@ -32,7 +32,6 @@ namespace UnityCore {
                 player.transform.forward = -moveTowards.transform.right;
                 Vector3 forcedDirection = moveTowards.transform.position - player.transform.position;
                 rgbd.velocity = forcedDirection.normalized * 4;
-                Debug.Log(fade);
                 fadeToBlack.color = new Color(0, 0, 0, fade += Time.deltaTime * 0.25f);
                 if(fade >= 1) {
                     SceneManager.LoadScene(3);

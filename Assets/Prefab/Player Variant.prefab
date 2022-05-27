@@ -1566,6 +1566,7 @@ MonoBehaviour:
   moveTowardsLever: 0
   dialogueStoping: 0
   canRun: 0
+  lastFuckingBool: 0
   walkingSound: {fileID: 8300000, guid: 4910f39fd9dcb9e40b264623efb6b6fc, type: 3}
 --- !u!114 &1248035205965164884
 MonoBehaviour:

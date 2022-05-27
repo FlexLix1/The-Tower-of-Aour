@@ -28,13 +28,14 @@ namespace UnityCore {
             }
 
             void Update() {
+                if(!onTrigger)
+                    return;
+
                 if(moveTowards) {
+                    transform.forward = holdLever.transform.forward;
                     MoveTowards(holdLever.transform.position + (-holdLever.transform.forward * 0.7f));
                     return;
                 }
-
-                if(!onTrigger)
-                    return;
 
                 if(Input.GetKeyDown(KeyCode.E)) {
                     UseItem();
@@ -105,44 +106,70 @@ namespace UnityCore {
             }
 
             void OnTriggerEnter(Collider other) {
+                if(onTrigger)
+                    return;
+
                 switch(other.tag) {
                     case "Lever":
-                        onTrigger = true;
                         saveTag = other.tag;
                         holdLever = other.gameObject;
                         leverScript = animScript.leverScript = holdLever.GetComponent<DynamicLever>();
+                        onTrigger = true;
                         break;
                     case "Lock":
-                        onTrigger = true;
                         saveTag = other.tag;
                         lockScript = other.gameObject.GetComponent<Lock>();
+                        onTrigger = true;
                         break;
                     case "Generator":
-                        onTrigger = true;
                         saveTag = other.tag;
                         generatorScript = other.gameObject.GetComponent<Generator>();
+                        onTrigger = true;
                         break;
                     case "BirdFuck":
-                        onTrigger = true;
                         saveTag = other.tag;
                         birdScript = other.gameObject.GetComponent<Bird>();
+                        onTrigger = true;
                         break;
                     case "LastDoor":
-                        onTrigger = true;
                         saveTag = other.tag;
                         lastLockScript = other.gameObject.GetComponent<LastLock>();
+                        onTrigger = true;
                         break;
                 }
             }
 
             void OnTriggerExit(Collider other) {
-                if(onTrigger) {
-                    onTrigger = false;
-                    saveTag = null;
-                    leverScript = null;
-                    lockScript = null;
-                    generatorScript = null;
-                    birdScript = null;
+                if(!onTrigger)
+                    return;
+
+                switch(other.tag) {
+                    case "Lever":
+                        saveTag = null;
+                        holdLever = null;
+                        leverScript = animScript.leverScript = null;
+                        onTrigger = false;
+                        break;
+                    case "Lock":
+                        saveTag = null;
+                        lockScript = null;
+                        onTrigger = false;
+                        break;
+                    case "Generator":
+                        saveTag = null;
+                        generatorScript = null;
+                        onTrigger = false;
+                        break;
+                    case "BirdFuck":
+                        saveTag = null;
+                        birdScript = null;
+                        onTrigger = false;
+                        break;
+                    case "LastDoor":
+                        saveTag = null;
+                        lastLockScript = null;
+                        onTrigger = false;
+                        break;
                 }
             }
         }

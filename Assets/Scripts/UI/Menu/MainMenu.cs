@@ -12,9 +12,9 @@ public class MainMenu:MonoBehaviour {
         pause = GetComponent<PauseMenu>();
         float checkLoad = PlayerPrefs.GetFloat("PlayerPosX");
         if(checkLoad == 0) {
-            PlayerPrefs.SetFloat("PlayerPosX", -21.2f);
-            PlayerPrefs.SetFloat("PlayerPosY", 3.55f);
-            PlayerPrefs.SetFloat("PlayerPosZ", 1.61f);
+            PlayerPrefs.SetFloat("PlayerPosX", -19.77f);
+            PlayerPrefs.SetFloat("PlayerPosY", 2.83f);
+            PlayerPrefs.SetFloat("PlayerPosZ", -0.94f);
             PlayerPrefs.SetInt("CurrentFloor", 0);
             loadButton.GetComponent<Image>().color = new Color(100, 100, 100);
         }
@@ -25,9 +25,9 @@ public class MainMenu:MonoBehaviour {
     }
 
     public void PlayGame() {
-        PlayerPrefs.SetFloat("PlayerPosX", -21.2f);
-        PlayerPrefs.SetFloat("PlayerPosY", 3.55f);
-        PlayerPrefs.SetFloat("PlayerPosZ", 1.61f);
+        PlayerPrefs.SetFloat("PlayerPosX", -19.77f);
+        PlayerPrefs.SetFloat("PlayerPosY", 2.83f);
+        PlayerPrefs.SetFloat("PlayerPosZ", -0.94f);
         PlayerPrefs.SetInt("CurrentFloor", 0);
         SceneManager.LoadScene(2);
     }

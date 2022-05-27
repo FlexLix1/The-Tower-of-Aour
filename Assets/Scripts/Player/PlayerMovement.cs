@@ -16,7 +16,7 @@ namespace UnityCore {
             AnimationManager animScript;
             Pushing pushScript;
 
-            public bool groundMovement, moveTowardsLever, dialogueStoping, canRun;
+            public bool groundMovement, moveTowardsLever, dialogueStoping, canRun, lastFuckingBool;
             private SlipperyOil slipperyOilMovement;
 
             public AudioClip walkingSound;
@@ -42,6 +42,9 @@ namespace UnityCore {
             }
 
             void Update() {
+                if(lastFuckingBool)
+                    return;
+
                 if(moveTowardsLever)
                     return;
 

@@ -10,10 +10,10 @@ namespace UnityCore {
             AnimationManager animScript;
             PlayerMovement movementScript;
             DynamicLever leverScript;
-            DynamicDoor doorScript;
+            Lock lockScript;
+            LastLock lastLockScript;
             Generator generatorScript;
             PickUp inventoryScript;
-            DynamicLastDoor lastDoor;
             string saveTag;
             bool onTrigger, moveTowards;
 
@@ -23,7 +23,6 @@ namespace UnityCore {
             void Start() {
                 movementScript = GetComponent<PlayerMovement>();
                 animScript = GetComponent<AnimationManager>();
-                lastDoor = GetComponent<DynamicLastDoor>();
                 inventoryScript = GetComponent<PickUp>();
                 rgbd = GetComponent<Rigidbody>();
             }
@@ -54,11 +53,11 @@ namespace UnityCore {
                         movementScript.moveTowardsLever = true;
                         moveTowards = true;
                         break;
-                    case "Door":
+                    case "Lock":
                         if(!inventoryScript.inventory[0].activeInHierarchy)
                             return;
 
-                        doorScript.openDoor = true;
+                        lockScript.Unlock();
                         inventoryScript.UseItem();
                         break;
                     case "Generator":
@@ -75,18 +74,13 @@ namespace UnityCore {
                         birdScript.bird = true;
                         inventoryScript.UseItem();
                         break;
+                    case "LastDoor":
+                        if(!inventoryScript.inventory[0].activeInHierarchy)
+                            return;
 
-                    //case "LastDoor":
-                    //    if (!inventoryScript.inventory[0].activeInHierarchy)
-                    //        return;
-                    //    inventoryScript.UseItem();
-
-                    //    if(lastDoor.keysAdded == 2)
-                    //    {
-                    //        lastDoor.openDoor = true;
-
-                    //    }
-                    //    break;
+                        lastLockScript.Unlock();
+                        inventoryScript.UseItem();
+                        break;
                 }
             }
 
@@ -118,10 +112,10 @@ namespace UnityCore {
                         holdLever = other.gameObject;
                         leverScript = animScript.leverScript = holdLever.GetComponent<DynamicLever>();
                         break;
-                    case "Door":
+                    case "Lock":
                         onTrigger = true;
                         saveTag = other.tag;
-                        doorScript = other.gameObject.GetComponent<DynamicDoor>();
+                        lockScript = other.gameObject.GetComponent<Lock>();
                         break;
                     case "Generator":
                         onTrigger = true;
@@ -133,6 +127,11 @@ namespace UnityCore {
                         saveTag = other.tag;
                         birdScript = other.gameObject.GetComponent<Bird>();
                         break;
+                    case "LastDoor":
+                        onTrigger = true;
+                        saveTag = other.tag;
+                        lastLockScript = other.gameObject.GetComponent<LastLock>();
+                        break;
                 }
             }
 
@@ -141,7 +140,7 @@ namespace UnityCore {
                     onTrigger = false;
                     saveTag = null;
                     leverScript = null;
-                    doorScript = null;
+                    lockScript = null;
                     generatorScript = null;
                     birdScript = null;
                 }

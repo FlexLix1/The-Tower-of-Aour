@@ -44,7 +44,7 @@ namespace UnityCore {
             }
 
             void SkipSentence() {
-                StopCoroutine(TypeSentence(holdDialogue[numInDialogue]));
+                StopAllCoroutines();
                 dialogueText.text = holdDialogue[numInDialogue];
                 nextDialogueArrow.SetActive(true);
                 writingOut = false;

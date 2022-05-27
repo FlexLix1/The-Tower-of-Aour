@@ -1492,7 +1492,7 @@ MonoBehaviour:
   nextDialogueArrow: {fileID: 0}
   nameText: {fileID: 0}
   dialogueText: {fileID: 0}
-  nextSentence: {fileID: 0}
+  nextSentence: {fileID: 8300000, guid: 0f18364125636024c9572463e32d8ab3, type: 3}
   textSpeed: 0.025
 --- !u!114 &348669812
 MonoBehaviour:
@@ -1565,6 +1565,7 @@ MonoBehaviour:
   groundMovement: 0
   moveTowardsLever: 0
   dialogueStoping: 0
+  canRun: 0
   walkingSound: {fileID: 8300000, guid: 4910f39fd9dcb9e40b264623efb6b6fc, type: 3}
 --- !u!114 &1248035205965164884
 MonoBehaviour:
@@ -1578,6 +1579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5232c391dcf3c17498cbd0e6de0d2647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onSlipperyOil: 0
+  oilSpeed: 0
 --- !u!114 &4729393839100826207
 MonoBehaviour:
   m_ObjectHideFlags: 0

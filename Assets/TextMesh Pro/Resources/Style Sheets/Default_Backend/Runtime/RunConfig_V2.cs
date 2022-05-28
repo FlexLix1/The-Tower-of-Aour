@@ -8,6 +8,7 @@ public class RunConfig_V2:MonoBehaviour {
     string outputText;
     bool activation, firstLetter, secondLetter, finale;
 
+    //Oskar was here! <3
     void Start() {
         textField = GetComponent<Text>();
     }

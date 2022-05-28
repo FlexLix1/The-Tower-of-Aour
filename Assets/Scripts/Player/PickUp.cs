@@ -26,6 +26,9 @@ public class PickUp:MonoBehaviour {
                     elevatorInvScript.ActivateItem(saveInventoryNumber);
                     UseItem();
                 } else if(canPickup) {
+                    if(!elevatorInvScript.inventory[0].activeInHierarchy && !elevatorInvScript.inventory[1].activeInHierarchy)
+                        return;
+
                     elevatorInvScript.DeactivateItem();
                     PickInventory(elevatorInvScript.inventoryActiveNumber);
                 }

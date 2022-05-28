@@ -88,14 +88,10 @@ namespace UnityCore {
 
                 //Update forward direction relative to camera
                 UpdateCameraForward();
-                if (canRun)
-                {
-                    if (Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox)
-                    {
+                if(canRun) {
+                    if(Input.GetKey(KeyCode.LeftShift) && !pushScript.hasBox) {
                         movementSpeed = 10;
-                    }
-                    else
-                    {
+                    } else {
                         movementSpeed = startMovementSpeed;
                     }
                 }
@@ -111,7 +107,6 @@ namespace UnityCore {
 
                 //Rotate character towards walking direction
                 RotateCharacter();
-
             }
 
             void UpdateCameraForward() {

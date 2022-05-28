@@ -77,8 +77,11 @@ namespace UnityCore {
                     rgbd.constraints = RigidbodyConstraints.FreezeRotation;
                 }
 
-                if(dialogueStoping)
+                if(dialogueStoping) {
+                    rgbd.velocity = Vector3.zero;
                     return;
+                }
+
 
                 if(!groundMovement)
                     return;

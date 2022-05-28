@@ -4,39 +4,19 @@ using UnityEngine;
 
 namespace UnityCore {
     namespace Audio {
-        public class Checkpoint : MonoBehaviour {
-            public HealthManager theHealthMan;
-            public SaveManager theSaveMan;
-            public Renderer theRenderer;
-            public Material cpOff;
-            public Material cpOn;
-
-            void Start() {
-                theHealthMan = FindObjectOfType<HealthManager>();
-            }
-
-            public void CheckpointOn() {
-                Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>();
-                foreach (Checkpoint cp in checkpoints) {
-                    cp.CheckpointOff();
-                }
-                theRenderer.material = cpOn;
-            }
+        public class Checkpoint:MonoBehaviour {
+            SaveManager saveScript;
 
             public void SaveData() {
-                theSaveMan.SavePlayer();
-            }
-
-            public void CheckpointOff() {
-                theRenderer.material = cpOff;
+                saveScript.SavePlayer();
             }
 
             private void OnTriggerEnter(Collider other) {
-                if (other.tag.Equals("Player")) {
-                    theHealthMan.SetSpawnPoint(transform.position);
-                    CheckpointOn();
-                    SaveData();
-                }
+                if(!other.CompareTag("Player"))
+                    return;
+
+                saveScript = other.GetComponent<SaveManager>();
+                saveScript.SavePlayer();
             }
         }
     }

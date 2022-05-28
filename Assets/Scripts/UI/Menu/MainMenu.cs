@@ -33,8 +33,9 @@ public class MainMenu:MonoBehaviour {
     }
 
     public void LoadGame() {
+        Time.timeScale = 1f;
         float checkLoad = PlayerPrefs.GetFloat("PlayerPosX");
-        if(checkLoad == -21.2f)
+        if(checkLoad == -19.77f)
             return;
 
         SceneManager.LoadScene(2);

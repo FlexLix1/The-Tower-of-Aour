@@ -13,6 +13,7 @@ public class MovingPlatform:MonoBehaviour {
 
     void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material.DisableKeyword("_EMISSION");
         startPosition  = transform.position;
         right = startPosition + transform.right * distanceToCover;
         left =  startPosition - transform.right * distanceToCover;

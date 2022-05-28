@@ -11,10 +11,11 @@ public class SettingsMenu:MonoBehaviour {
     public Texture[] resolutionImg, qualityImg, textSpeedText, fullscreenImg;
     private int selectedResolution, selectQualitySetting = 5;
     public bool fullScreen;
-    public int textSelection;
+    public int textSelection = 1;
     public float[] textSpeeds;
 
     private void Start() {
+        TextSpeedChange();
         //bool foundRes = false;
         for(int i = 0; i < resolution.Count; i++) {
             if(Screen.width == resolution[i].horizontal && Screen.height == resolution[i].vertical) {

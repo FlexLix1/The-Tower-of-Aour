@@ -5,19 +5,20 @@ namespace UnityCore {
     namespace Audio {
 
         public class HealthManager : MonoBehaviour {
-            public int maxHealth;
-            public int currentHealth;
-            public PlayerMovement playerMovement;
-            public SkinnedMeshRenderer meshRenderer;
+            int maxHealth = 1, damage = 1, currentHealth;
+            PlayerMovement playerMovement;
+            SkinnedMeshRenderer meshRenderer;
+            float respawnTime = 3;
 
-            public GameObject player;
+            GameObject player;
 
-            private bool isRespawning;
-            private Vector3 respawnPoint;
-            public float respawnTime;
-            public int damage;
+            Vector3 respawnPoint;
+            bool isRespawning;
 
             void Start() {
+                player = this.gameObject;
+                playerMovement = GetComponent<PlayerMovement>();
+                meshRenderer = GetComponent<SkinnedMeshRenderer>();
                 currentHealth = maxHealth;
                 respawnPoint = player.transform.position;
             }

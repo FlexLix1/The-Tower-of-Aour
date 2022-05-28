@@ -11,6 +11,7 @@ public class spinscript:MonoBehaviour {
 
     void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material.DisableKeyword("_EMISSION");
     }
 
     void Update() {

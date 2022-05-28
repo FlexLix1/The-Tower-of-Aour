@@ -18,6 +18,8 @@ public class Generator:MonoBehaviour {
         doorScript = bigHeavyDoor.GetComponent<DynamicDoor>();
         if(bigHeavyDoor != null) {
             meshRend = bigHeavyDoor.GetComponent<MeshRenderer>();
+            meshRend.materials[4].DisableKeyword("_EMISSION");
+            meshRend.materials[1].DisableKeyword("_EMISSION");
         }
 
         anim = GetComponent<Animator>();

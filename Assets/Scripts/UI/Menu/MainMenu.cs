@@ -41,6 +41,11 @@ public class MainMenu:MonoBehaviour {
         SceneManager.LoadScene(2);
     }
 
+    public void LoadGameInside() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(2);
+    }
+
     public void backToMainMenu() {
         SceneManager.LoadScene(1);
         Time.timeScale = 1f;

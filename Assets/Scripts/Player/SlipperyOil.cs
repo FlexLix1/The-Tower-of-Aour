@@ -20,7 +20,6 @@ namespace UnityCore {
                 rb = gameObject.GetComponent<Rigidbody>();
                 playermovement = GetComponent<PlayerMovement>();
 
-                //rb.velocity = Vector3.ClampMagnitude(rb.velocity, playermovement.movementSpeed);
             }
 
             void Update() {
@@ -29,7 +28,7 @@ namespace UnityCore {
             }
             private void OnTriggerEnter(Collider colider) {
                 if (colider.gameObject.tag == "OilFloor") {
-                    //playermovement.canRun = false;
+                    onSlipperyOil = true;
                     saveVelocity = rb.velocity.normalized * oilSpeed;
                     playermovement.groundMovement = false;
                     audioController.PlayAudio(AudioType.SFX_GlidingOnOil, true);
@@ -52,7 +51,7 @@ namespace UnityCore {
                     rb.velocity = Vector3.zero;
                     saveVelocity = Vector3.zero;
                     playermovement.groundMovement = true;
-                    //playermovement.canRun = true;
+                    onSlipperyOil = false;
                     audioController.StopAudio(AudioType.SFX_GlidingOnOil, true);
                 }
             }

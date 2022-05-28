@@ -8,8 +8,10 @@ namespace UnityCore {
             PlayerMovement movementScript;
             MovingPlatform platformScript;
             AnimationManager animScript;
+            SlipperyOil slipperyScript;
             PickUp inventoryScript;
             spinscript spinscript;
+            Ladder ladderScript;
 
             MeshRenderer meshRenderer;
             AudioController audioController;
@@ -24,10 +26,18 @@ namespace UnityCore {
             void Start() {
                 movementScript = GetComponent<PlayerMovement>();
                 animScript = GetComponent<AnimationManager>();
+                slipperyScript = GetComponent<SlipperyOil>();
                 inventoryScript = GetComponent<PickUp>();
+                ladderScript = GetComponent<Ladder>();
             }
 
             void Update() {
+                if(ladderScript.isClimbing)
+                    return;
+
+                if(slipperyScript.onSlipperyOil)
+                    return;
+
                 if(inventoryScript.hasPickup)
                     return;
 

@@ -9,6 +9,7 @@ public class MainMenu:MonoBehaviour {
     public Button loadButton;
 
     private void Start() {
+        Cursor.lockState = CursorLockMode.Confined;
         pause = GetComponent<PauseMenu>();
         float checkLoad = PlayerPrefs.GetFloat("PlayerPosX");
         if(checkLoad == 0) {

@@ -23,11 +23,11 @@ namespace UnityCore {
             AudioSource audioSource;
 
             void Start() {
-                Vector3 loadPosition;
-                loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
-                loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
-                loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
-                transform.position = loadPosition;
+                //Vector3 loadPosition;
+                //loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
+                //loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
+                //loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
+                //transform.position = loadPosition;
 
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();

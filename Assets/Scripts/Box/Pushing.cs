@@ -69,6 +69,7 @@ namespace UnityCore {
                         boxScript = holdBox.GetComponent<Box>();
                         Vector3 forcedDir = holdBox.transform.position - transform.position;
                         float angle = Mathf.Atan2(forcedDir.z, forcedDir.x) * Mathf.Rad2Deg;
+                        Debug.Log(angle);
                         if(angle < 35 && angle > -35) {
                             //Left
                             holdRotation = Quaternion.Euler(0, 90, 0);
@@ -93,6 +94,8 @@ namespace UnityCore {
                             boxScript.offset = offset = -Vector3.right * boxOffset;
                             holdLockDirection = lockDirection.LockAxisY;
                             holdPushDirection = pushDirection.Right;
+                        } else {
+                            return;
                         }
                         movingPlayerTowardsBox = true;
                     }

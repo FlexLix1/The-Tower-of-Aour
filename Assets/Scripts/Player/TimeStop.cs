@@ -10,6 +10,7 @@ namespace UnityCore {
             AnimationManager animScript;
             SlipperyOil slipperyScript;
             PickUp inventoryScript;
+            PauseMenu pauseScript;
             spinscript spinscript;
             Ladder ladderScript;
 
@@ -24,6 +25,8 @@ namespace UnityCore {
             float time;
 
             void Start() {
+                Cursor.lockState = CursorLockMode.Locked;
+                pauseScript = GameObject.Find("Canvas").GetComponent<PauseMenu>();
                 movementScript = GetComponent<PlayerMovement>();
                 animScript = GetComponent<AnimationManager>();
                 slipperyScript = GetComponent<SlipperyOil>();
@@ -55,8 +58,10 @@ namespace UnityCore {
                 if(usingTimeStop) {
                     CheckFreezeItem();
                 } else {
-                    timeFreezeOverlay.SetActive(false);
+                    if(!pauseScript.GameIsPaused)
+                        Cursor.lockState = CursorLockMode.Locked;
 
+                    timeFreezeOverlay.SetActive(false);
                     if(platformScript != null && !timeStoped) {
                         platformScript.rayIsHovering = false;
                         saveFrozenObject = null;
@@ -84,6 +89,7 @@ namespace UnityCore {
             }
 
             void CheckFreezeItem() {
+                Cursor.lockState = CursorLockMode.Confined;
                 timeFreezeOverlay.SetActive(true);
                 RaycastHit hit;
                 if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask("TimeFreezeRay"), QueryTriggerInteraction.Collide)) {

@@ -36,7 +36,7 @@ namespace UnityCore {
             }
 
             public void LadderClimbSound() {
-                audioSource.pitch = Random.Range(0.8f, 1.1f);
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
                 audioSource.PlayOneShot(walkingSound);
             }
         }

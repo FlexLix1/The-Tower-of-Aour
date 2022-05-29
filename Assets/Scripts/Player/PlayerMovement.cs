@@ -23,11 +23,11 @@ namespace UnityCore {
             AudioSource audioSource;
 
             void Start() {
-                //Vector3 loadPosition;
-                //loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
-                //loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
-                //loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
-                //transform.position = loadPosition;
+                Vector3 loadPosition;
+                loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
+                loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
+                loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
+                transform.position = loadPosition;
 
                 rgbd = GetComponent<Rigidbody>();
                 pushScript = GetComponent<Pushing>();
@@ -136,7 +136,10 @@ namespace UnityCore {
             }
 
             public void PlayWalkingSound() {
-                audioSource.pitch = Random.Range(0.8f, 1.1f);
+                if (!groundMovement)
+                    return;
+
+                audioSource.pitch = Random.Range(0.6f, 1.3f);
                 audioSource.PlayOneShot(walkingSound);
             }
 

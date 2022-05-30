@@ -1,32 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace UnityCore {
     namespace Audio {
-
         public class HealthManager : MonoBehaviour {
+
             int maxHealth = 1, damage = 1, currentHealth;
-            PlayerMovement playerMovement;
-            SkinnedMeshRenderer meshRenderer;
             float respawnTime = 3;
-
-            GameObject player;
-
-            Vector3 respawnPoint;
             bool isRespawning;
 
-            void Start() {
-                player = this.gameObject;
-                playerMovement = GetComponent<PlayerMovement>();
-                meshRenderer = GetComponent<SkinnedMeshRenderer>();
-                currentHealth = maxHealth;
-                respawnPoint = player.transform.position;
-            }
+            ActiveAndDeactivateFloors currentFloor;
+            SkinnedMeshRenderer meshRenderer;
+            PlayerMovement playerMovement;
 
-            void Update() {
-                //if (Input.GetKeyDown("p")) {
-                //    HurtPlayer(damage);
-                //}
+            Vector3 respawnPoint;
+
+            void Start() {
+                currentHealth = maxHealth;
+                meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+                currentFloor = GetComponent<ActiveAndDeactivateFloors>();
+                playerMovement = GetComponent<PlayerMovement>();
             }
 
             public void HurtPlayer(int damage) {
@@ -36,26 +30,32 @@ namespace UnityCore {
                     Respawn();
                 }
             }
-            public void Respawn() {
+
+            void Respawn() {
                 if (!isRespawning) {
                     StartCoroutine("RespawnCount");
                 }
             }
-            public IEnumerator RespawnCount() {
-                playerMovement.enabled = false;
-                meshRenderer.enabled = false;
-                isRespawning = true;
-                yield return new WaitForSeconds(respawnTime);
-                playerMovement.enabled = true;
-                meshRenderer.enabled = true;
-                isRespawning = false;
 
-                player.gameObject.SetActive(true);
-                player.transform.position = respawnPoint;
-                currentHealth = maxHealth;
+            IEnumerator RespawnCount() {
+                isRespawning = true;
+                playerMovement.lastFuckingBool = true;
+                meshRenderer.enabled = false;
+                yield return new WaitForSeconds(respawnTime);
+                LoadRespawn();
             }
-            public void SetSpawnPoint(Vector3 newPos) {
-                respawnPoint = newPos;
+
+            void LoadRespawn() {
+                Vector3 loadPosition;
+                loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
+                loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
+                loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
+                transform.position = loadPosition;
+                meshRenderer.enabled = true;
+                currentHealth = maxHealth;
+
+                isRespawning = false;
+                playerMovement.lastFuckingBool = false;
             }
         }
     }

@@ -25,6 +25,8 @@ public class spinscript:MonoBehaviour {
         if(timeFroze)
             return;
 
-        transform.Rotate(speedX, speedY, speedZ, Space.World);
+
+
+        transform.Rotate(speedX * Time.deltaTime, speedY * Time.deltaTime, speedZ * Time.deltaTime, Space.World);
     }
 }

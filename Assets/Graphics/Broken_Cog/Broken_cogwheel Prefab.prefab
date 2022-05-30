@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 1125381163806627500}
   - component: {fileID: 5246907578002590625}
   - component: {fileID: 1687965294160893099}
-  - component: {fileID: 6776890990797068156}
   m_Layer: 6
   m_Name: Circle
   m_TagString: Spinning
@@ -214,20 +213,6 @@ MonoBehaviour:
   speedX: 0
   speedY: 0
   speedZ: 0.5
---- !u!64 &6776890990797068156
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459677880481606158}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2124705421725058983, guid: 41cb0df3afb96af44b97f74dfda22a6e, type: 3}
 --- !u!1 &8513848095880661539
 GameObject:
   m_ObjectHideFlags: 0

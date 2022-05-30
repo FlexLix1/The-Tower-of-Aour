@@ -6,7 +6,7 @@ namespace UnityCore {
 
         public class PressurePlate : MonoBehaviour {
             public bool pressed;
-            public float closeDelay = 5;
+            float closeDelay = 0.1f;
             public Vector3 pressedOffset = new Vector3(0, 0.02f, 0);
             AudioController audioController;
             Vector3 pressedPosition;

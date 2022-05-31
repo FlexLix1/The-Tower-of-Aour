@@ -44,15 +44,16 @@ public class MainMenu:MonoBehaviour {
 
     public void LoadGameInside() {
         Time.timeScale = 1f;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        ActiveAndDeactivateFloors currentFloor = player.GetComponent<ActiveAndDeactivateFloors>();
+        SceneManager.LoadScene(2);
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        //ActiveAndDeactivateFloors currentFloor = player.GetComponent<ActiveAndDeactivateFloors>();
 
-        Vector3 loadPosition;
-        loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
-        loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
-        loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
-        player.transform.position = loadPosition;
-        currentFloor.currentfloor = PlayerPrefs.GetInt("CurrentFloor", currentFloor.currentfloor);
+        //Vector3 loadPosition;
+        //loadPosition.x = PlayerPrefs.GetFloat("PlayerPosX");
+        //loadPosition.y = PlayerPrefs.GetFloat("PlayerPosY");
+        //loadPosition.z = PlayerPrefs.GetFloat("PlayerPosZ");
+        //player.transform.position = loadPosition;
+        //currentFloor.currentfloor = PlayerPrefs.GetInt("CurrentFloor", currentFloor.currentfloor);
     }
 
     public void backToMainMenu() {
